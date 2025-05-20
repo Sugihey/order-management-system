@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受注編集</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-width: 80%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .dialog-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .selectable-item {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .selectable-item:hover {
+            background-color: #f0f0f0;
+        }
+        .report-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">受注編集</h2>
+        
+        <!-- ヘッダー部 -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">受注日</label>
+                        <input type="text" class="form-control" id="orderDate" readonly value="2025-01-15">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">顧客</label>
+                        <input type="text" class="form-control" id="customer" readonly value="顧客１">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">物件</label>
+                        <input type="text" class="form-control" id="property" readonly value="物件１">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">請求日</label>
+                        <input type="date" class="form-control" id="billingDate">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 明細部 -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px">No.</th>
+                            <th>作業内容</th>
+                            <th>発注先</th>
+                            <th style="width: 150px">受注金額</th>
+                            <th style="width: 150px">発注金額</th>
+                            <th style="width: 120px">支払日</th>
+                            <th style="width: 200px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text" class="form-control" readonly value="作業A"></td>
+                            <td><input type="text" class="form-control" readonly value="職人A"></td>
+                            <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()" value="10000"></td>
+                            <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()" value="12000"></td>
+                            <td><input type="date" class="form-control"></td>
+                            <td>
+                                <button class="btn btn-info btn-sm me-2" onclick="showReportDialog(this)">報告確認</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">削除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-secondary">
+                            <td colspan="3" class="text-end"><strong>合計</strong></td>
+                            <td><input type="text" class="form-control" id="totalOrderAmount" readonly></td>
+                            <td><input type="text" class="form-control" id="totalWorkerAmount" readonly></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <button class="btn btn-primary" onclick="addRow()">明細追加</button>
+            </div>
+        </div>
+
+        <!-- ボタン部 -->
+        <div class="mt-4 text-end">
+            <button class="btn btn-secondary me-2" onclick="cancel()">キャンセル</button>
+            <button class="btn btn-primary" onclick="update()">更新</button>
+        </div>
+    </div>
+
+    <!-- 報告確認ダイアログ -->
+    <div class="dialog-backdrop" id="reportDialogBackdrop"></div>
+    <div class="dialog" id="reportDialog">
+        <h4>作業報告確認</h4>
+        <div class="mb-3">
+            <label class="form-label">報告者</label>
+            <input type="text" class="form-control" id="reporter" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">作業完了日</label>
+            <input type="text" class="form-control" id="completionDate" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">報告内容</label>
+            <textarea class="form-control" id="reportContent" rows="5" readonly></textarea>
+        </div>
+        <div id="reportImages" class="mb-3">
+            <!-- 画像はJavaScriptで動的に追加 -->
+        </div>
+        <div class="text-end">
+            <button class="btn btn-secondary" onclick="hideReportDialog()">閉じる</button>
+        </div>
+    </div>
+
+    <script>
+        // 金額の3桁区切り表示
+        function formatNumber(number) {
+            return new Intl.NumberFormat('ja-JP').format(number);
+        }
+
+        // 合計金額の更新
+        function updateTotals() {
+            const tbody = document.getElementById('detailTableBody');
+            let totalOrderAmount = 0;
+            let totalWorkerAmount = 0;
+
+            Array.from(tbody.children).forEach(row => {
+                const orderAmount = parseInt(row.cells[3].querySelector('input').value) || 0;
+                const workerAmount = parseInt(row.cells[4].querySelector('input').value) || 0;
+                totalOrderAmount += orderAmount;
+                totalWorkerAmount += workerAmount;
+            });
+
+            document.getElementById('totalOrderAmount').value = formatNumber(totalOrderAmount);
+            document.getElementById('totalWorkerAmount').value = formatNumber(totalWorkerAmount);
+        }
+
+        // 明細行追加
+        function addRow() {
+            const tbody = document.getElementById('detailTableBody');
+            const rowCount = tbody.children.length + 1;
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()"></td>
+                <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()"></td>
+                <td><input type="date" class="form-control"></td>
+                <td>
+                    <button class="btn btn-info btn-sm me-2" onclick="showReportDialog(this)">報告確認</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteRow(this)">削除</button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        // 明細行削除
+        function deleteRow(button) {
+            const tbody = document.getElementById('detailTableBody');
+            if (tbody.children.length > 1) {
+                button.closest('tr').remove();
+                // 行番号の振り直し
+                Array.from(tbody.children).forEach((row, index) => {
+                    row.cells[0].textContent = index + 1;
+                });
+                updateTotals();
+            }
+        }
+
+        // 報告確認ダイアログ表示
+        function showReportDialog(button) {
+            const row = button.closest('tr');
+            // ここで実際のデータを取得して表示
+            document.getElementById('reporter').value = '職人A';
+            document.getElementById('completionDate').value = '2025-03-20';
+            document.getElementById('reportContent').value = '作業完了しました。\n特記事項はありません。';
+            
+            // 画像の表示（サンプル）
+            const imagesContainer = document.getElementById('reportImages');
+            imagesContainer.innerHTML = '<img src="sample.jpg" class="report-image" alt="作業報告画像">';
+            
+            document.getElementById('reportDialog').style.display = 'block';
+            document.getElementById('reportDialogBackdrop').style.display = 'block';
+        }
+
+        // 報告確認ダイアログ非表示
+        function hideReportDialog() {
+            document.getElementById('reportDialog').style.display = 'none';
+            document.getElementById('reportDialogBackdrop').style.display = 'none';
+        }
+
+        // キャンセル
+        function cancel() {
+            if (confirm('変更内容を破棄してよろしいですか？')) {
+                window.location.href = '/';
+            }
+        }
+
+        // 更新
+        function update() {
+            // ここに更新処理を実装
+            alert('更新処理を実行します');
+        }
+
+        // 初期表示時に合計を更新
+        document.addEventListener('DOMContentLoaded', updateTotals);
+
+        // ダイアログの外側クリックで閉じる
+        document.getElementById('reportDialogBackdrop').addEventListener('click', hideReportDialog);
+    </script>
+</body>
+</html>

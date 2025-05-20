@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規受注登録</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .dialog-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .selectable-item {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .selectable-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">新規受注登録</h2>
+        
+        <!-- ヘッダー部 -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">受注日</label>
+                        <input type="date" class="form-control" id="orderDate">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">顧客</label>
+                        <input type="text" class="form-control" id="customer" readonly onclick="showCustomerDialog()">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">物件</label>
+                        <input type="text" class="form-control" id="property" readonly onclick="showPropertyDialog()" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 明細部 -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px">No.</th>
+                            <th>作業内容</th>
+                            <th>発注先</th>
+                            <th style="width: 150px">受注金額</th>
+                            <th style="width: 150px">発注金額</th>
+                            <th style="width: 100px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text" class="form-control" readonly onclick="showWorkDialog(this)"></td>
+                            <td><input type="text" class="form-control" readonly onclick="showWorkerDialog(this)"></td>
+                            <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()"></td>
+                            <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()"></td>
+                            <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">削除</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-secondary">
+                            <td colspan="3" class="text-end"><strong>合計</strong></td>
+                            <td><input type="text" class="form-control" id="totalOrderAmount" readonly></td>
+                            <td><input type="text" class="form-control" id="totalWorkerAmount" readonly></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <button class="btn btn-primary" onclick="addRow()">明細追加</button>
+            </div>
+        </div>
+
+        <!-- ボタン部 -->
+        <div class="mt-4 text-end">
+            <button class="btn btn-secondary me-2" onclick="cancel()">キャンセル</button>
+            <button class="btn btn-primary" onclick="register()">登録</button>
+        </div>
+    </div>
+
+    <!-- 顧客選択ダイアログ -->
+    <div class="dialog-backdrop" id="customerDialogBackdrop"></div>
+    <div class="dialog" id="customerDialog">
+        <h4>顧客選択</h4>
+        <div class="selectable-item" onclick="selectCustomer('顧客1')">顧客1</div>
+        <div class="selectable-item" onclick="selectCustomer('顧客2')">顧客2</div>
+        <div class="selectable-item" onclick="selectCustomer('顧客3')">顧客3</div>
+    </div>
+
+    <!-- 物件選択ダイアログ -->
+    <div class="dialog-backdrop" id="propertyDialogBackdrop"></div>
+    <div class="dialog" id="propertyDialog">
+        <h4>物件選択</h4>
+        <div class="selectable-item" onclick="selectProperty('物件1')">物件1</div>
+        <div class="selectable-item" onclick="selectProperty('物件2')">物件2</div>
+        <div class="selectable-item" onclick="selectProperty('物件3')">物件3</div>
+    </div>
+
+    <!-- 作業選択ダイアログ -->
+    <div class="dialog-backdrop" id="workDialogBackdrop"></div>
+    <div class="dialog" id="workDialog">
+        <h4>作業選択</h4>
+        <div class="selectable-item" onclick="selectWork('作業1')">作業1</div>
+        <div class="selectable-item" onclick="selectWork('作業2')">作業2</div>
+        <div class="selectable-item" onclick="selectWork('作業3')">作業3</div>
+    </div>
+
+    <!-- 発注先選択ダイアログ -->
+    <div class="dialog-backdrop" id="workerDialogBackdrop"></div>
+    <div class="dialog" id="workerDialog">
+        <h4>発注先選択</h4>
+        <div class="selectable-item" onclick="selectWorker('職人A')">職人A</div>
+        <div class="selectable-item" onclick="selectWorker('職人B')">職人B</div>
+        <div class="selectable-item" onclick="selectWorker('職人C')">職人C</div>
+    </div>
+
+    <script>
+        // ダイアログ表示関数
+        function showDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).style.display = 'block';
+            document.getElementById(backdropId).style.display = 'block';
+        }
+
+        // ダイアログ非表示関数
+        function hideDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).style.display = 'none';
+            document.getElementById(backdropId).style.display = 'none';
+        }
+
+        // 顧客選択
+        function showCustomerDialog() {
+            showDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        function selectCustomer(customer) {
+            document.getElementById('customer').value = customer;
+            // 顧客が選択されたら物件選択を有効化
+            document.getElementById('property').disabled = false;
+            // 物件をクリア
+            document.getElementById('property').value = '';
+            hideDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        // 物件選択
+        function showPropertyDialog() {
+            // 顧客が選択されていない場合は物件選択ダイアログを表示しない
+            if (!document.getElementById('customer').value) {
+                alert('先に顧客を選択してください。');
+                return;
+            }
+            showDialog('propertyDialog', 'propertyDialogBackdrop');
+        }
+
+        function selectProperty(property) {
+            document.getElementById('property').value = property;
+            hideDialog('propertyDialog', 'propertyDialogBackdrop');
+        }
+
+        // 作業選択
+        function showWorkDialog(input) {
+            window.currentWorkInput = input;
+            showDialog('workDialog', 'workDialogBackdrop');
+        }
+
+        function selectWork(work) {
+            window.currentWorkInput.value = work;
+            hideDialog('workDialog', 'workDialogBackdrop');
+        }
+
+        // 発注先選択
+        function showWorkerDialog(input) {
+            window.currentWorkerInput = input;
+            showDialog('workerDialog', 'workerDialogBackdrop');
+        }
+
+        function selectWorker(worker) {
+            window.currentWorkerInput.value = worker;
+            hideDialog('workerDialog', 'workerDialogBackdrop');
+        }
+
+        // 明細行追加
+        function addRow() {
+            const tbody = document.getElementById('detailTableBody');
+            const rowCount = tbody.children.length + 1;
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td><input type="text" class="form-control" readonly onclick="showWorkDialog(this)"></td>
+                <td><input type="text" class="form-control" readonly onclick="showWorkerDialog(this)"></td>
+                <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()"></td>
+                <td><input type="number" class="form-control" min="0" step="1000" onchange="updateTotals()"></td>
+                <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">削除</button></td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        // 明細行削除
+        function deleteRow(button) {
+            const tbody = document.getElementById('detailTableBody');
+            if (tbody.children.length > 1) {
+                button.closest('tr').remove();
+                // 行番号の振り直し
+                Array.from(tbody.children).forEach((row, index) => {
+                    row.cells[0].textContent = index + 1;
+                });
+                updateTotals();
+            }
+        }
+
+        // 金額の3桁区切り表示
+        function formatNumber(number) {
+            return new Intl.NumberFormat('ja-JP').format(number);
+        }
+
+        // 合計金額の更新
+        function updateTotals() {
+            const tbody = document.getElementById('detailTableBody');
+            let totalOrderAmount = 0;
+            let totalWorkerAmount = 0;
+
+            Array.from(tbody.children).forEach(row => {
+                const orderAmount = parseInt(row.cells[3].querySelector('input').value) || 0;
+                const workerAmount = parseInt(row.cells[4].querySelector('input').value) || 0;
+                totalOrderAmount += orderAmount;
+                totalWorkerAmount += workerAmount;
+            });
+
+            document.getElementById('totalOrderAmount').value = formatNumber(totalOrderAmount);
+            document.getElementById('totalWorkerAmount').value = formatNumber(totalWorkerAmount);
+        }
+
+        // 初期表示時に合計を更新
+        document.addEventListener('DOMContentLoaded', updateTotals);
+
+        // キャンセル
+        function cancel() {
+            if (confirm('入力内容を破棄してよろしいですか？')) {
+                window.location.href = '/';
+            }
+        }
+
+        // 登録
+        function register() {
+            // ここに登録処理を実装
+            alert('登録処理を実行します');
+        }
+
+        // ダイアログの外側クリックで閉じる
+        document.querySelectorAll('.dialog-backdrop').forEach(backdrop => {
+            backdrop.addEventListener('click', function() {
+                const dialogId = this.id.replace('Backdrop', '');
+                hideDialog(dialogId, this.id);
+            });
+        });
+    </script>
+</body>
+</html>

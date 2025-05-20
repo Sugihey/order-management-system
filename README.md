@@ -26,7 +26,7 @@ localhost:80で開発サーバーが起動する
 
 ## appサーバーコンソールへのアクセス
 ```cmd
-$ docker compose exec l11dev-app bash
+> docker compose exec l11dev-app bash
 ```
 ## storage/logsディレクトリへの書き込み権限付与
 ```bash

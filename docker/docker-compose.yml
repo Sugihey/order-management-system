@@ -1,4 +1,3 @@
-version: '3'
 services:
   l11dev-nginx:
     container_name: "l11dev-nginx"

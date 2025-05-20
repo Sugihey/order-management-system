@@ -28,6 +28,21 @@ localhost:80で開発サーバーが起動する
 ```cmd
 > docker compose exec l11dev-app bash
 ```
+### .envファイルの作成
+.env.sampleをコピーして.envファイルを作成
+db接続の設定を以下の内容に変更
+```
+DB_CONNECTION=mysql
+DB_HOST=l11dev-mysql
+DB_PORT=3306
+DB_DATABASE=l11dev
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+.envをコピーして作成した場合はAPP_KEYが未定義なので、以下のコマンドでキーを生成する
+```
+php artisan key:generate
+```
 ## storage/logsディレクトリへの書き込み権限付与
 ```bash
 $ cd /src

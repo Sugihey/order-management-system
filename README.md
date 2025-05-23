@@ -7,6 +7,9 @@
 環境構築は以下のサイトを参考に行った
 https://qiita.com/hitotch/items/2e816bc1423d00562dc2
 
+## HostingURL
+https://sugihey.github.io/order-management-system/
+
 ## Clone後のセットアップ
 ### Docker起動前の準備
 プロジェクトフォルダに移動して以下のディレクトリがリポジトリに含まれない場合はコマンドを実行して作成。

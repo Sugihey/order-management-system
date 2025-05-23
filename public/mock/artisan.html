@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>職人詳細</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- ヘッダー部 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold mb-6">職人情報</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-600">ID</p>
+                    <p class="font-semibold">ART001</p>
+                </div>
+                <div>
+                    <p class="text-gray-600">名前</p>
+                    <input type="text" class="w-full p-2 border rounded" value="山田 太郎">
+                </div>
+                <div>
+                    <p class="text-gray-600">メールアドレス</p>
+                    <input type="email" class="w-full p-2 border rounded" value="yamada@example.com">
+                </div>
+                <div>
+                    <p class="text-gray-600">住所</p>
+                    <input type="text" class="w-full p-2 border rounded" value="東京都渋谷区...">
+                </div>
+                <div>
+                    <p class="text-gray-600">電話番号</p>
+                    <input type="tel" class="w-full p-2 border rounded" value="03-1234-5678">
+                </div>
+                <div>
+                    <p class="text-gray-600">パスワード</p>
+                    <input type="password" class="w-full p-2 border rounded" value="********">
+                </div>
+                <div>
+                    <p class="text-gray-600">登録日時</p>
+                    <p class="font-semibold">2024-03-20 10:00:00</p>
+                </div>
+                <div>
+                    <p class="text-gray-600">更新日時</p>
+                    <p class="font-semibold">2024-03-21 15:30:00</p>
+                </div>
+                <div>
+                    <p class="text-gray-600">最終更新者</p>
+                    <p class="font-semibold">管理者</p>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-4">
+                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./artisan_list.html'">更新</button>
+                <button class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600" onclick="window.location.href='./artisan_list.html'">削除</button>
+            </div>
+        </div>
+
+        <!-- 明細部 -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold mb-6">発注一覧</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">発注日</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業場所</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業内容</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業完了日</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">2024-03-20</td>
+                            <td class="px-6 py-4">東京都渋谷区</td>
+                            <td class="px-6 py-4">水道修理</td>
+                            <td class="px-6 py-4">2024-03-21</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">確認</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">2024-03-18</td>
+                            <td class="px-6 py-4">東京都新宿区</td>
+                            <td class="px-6 py-4">電気工事</td>
+                            <td class="px-6 py-4">2024-03-19</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">確認</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

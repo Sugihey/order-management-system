@@ -3,14 +3,10 @@
 </p>
 
 ## このリポジトリについて
-
-環境構築は以下のサイトを参考に行った
-https://qiita.com/hitotch/items/2e816bc1423d00562dc2
-
 ## HostingURL
-https://sugihey.github.io/order-management-system/public/mock/index.html
+[[https://sugihey.github.io/order-management-system/public/mock/index.html]]
 ## Artisan Login Screen
-https://sugihey.github.io/order-management-system/public/mock/artisan_login.html
+[[https://sugihey.github.io/order-management-system/public/mock/artisan_login.html]]
 
 ## Clone後のセットアップ
 ### Docker起動前の準備
@@ -65,3 +61,7 @@ php artisan migrate
 ```bash
 $ npm run dev
 ```
+
+環境構築は以下のサイトを参考に行った
+https://qiita.com/hitotch/items/2e816bc1423d00562dc2
+

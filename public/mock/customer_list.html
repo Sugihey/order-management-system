@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧客一覧</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">顧客一覧</h1>
+                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./customer_new.html'">
+                    新規顧客
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">顧客名</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">住所</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">電話番号</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">CUS001</td>
+                            <td class="px-6 py-4">株式会社サンプル</td>
+                            <td class="px-6 py-4">東京都渋谷区...</td>
+                            <td class="px-6 py-4">03-1234-5678</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./customer.html'">表示</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">CUS002</td>
+                            <td class="px-6 py-4">株式会社テスト</td>
+                            <td class="px-6 py-4">東京都新宿区...</td>
+                            <td class="px-6 py-4">03-8765-4321</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./customer.html'">表示</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">CUS003</td>
+                            <td class="px-6 py-4">株式会社デモ</td>
+                            <td class="px-6 py-4">東京都千代田区...</td>
+                            <td class="px-6 py-4">03-9876-5432</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./customer.html'">表示</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

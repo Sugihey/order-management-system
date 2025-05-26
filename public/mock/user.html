@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ユーザー登録</title>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center p-5">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">ユーザー登録</h1>
+        <form id="userRegistrationForm" class="space-y-6">
+            <div class="space-y-2">
+                <label for="userId" class="block text-sm font-medium text-gray-700">ユーザーID</label>
+                <input type="text" id="userId" name="userId" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    value="1">
+            </div>
+            <div class="space-y-2">
+                <label for="username" class="block text-sm font-medium text-gray-700">ユーザー名</label>
+                <input type="text" id="username" name="username" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    value="山田 太郎">
+            </div>
+            <div class="space-y-2">
+                <label for="password" class="block text-sm font-medium text-gray-700">パスワード</label>
+                <input type="password" id="password" name="password" required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    value="12345678">
+            </div>
+            <div>
+                <p class="text-gray-600">登録日時</p>
+                <p class="font-semibold">2024-03-20 10:00:00</p>
+            </div>
+            <div>
+                <p class="text-gray-600">更新日時</p>
+                <p class="font-semibold">2024-03-21 15:30:00</p>
+            </div>
+            <div>
+                <p class="text-gray-600">最終更新者</p>
+                <p class="font-semibold">管理者</p>
+            </div>
+            <div class="space-y-3">
+                <button type="submit" 
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition duration-200" onclick="window.location.href='./user_list.html'">
+                    更新
+                </button>
+                <button type="button"
+                    class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition duration-200" onclick="window.location.href='./user_list.html'">
+                    削除
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

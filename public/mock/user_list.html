@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザー一覧</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">ユーザー一覧</h1>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4" onclick="window.location.href='./user_new.html'">ユーザー登録</button>
+    <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="py-2 px-4 text-left">ユーザーID</th>
+          <th class="py-2 px-4 text-left">ユーザー名</th>
+          <th class="py-2 px-4 text-left">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="py-2 px-4">1</td>
+          <td class="py-2 px-4">山田 太郎</td>
+          <td class="py-2 px-4">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded mr-2" onclick="window.location.href='./user.html'">表示</button>
+          </td>
+        </tr>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="py-2 px-4">2</td>
+          <td class="py-2 px-4">佐藤 花子</td>
+          <td class="py-2 px-4">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded mr-2" onclick="window.location.href='./user.html'">表示</button>
+          </td>
+        </tr>
+        <!-- ここに他のユーザー行を追加可能 -->
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

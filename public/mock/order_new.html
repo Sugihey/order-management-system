@@ -61,6 +61,44 @@
                         <label class="form-label">物件</label>
                         <input type="text" class="form-control" id="property" readonly onclick="showPropertyDialog()" disabled>
                     </div>
+                    <div class="col-md-4">
+                        <label class="form-label">タイプ</label>
+                        <div class="d-flex gap-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="typeOriginal" value="原復" checked>
+                                <label class="form-check-label" for="typeOriginal">原復</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="typeRepair" value="修繕">
+                                <label class="form-check-label" for="typeRepair">修繕</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">完工日</label>
+                        <input type="date" class="form-control" id="dueDate">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">電話確認</label>
+                        <div class="d-flex gap-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="callRequired" value="要" checked>
+                                <label class="form-check-label" for="callRequired">要</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" id="callNotRequired" value="不要">
+                                <label class="form-check-label" for="callNotRequired">不要</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">入居者名</label>
+                        <input type="text" class="form-control" id="dominant_name" readonly disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">入居者TEL</label>
+                        <input type="text" class="form-control" id="dominant_tel" readonly disabled>
+                    </div>
                 </div>
             </div>
         </div>

@@ -50,19 +50,7 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label class="form-label">受注日</label>
-                        <input type="date" class="form-control" id="orderDate">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">顧客</label>
-                        <input type="text" class="form-control" id="customer" readonly onclick="showCustomerDialog()">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">物件</label>
-                        <input type="text" class="form-control" id="property" readonly onclick="showPropertyDialog()" disabled>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">タイプ</label>
+                        <label class="form-label">依頼区分</label>
                         <div class="d-flex gap-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="type" id="typeOriginal" value="原復" checked>
@@ -74,37 +62,84 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">完工日</label>
-                        <input type="date" class="form-control" id="dueDate">
+                    <div class="col-md-8">
+                        <label class="form-label">顧客</label>
+                        <input type="text" class="form-control" id="customer" readonly onclick="showCustomerDialog()">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">電話確認</label>
-                        <div class="d-flex gap-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="type" id="callRequired" value="要" checked>
-                                <label class="form-check-label" for="callRequired">要</label>
+                        <label class="form-label">物件</label>
+                        <input type="text" class="form-control" id="property" readonly onclick="showPropertyDialog()" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">住所</label>
+                        <input type="text" class="form-control" id="address" readonly disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">部屋番号</label>
+                        <input type="text" class="form-control" id="room_number">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">備考</label>
+                        <input type="text" class="form-control" id="comment">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row mb-1">
+                            <label class="form-label">依頼日</label>
+                            <input type="date" class="form-control" id="orderDate">
+                            <label class="form-label">完了期日</label>
+                            <input type="date" class="form-control" id="dueDate">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row mb-1">
+                            <label class="form-label">写真</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="photo" id="photoRequired" value="要" checked>
+                                        <label class="form-check-label" for="photoRequired">要</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="photo" id="photoNotRequired" value="不要">
+                                        <label class="form-check-label" for="photoNotRequired">不要</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="type" id="callNotRequired" value="不要">
-                                <label class="form-check-label" for="callNotRequired">不要</label>
+                            <label class="form-label">緊急/通常</label>
+                            <div class="d-flex gap-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="emergency" id="emergency" value="緊急" checked>
+                                    <label class="form-check-label" for="emergency">緊急</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="emergency" id="notEmergency" value="通常">
+                                    <label class="form-check-label" for="notEmergency">通常</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">入居者名</label>
-                        <input type="text" class="form-control" id="dominant_name" readonly disabled>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">入居者TEL</label>
-                        <input type="text" class="form-control" id="dominant_tel" readonly disabled>
+                        <div class="row mb-1">
+                            <label class="form-label">電話確認</label>
+                            <div class="d-flex gap-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="call" id="callRequired" value="要" checked>
+                                    <label class="form-check-label" for="callRequired">要</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="call" id="callNotRequired" value="不要">
+                                    <label class="form-check-label" for="callNotRequired">不要</label>
+                                </div>
+                            </div>
+                            <label class="form-label">入居者名</label>
+                            <input type="text" class="form-control" id="dominant_name" readonly disabled>
+                            <label class="form-label">入居者TEL</label>
+                            <input type="text" class="form-control" id="dominant_tel" readonly disabled>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 明細部 -->
-        <div class="card">
+            <!-- 明細部 -->
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -151,18 +186,23 @@
     <div class="dialog-backdrop" id="customerDialogBackdrop"></div>
     <div class="dialog" id="customerDialog">
         <h4>顧客選択</h4>
-        <div class="selectable-item" onclick="selectCustomer('顧客1')">顧客1</div>
-        <div class="selectable-item" onclick="selectCustomer('顧客2')">顧客2</div>
-        <div class="selectable-item" onclick="selectCustomer('顧客3')">顧客3</div>
+        <div class="selectable-item" onclick="selectCustomer('東亜リース・大阪/〇〇株式会社')">東亜リース・大阪/〇〇株式会社</div>
+        <div class="selectable-item" onclick="selectCustomer('東亜リース・大阪/△△株式会社')">東亜リース・大阪/△△株式会社</div>
+        <div class="selectable-item" onclick="selectCustomer('東亜リース・大阪/□□株式会社')">東亜リース・大阪/□□株式会社</div>
+        <div class="selectable-item" onclick="selectCustomer('東亜リース・東京/〇〇株式会社')">東亜リース・東京/〇〇株式会社</div>
+        <div class="selectable-item" onclick="selectCustomer('東亜リース・東京/△△株式会社')">東亜リース・東京/△△株式会社</div>
+        <div class="selectable-item" onclick="selectCustomer('東亜リース・東京/□□株式会社')">東亜リース・東京/□□株式会社</div>
+        <div class="selectable-item" onclick="selectCustomer('レオパレス')">レオパレス</div>
+        <div class="selectable-item" onclick="selectCustomer('その他')">その他</div>
     </div>
 
     <!-- 物件選択ダイアログ -->
     <div class="dialog-backdrop" id="propertyDialogBackdrop"></div>
     <div class="dialog" id="propertyDialog">
         <h4>物件選択</h4>
-        <div class="selectable-item" onclick="selectProperty('物件1')">物件1</div>
-        <div class="selectable-item" onclick="selectProperty('物件2')">物件2</div>
-        <div class="selectable-item" onclick="selectProperty('物件3')">物件3</div>
+        <div class="selectable-item" onclick="selectProperty('XXハイツ','大阪府大阪市中央区3-4-1')">XXハイツ</div>
+        <div class="selectable-item" onclick="selectProperty('〇〇レジデンス','大阪府大阪市中央区5-2-2')">〇〇レジデンス</div>
+        <div class="selectable-item" onclick="selectProperty('メゾンドゥロワ','大阪府大阪市中央区3-3-3')">メゾンドゥロワ</div>
     </div>
 
     <!-- 作業選択ダイアログ -->
@@ -220,8 +260,9 @@
             showDialog('propertyDialog', 'propertyDialogBackdrop');
         }
 
-        function selectProperty(property) {
-            document.getElementById('property').value = property;
+        function selectProperty(name,address) {
+            document.getElementById('property').value = name;
+            document.getElementById('address').value = address;
             hideDialog('propertyDialog', 'propertyDialogBackdrop');
         }
 

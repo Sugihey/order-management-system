@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完了作業検索</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">株式会社 エスクラフト</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6">完了作業検索：2021-01-01 ～ 2021-01-31</h2>
+        <button class="bg-gray-500 text-white px-4 py-1 rounded hover:bg-gray-600 mb-2" onclick="window.location.href='./artisan_dashboard.html'">戻る</button>
+        <div class="overflow-x-auto">
+            <form class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4" action="./artisan_task_search.html">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">完工日（From）</label>
+                    <input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">完工日（To）</label>
+                    <input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div class="flex items-end">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        検索
+                    </button>
+                </div>
+            </form>
+            <table class="min-w-full bg-white rounded-lg shadow">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">完工日</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">施主</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業場所</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業内容</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業完了日</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2021-08-30</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">その他</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">東京都新宿区〇〇町1-2-3 〇〇ハイツ 101</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">クロス張替え</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2021-08-27</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition-colors">詳細</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2021-02-20</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">レオパレス</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">東京都渋谷区ｘｘ町1-2-3 ｘｘハイツ 210</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">キッチンリフォーム</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2021-02-10</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition-colors">詳細</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

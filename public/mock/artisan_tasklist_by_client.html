@@ -17,9 +17,11 @@
         </div>
     </div>
     <div class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">施主別作業リスト：東亜リース・大阪</h2>
+        <h2 class="text-2xl font-bold mb-6">東亜リース・大阪</h2>
+        <p class="text-gray-600 mb-6">締め日：15日 支払：当月末日</p>
         <button class="bg-gray-500 text-white px-4 py-1 rounded hover:bg-gray-600 mb-2" onclick="window.location.href='./artisan_dashboard.html'">戻る</button>
         <div class="overflow-x-auto">
+            <h2 class="text-lg font-bold mb-2">未完了作業</h2>
             <table class="min-w-full bg-white rounded-lg shadow">
                 <thead class="bg-gray-100">
                     <tr>
@@ -34,12 +36,7 @@
                 <tbody class="divide-y divide-gray-200">
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-06-20</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">東京都渋谷区</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">キッチンリフォーム</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <span class="text-green-600 font-medium">完了</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-06-01</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">東京都渋谷区〇〇町1-2-3 〇〇ハイツ 101</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                             <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition-colors">詳細</button>
                         </td>
@@ -47,17 +44,31 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2024-06-25</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">東京都新宿区</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">浴室改修</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <span class="text-red-600 font-medium">未完了</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">-</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                             <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition-colors">詳細</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <!-- 完了作業検索 -->
+        <h2 class="text-lg font-bold mb-2">完了作業検索</h2>
+        <div class="bg-white shadow rounded-lg p-6">
+            <form class="grid grid-cols-1 md:grid-cols-3 gap-4" action="./artisan_task_search.html">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">完工日（From）</label>
+                    <input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">完工日（To）</label>
+                    <input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div class="flex items-end">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        検索
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

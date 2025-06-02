@@ -1,6 +1,16 @@
 <html>
     <head>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="../js/SvgPrint.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const paper = new SvgPrint('#svg');
+                paper.replace('%OrderNo%', 'AAAAAAAAAA');
+                paper.adjustText('OrderNo', 738, 'middle');
+                paper.apply();
+            });
+        </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/svg-paper/dist/svg-paper.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Zen+Antique&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -31,9 +41,11 @@
                 font-style: normal;
             }
         </style>
+        <style>@page { size: A4 }</style>
     </head>
-    <body>
-        <svg 
+    <body class="paper">
+        <svg
+        id="svg"
         width="100%"
         height="100%"
         viewBox="0 0 2481 3508" 
@@ -60,10 +72,10 @@
                         <g transform="matrix(37.5,0,0,37.5,1437.64,538.345)">
                         </g>
                         <text x="1250.14px" y="538.345px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;fill:white;">管　轄　店</text>
-                        <text x="337.932px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%OrderN<tspan x="627.399px " y="695.18px ">o</tspan>%</text>
+                        <text id="OrderNo" x="165px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66px;">%OrderNo%</text>
                         <g transform="matrix(66.6667,0,0,66.6667,1581.19,695.18)">
                         </g>
-                        <text x="1106.59px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%Juris<tspan x="1320.39px " y="695.18px ">d</tspan>ictio<tspan x="1480.05px " y="695.18px ">n</tspan>%</text>
+                        <text x="1000px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%Jurisdiction%</text>
                         <text x="177.798px" y="868.074px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">物件名</text>
                         <g transform="matrix(37.5,0,0,37.5,923.332,860.511)">
                         </g>
@@ -77,11 +89,11 @@
                         <text x="148.631px" y="1011.91px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">物件住所</text>
                         <g transform="matrix(37.5,0,0,37.5,791.12,1004.35)">
                         </g>
-                        <text x="436.107px" y="1004.35px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Property<tspan x="617.87px 644.345px " y="1004.35px 1004.35px ">Ad</tspan>dress%</text>
+                        <text x="436.107px" y="1004.35px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Property>Address%</text>
                         <text x="177.798px" y="1142.07px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">備　考</text>
                         <g transform="matrix(37.5,0,0,37.5,660.77,1134.51)">
                         </g>
-                        <text x="436.107px" y="1134.51px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Co<tspan x="518.157px 546.057px 573.582px 591.657px 609.92px " y="1134.51px 1134.51px 1134.51px 1134.51px 1134.51px ">mment</tspan>%</text>
+                        <text x="436.107px" y="1134.51px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Comment%</text>
                         <path d="M946.621,501.453L946.621,762.903M412.485,762.903L412.485,1174.55M1124.17,762.903L1124.17,914.229M1381.12,762.903L1381.12,914.229" style="fill:none;stroke:black;stroke-width:3.33px;"/>
                         <path d="M118.11,501.453L118.11,1174.55M1741.15,501.453L1741.15,1174.55" style="fill:none;stroke:black;stroke-width:5.72px;stroke-linecap:square;"/>
                         <path d="M118.11,562.39L1741.15,562.39M118.11,762.903L1741.15,762.903M118.11,914.229L1741.15,914.229M118.11,1050.57L1741.15,1050.57" style="fill:none;stroke:black;stroke-width:3.33px;"/>

@@ -117,7 +117,7 @@
                         <tr>
                             <td>1</td>
                             <td>クロス張替え</td>
-                            <td><button class="btn btn-primary btn-sm" onclick="confirmOrder(this)">受注</button></td>
+                            <td><button class="btn btn-primary btn-sm" onclick="orderConfirm(this)">受注</button></td>
                         </tr>
                         <tr>
                             <td>2</td>
@@ -127,7 +127,7 @@
                         <tr>
                             <td>3</td>
                             <td>清掃</td>
-                            <td><button class="btn btn-primary btn-sm" onclick="confirmOrder(this)">受注</button></td>
+                            <td><button class="btn btn-primary btn-sm" onclick="orderConfirm(this)">受注</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -147,8 +147,8 @@
             if (tbody.children.length > 1) {
                 var row = button.closest('tr');
                 var taskName = row.querySelector('td:nth-child(2)').textContent;
-                if (confirm($taskName+'を受注してよろしいですか？')) {
-                    window.location.href = './artisan_incoming_task_list.html';
+                if (confirm(taskName+'を受注してよろしいですか？')) {
+//                    window.location.href = './artisan_incoming_task_list.html';
                 }
             }
         }

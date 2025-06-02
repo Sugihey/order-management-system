@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規作業単価登録</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+        .dialog-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
+        .selectable-item {
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+        }
+        .selectable-item:hover {
+            background-color: #f3f4f6;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div id="logo">
+            <h1 class="text-xl" style="font-size: 24px;"><a class="text-black text-decoration-none" href="./dashboard.html">受注管理システム</a></h1>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold mb-6">新規作業単価登録</h1>
+            
+            <!-- 作業情報 -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
+                <div class="col-span-4">
+                    <p class="text-gray-600 mb-1">顧客 <span class="text-red-500">*</span></p>
+                    <input type="text" class="w-full p-2 border rounded" required id="customer" readonly onclick="showCustomerDialog()">
+                </div>
+                <div class="col-span-4">
+                    <p class="text-gray-600 mb-1">作業 <span class="text-red-500">*</span></p>
+                    <input type="text" class="w-full p-2 border rounded" required id="operation" readonly onclick="showOperationDialog()">
+                </div>
+                <div class="col-span-1">
+                    <p class="text-gray-600 mb-1">単位 <span class="text-red-500"></span></p>
+                    <input type="text" class="w-full p-2 border rounded" readonly id="unit">
+                </div>
+                <div class="col-span-3"></div>
+                <div class="col-span-4">
+                    <p class="text-gray-600 mb-1">受注単価 <span class="text-red-500">*</span></p>
+                    <input type="text" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="col-span-4">
+                    <p class="text-gray-600 mb-1">発注単価 <span class="text-red-500">*</span></p>
+                    <input type="text" class="w-full p-2 border rounded" required>
+                </div>
+            </div>
+            <!-- ボタン -->
+            <div class="flex gap-4">
+                <button class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600" onclick="window.location.href='./unit_price_list.html'">キャンセル</button>
+                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./unit_price_list.html'">登録</button>
+            </div>
+        </div>
+    </div>
+    <!-- 顧客選択ダイアログ -->
+    <div class="dialog-backdrop hidden" id="customerDialogBackdrop"></div>
+    <div class="dialog hidden" id="customerDialog">
+        <h4 class="text-lg font-semibold mb-4">請求先選択</h4>
+        <div class="space-y-2">
+            <div class="selectable-item" onclick="selectCustomer('XXリース・大阪')">XXリース・大阪</div>
+            <div class="selectable-item" onclick="selectCustomer('XXリース・東京')">XXリース・東京</div>
+            <div class="selectable-item" onclick="selectCustomer('レオパレス')">レオパレス</div>
+            <div class="selectable-item" onclick="selectCustomer('カギ')">カギ</div>
+            <div class="selectable-item" onclick="selectCustomer('その他')">その他</div>
+        </div>
+    </div>
+
+    <!-- 物件選択ダイアログ -->
+    <div class="dialog-backdrop hidden" id="operationDialogBackdrop"></div>
+    <div class="dialog hidden" id="operationDialog">
+        <h4 class="text-lg font-semibold mb-4">作業選択</h4>
+        <div class="space-y-2">
+            <div class="selectable-item" onclick="selectOperation('クロス張替え','㎡')">クロス張替え</div>
+            <div class="selectable-item" onclick="selectOperation('清掃','㎡')">清掃</div>
+            <div class="selectable-item" onclick="selectOperation('カギ交換','個')">カギ交換</div>
+        </div>
+    </div>
+
+    <script>
+        // ダイアログ表示関数
+        function showDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).classList.remove('hidden');
+            document.getElementById(backdropId).classList.remove('hidden');
+        }
+
+        // ダイアログ非表示関数
+        function hideDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).classList.add('hidden');
+            document.getElementById(backdropId).classList.add('hidden');
+        }
+
+        // 請求先選択
+        function showCustomerDialog() {
+            showDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        function selectCustomer(customer) {
+            document.getElementById('customer').value = customer;
+            hideDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        // 作業選択
+        function showOperationDialog(input) {
+            showDialog('operationDialog', 'operationDialogBackdrop');
+        }
+
+        function selectOperation(operation,unit) {
+            document.getElementById('operation').value = operation;
+            document.getElementById('unit').value = unit;
+            hideDialog('operationDialog', 'operationDialogBackdrop');
+        }
+
+        // キャンセル
+        function cancel() {
+            if (confirm('入力内容を破棄してよろしいですか？')) {
+                window.location.href = '/';
+            }
+        }
+
+        // ダイアログの外側クリックで閉じる
+        document.querySelectorAll('.dialog-backdrop').forEach(backdrop => {
+            backdrop.addEventListener('click', function() {
+                const dialogId = this.id.replace('Backdrop', '');
+                hideDialog(dialogId, this.id);
+            });
+        });
+    </script>
+</body>
+</html>

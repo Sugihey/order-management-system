@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>請求先情報</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div id="logo">
+            <h1 class="text-xl" style="font-size: 24px;"><a class="text-black text-decoration-none" href="./dashboard.html">受注管理システム</a></h1>
+        </div>
+        <!-- 顧客情報 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold mb-6">請求先情報</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-gray-600">顧客</p>
+                    <input type="text" class="w-full p-2 border rounded" value="XXリース">
+                </div>
+                <div>
+                    <p class="text-gray-600">請求先名</p>
+                    <input type="text" class="w-full p-2 border rounded" value="サンプル株式会社">
+                </div>
+                <div class="md:col-span-2 flex gap-4">
+                    <div>
+                        <p class="text-gray-600">締め日</p>
+                        <select class="w-auto p-2 border rounded">
+                            <option value="">選択してください</option>
+                            <option value="1">1日</option>
+                            <option value="2">2日</option>
+                            <option value="3">3日</option>
+                            <option value="4">4日</option>
+                            <option value="5">5日</option>
+                            <option value="6">6日</option>
+                            <option value="7">7日</option>
+                            <option value="8">8日</option>
+                            <option value="9">9日</option>
+                            <option value="10">10日</option>
+                            <option value="11">11日</option>
+                            <option value="12">12日</option>
+                            <option value="13">13日</option>
+                            <option value="14">14日</option>
+                            <option value="15">15日</option>
+                            <option value="16">16日</option>
+                            <option value="17">17日</option>
+                            <option value="18">18日</option>
+                            <option value="19">19日</option>
+                            <option value="20">20日</option>
+                            <option value="21">21日</option>
+                            <option value="22">22日</option>
+                            <option value="23">23日</option>
+                            <option value="24">24日</option>
+                            <option value="25">25日</option>
+                            <option value="26">26日</option>
+                            <option value="27">27日</option>
+                            <option value="28">28日</option>
+                            <option value="29">29日</option>
+                            <option value="30">30日</option>
+                            <option value="31">31日(月末)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="text-gray-600">請求月日</p>
+                        <select class="w-auto p-2 border rounded">
+                            <option value="">選択してください</option>
+                            <option value="1">当月</option>
+                            <option value="2">翌月</option>
+                            <option value="3">翌々月</option>
+                        </select>
+
+                        <select class="w-auto p-2 border rounded">
+                            <option value="1">1日</option>
+                            <option value="2">2日</option>
+                            <option value="3">3日</option>
+                            <option value="4">4日</option>
+                            <option value="5">5日</option>
+                            <option value="6">6日</option>
+                            <option value="7">7日</option>
+                            <option value="8">8日</option>
+                            <option value="9">9日</option>
+                            <option value="10">10日</option>
+                            <option value="11">11日</option>
+                            <option value="12">12日</option>
+                            <option value="13">13日</option>
+                            <option value="14">14日</option>
+                            <option value="15">15日</option>
+                            <option value="16">16日</option>
+                            <option value="17">17日</option>
+                            <option value="18">18日</option>
+                            <option value="19">19日</option>
+                            <option value="20">20日</option>
+                            <option value="21">21日</option>
+                            <option value="22">22日</option>
+                            <option value="23">23日</option>
+                            <option value="24">24日</option>
+                            <option value="25">25日</option>
+                            <option value="26">26日</option>
+                            <option value="27">27日</option>
+                            <option value="28">28日</option>
+                            <option value="29">29日</option>
+                            <option value="30">30日</option>
+                            <option value="31">31日(月末)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-gray-600">登録日時</p>
+                    <p class="font-semibold">2024-03-20 10:00:00</p>
+                </div>
+                <div>
+                    <p class="text-gray-600">更新日時</p>
+                    <p class="font-semibold">2024-03-21 15:30:00</p>
+                </div>
+                <div>
+                    <p class="text-gray-600">最終更新者</p>
+                    <p class="font-semibold">管理者</p>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-4">
+                <button class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600" onclick="window.location.href='./billing_destination_list.html'">キャンセル</button>
+                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./billing_destination_list.html'">更新</button>
+            </div>
+        </div>
+
+        <!-- 所有物件一覧 -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">所有物件一覧</h2>
+                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./property_new.html'">
+                    新規物件
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">物件名</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">住所</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4">サンプルマンション</td>
+                            <td class="px-6 py-4">東京都渋谷区...</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./property.html'">表示</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4">テストビル</td>
+                            <td class="px-6 py-4">東京都新宿区...</td>
+                            <td class="px-6 py-4">
+                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./property.html'">表示</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

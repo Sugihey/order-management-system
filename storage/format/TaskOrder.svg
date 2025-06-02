@@ -5,7 +5,7 @@
         <g transform="matrix(1,0,0,1,208.505,37.4763)">
             <g transform="matrix(91.6667,0,0,91.6667,1680.47,157.176)">
             </g>
-            <text x="382.836px" y="157.176px" style="font-family:'ZenAntique-Regular', 'Zen Antique';font-size:91.667px;">発<tspan x="483.303px 583.769px 684.603px 785.069px 885.536px 986.003px 1086.47px 1187.3px 1287.77px 1388.24px 1488.7px 1589.17px " y="157.176px 157.176px 157.176px 157.176px 157.176px 157.176px 157.176px 157.176px 157.176px 157.176px 157.176px 157.176px ">注・完了報告・請求明細書</tspan></text>
+            <text x="382.836px" y="157.176px" style="font-family:'ZenAntique-Regular', 'Zen Antique';font-size:91.667px;">発注・完了報告・請求明細書</text>
             <rect x="382.836" y="169.367" width="1297.63" height="1.833"/>
         </g>
         <g transform="matrix(1,0,0,1.17769,1.59872e-14,-189.486)">
@@ -18,28 +18,28 @@
                 <g transform="matrix(37.5,0,0,37.5,1437.64,538.345)">
                 </g>
                 <text x="1250.14px" y="538.345px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;fill:white;">管　轄　店</text>
-                <text x="337.932px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%OrderN<tspan x="627.399px " y="695.18px ">o</tspan>%</text>
+                <text x="337.932px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%OrderNo%</text>
                 <g transform="matrix(66.6667,0,0,66.6667,1581.19,695.18)">
                 </g>
-                <text x="1106.59px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%Juris<tspan x="1320.39px " y="695.18px ">d</tspan>ictio<tspan x="1480.05px " y="695.18px ">n</tspan>%</text>
+                <text x="1106.59px" y="695.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:66.667px;">%Jurisdiction%</text>
                 <text x="177.798px" y="868.074px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">物件名</text>
                 <g transform="matrix(37.5,0,0,37.5,923.332,860.511)">
                 </g>
-                <text x="613.32px" y="860.511px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Property<tspan x="796.582px 822.87px 840.232px 867.757px " y="860.511px 860.511px 860.511px 860.511px ">Name</tspan>%</text>
+                <text x="613.32px" y="860.511px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%PropertyName%</text>
                 <g transform="matrix(58.3333,0,0,58.3333,1369.31,868.074)">
                 </g>
                 <text x="1135.98px" y="868.074px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">部屋番号</text>
                 <g transform="matrix(37.5,0,0,37.5,1666.06,860.511)">
                 </g>
-                <text x="1456.21px" y="860.511px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%R<tspan x="1518.76px 1537.17px 1555.21px 1583.11px 1610.15px " y="860.511px 860.511px 860.511px 860.511px 860.511px ">oomNo</tspan>%</text>
+                <text x="1420.21px" y="860.511px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">%RoomNo%</text>
                 <text x="148.631px" y="1011.91px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">物件住所</text>
                 <g transform="matrix(37.5,0,0,37.5,791.12,1004.35)">
                 </g>
-                <text x="436.107px" y="1004.35px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Property<tspan x="617.87px 644.345px " y="1004.35px 1004.35px ">Ad</tspan>dress%</text>
+                <text x="436.107px" y="1004.35px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%PropertyAddress%</text>
                 <text x="177.798px" y="1142.07px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:58.333px;">備　考</text>
                 <g transform="matrix(37.5,0,0,37.5,660.77,1134.51)">
                 </g>
-                <text x="436.107px" y="1134.51px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Co<tspan x="518.157px 546.057px 573.582px 591.657px 609.92px " y="1134.51px 1134.51px 1134.51px 1134.51px 1134.51px ">mment</tspan>%</text>
+                <text x="436.107px" y="1134.51px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Comment%</text>
                 <path d="M946.621,501.453L946.621,762.903M412.485,762.903L412.485,1174.55M1124.17,762.903L1124.17,914.229M1381.12,762.903L1381.12,914.229" style="fill:none;stroke:black;stroke-width:3.33px;"/>
                 <path d="M118.11,501.453L118.11,1174.55M1741.15,501.453L1741.15,1174.55" style="fill:none;stroke:black;stroke-width:5.72px;stroke-linecap:square;"/>
                 <path d="M118.11,562.39L1741.15,562.39M118.11,762.903L1741.15,762.903M118.11,914.229L1741.15,914.229M118.11,1050.57L1741.15,1050.57" style="fill:none;stroke:black;stroke-width:3.33px;"/>
@@ -53,20 +53,19 @@
             <path d="M1013.38,270.273L1013.38,381.474C1013.38,384.926 1009.71,387.724 1005.18,387.724L118.11,387.724C113.583,387.724 109.913,384.926 109.913,381.474L109.913,270.273C109.913,266.822 113.583,264.023 118.11,264.023L1005.18,264.023C1009.71,264.023 1013.38,266.822 1013.38,270.273ZM1005.18,270.273L118.11,270.273L118.11,381.474L1005.18,381.474L1005.18,270.273Z"/>
         </g>
         <g>
-            <text x="138.806px" y="1274.93px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">依　頼　日</text>
+            <text x="138.806px" y="1270.93px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">依　頼　日</text>
             <g transform="matrix(50,0,0,50,765.223,1268.42)">
             </g>
             <text x="433.123px" y="1268.42px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">%OrderDate%</text>
-            <text x="1202.97px" y="1274.93px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">写真</text>
-            <text x="1388.08px" y="1253.16px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%IsPh<tspan x="1515.83px 1535.87px 1550.71px 1570.33px 1598.16px 1618.25px 1638.33px " y="1253.16px 1253.16px 1253.16px 1253.16px 1253.16px 1253.16px 1253.16px ">otoRequ</tspan>ired</text>
-            <text x="1539.29px" y="1290.66px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%</text>
+            <text x="1202.97px" y="1270.93px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">写真</text>
+            <text x="1388.08px" y="1268.16px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%IsPhotoRequired%</text>
             <g transform="matrix(50,0,0,50,363.806,1373.47)">
             </g>
-            <text x="163.806px" y="1373.47px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">完了期日</text>
-            <text x="433.123px" y="1364.99px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">%DueDate%</text>
+            <text x="163.806px" y="1365.47px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">完了期日</text>
+            <text x="433.123px" y="1364.99px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">%Deadline%</text>
             <g transform="matrix(50,0,0,50,1624.82,1373.47)">
             </g>
-            <text x="1243.17px" y="1373.47px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">%IsEm<tspan x="1407.97px " y="1373.47px ">e</tspan>rg<tspan x="1479.07px 1503.17px 1528.52px 1550.62px " y="1373.47px 1373.47px 1373.47px 1373.47px ">ency</tspan>%</text>
+            <text x="1243.17px" y="1363.47px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">%IsEmergency%</text>
             <path d="M118.11,1197.25L118.11,1400.15M1741.15,1197.25L1741.15,1400.15" style="fill:none;stroke:black;stroke-width:5.83px;"/>
             <path d="M409.501,1200.17L409.501,1397.24M1126.84,1200.17L1126.84,1397.24M1379.09,1200.17L1379.09,1296.73" style="fill:none;stroke:black;stroke-width:3.75px;"/>
             <path d="M118.11,1200.17L1741.15,1200.17M118.11,1397.24L1741.15,1397.24" style="fill:none;stroke:black;stroke-width:5.83px;"/>
@@ -74,17 +73,13 @@
         </g>
         <g>
             <text x="1809.25px" y="1164.38px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">事前TEL</text>
-            <text x="2006.88px" y="1145.63px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%IsCallR<tspan x="2185.72px 2205.8px 2225.88px " y="1145.63px 1145.63px 1145.63px ">equ</tspan>ired</text>
-            <text x="2142.47px" y="1183.13px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%</text>
+            <text x="2006.88px" y="1165.63px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%IsCallRequired%</text>
             <g transform="matrix(50,0,0,50,1969.44,1266.6)">
             </g>
             <text x="1819.43px" y="1266.6px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:50px;">入居者</text>
-            <text x="1992.78px" y="1263.57px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%R<tspan x="2062.28px " y="1263.57px ">e</tspan>giden<tspan x="2178.15px 2192.99px 2222.2px 2241.49px 2272.07px " y="1263.57px 1263.57px 1263.57px 1263.57px 1263.57px ">tName</tspan>%</text>
+            <text x="2006.88px" y="1263.57px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%RgidentName%</text>
             <text x="1850.91px" y="1362.77px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">TEL</text>
-            <text x="2007.82px" y="1344.02px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%R<tspan x="2077.32px " y="1344.02px ">e</tspan>giden<tspan x="2193.2px " y="1344.02px ">t</tspan>Ph<tspan x="2257.53px 2277.57px 2298.7px " y="1344.02px 1344.02px 1344.02px ">one</tspan></text>
-            <g transform="matrix(41.6667,0,0,41.6667,2184.13,1381.52)">
-            </g>
-            <text x="2142.47px" y="1381.52px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%</text>
+            <text x="2006.88px" y="1364.02px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%RegidentPhone%</text>
             <path d="M1802.8,1096.74L1802.8,1400.15M2340.53,1096.74L2340.53,1400.15" style="fill:none;stroke:black;stroke-width:5.83px;"/>
             <path d="M1986.07,1099.66L1986.07,1397.24" style="fill:none;stroke:black;stroke-width:3.75px;"/>
             <path d="M1802.8,1099.66L2340.53,1099.66M1802.8,1397.24L2340.53,1397.24" style="fill:none;stroke:black;stroke-width:5.83px;"/>
@@ -116,7 +111,7 @@
             <rect x="1062.78" y="270.273" width="676.377" height="111.2" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:1px;"/>
             <g transform="matrix(58.3333,0,0,58.3333,1592.71,347.049)">
             </g>
-            <text x="1209.22px" y="347.049px" style="font-family:'ZenOldMincho-Bold', 'Zen Old Mincho';font-weight:700;font-size:58.333px;">%T<tspan x="1307.46px " y="347.049px ">a</tspan>skT<tspan x="1440.28px " y="347.049px ">y</tspan>pe%</text>
+            <text x="1209.22px" y="347.049px" style="font-family:'ZenOldMincho-Bold', 'Zen Old Mincho';font-weight:700;font-size:58.333px;">%TaskType%</text>
         </g>
     </g>
     <g id="レイヤー2">
@@ -138,7 +133,7 @@
             <text x="135.661px" y="1586.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">1</text>
             <g transform="matrix(41.6667,0,0,41.6667,500.147,1589.73)">
             </g>
-            <text x="182.855px" y="1589.73px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="1589.73px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="1589.73px 1589.73px 1589.73px ">ame</tspan>01%</text>
+            <text x="182.855px" y="1589.73px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName01%</text>
             <text x="1081.43px" y="1588.21px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q01%</text>
             <text x="1289.89px" y="1588.21px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U01%</text>
             <text x="1585.64px" y="1588.21px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P01%</text>
@@ -146,7 +141,7 @@
             <text x="135.094px" y="1680.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">2</text>
             <g transform="matrix(41.6667,0,0,41.6667,501.564,1683.32)">
             </g>
-            <text x="182.855px" y="1683.32px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="1683.32px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="1683.32px 1683.32px 1683.32px ">ame</tspan>02%</text>
+            <text x="182.855px" y="1683.32px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName02%</text>
             <text x="1080.8px" y="1681.8px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q02%</text>
             <text x="1288.62px" y="1681.8px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U02%</text>
             <text x="1584.37px" y="1681.8px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P02%</text>
@@ -154,7 +149,7 @@
             <text x="135.277px" y="1765.15px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">3</text>
             <g transform="matrix(41.6667,0,0,41.6667,501.105,1768.18)">
             </g>
-            <text x="182.855px" y="1768.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="1768.18px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="1768.18px 1768.18px 1768.18px ">ame</tspan>03%</text>
+            <text x="182.855px" y="1768.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName03%</text>
             <text x="1081px" y="1766.67px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q03%</text>
             <text x="1289.03px" y="1766.67px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U03%</text>
             <text x="1584.78px" y="1766.67px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P03%</text>
@@ -162,7 +157,7 @@
             <text x="134.827px" y="1842.3px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">4</text>
             <g transform="matrix(41.6667,0,0,41.6667,502.23,1845.33)">
             </g>
-            <text x="182.855px" y="1845.33px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="1845.33px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="1845.33px 1845.33px 1845.33px ">ame</tspan>04%</text>
+            <text x="182.855px" y="1845.33px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName04%</text>
             <text x="1080.5px" y="1843.82px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q04%</text>
             <text x="1288.02px" y="1843.82px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U04%</text>
             <text x="1583.77px" y="1843.82px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P04%</text>
@@ -170,7 +165,7 @@
             <text x="135.044px" y="1919.45px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">5</text>
             <g transform="matrix(41.6667,0,0,41.6667,501.689,1922.48)">
             </g>
-            <text x="182.855px" y="1922.48px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="1922.48px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="1922.48px 1922.48px 1922.48px ">ame</tspan>05%</text>
+            <text x="182.855px" y="1922.48px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName05%</text>
             <text x="1080.74px" y="1920.96px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q05%</text>
             <text x="1288.51px" y="1920.96px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U05%</text>
             <text x="1584.26px" y="1920.96px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P05%</text>
@@ -178,7 +173,7 @@
             <text x="134.627px" y="1996.6px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">6</text>
             <g transform="matrix(41.6667,0,0,41.6667,502.73,1999.62)">
             </g>
-            <text x="182.855px" y="1999.62px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="1999.62px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="1999.62px 1999.62px 1999.62px ">ame</tspan>06%</text>
+            <text x="182.855px" y="1999.62px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName06%</text>
             <text x="1080.27px" y="1998.11px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q06%</text>
             <text x="1287.57px" y="1998.11px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U06%</text>
             <text x="1583.32px" y="1998.11px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P06%</text>
@@ -186,7 +181,7 @@
             <text x="135.461px" y="2073.75px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">7</text>
             <g transform="matrix(41.6667,0,0,41.6667,500.647,2076.77)">
             </g>
-            <text x="182.855px" y="2076.77px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2076.77px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2076.77px 2076.77px 2076.77px ">ame</tspan>07%</text>
+            <text x="182.855px" y="2076.77px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName07%</text>
             <text x="1081.21px" y="2075.26px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q07%</text>
             <text x="1289.44px" y="2075.26px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U07%</text>
             <text x="1585.19px" y="2075.26px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P07%</text>
@@ -194,7 +189,7 @@
             <text x="134.577px" y="2150.89px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">8</text>
             <g transform="matrix(41.6667,0,0,41.6667,502.855,2153.92)">
             </g>
-            <text x="182.855px" y="2153.92px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2153.92px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2153.92px 2153.92px 2153.92px ">ame</tspan>08%</text>
+            <text x="182.855px" y="2153.92px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName08%</text>
             <text x="1080.21px" y="2152.41px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q08%</text>
             <text x="1287.46px" y="2152.41px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U08%</text>
             <text x="1583.2px" y="2152.41px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P08%</text>
@@ -202,23 +197,23 @@
             <text x="134.694px" y="2228.04px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">9</text>
             <g transform="matrix(41.6667,0,0,41.6667,502.564,2231.07)">
             </g>
-            <text x="182.855px" y="2231.07px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2231.07px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2231.07px 2231.07px 2231.07px ">ame</tspan>09%</text>
+            <text x="182.855px" y="2231.07px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName09%</text>
             <text x="1080.35px" y="2229.55px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q09%</text>
             <text x="1287.72px" y="2229.55px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U09%</text>
             <text x="1583.47px" y="2229.55px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P09%</text>
             <text x="1752.97px" y="2229.55px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C09%</text>
-            <text x="125.911px" y="2305.19px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">1<tspan x="142.744px " y="2305.19px ">0</tspan></text>
+            <text x="125.911px" y="2305.19px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">10</text>
             <g transform="matrix(41.6667,0,0,41.6667,498.897,2308.21)">
             </g>
-            <text x="182.855px" y="2308.21px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2308.21px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px 410.564px 431.605px " y="2308.21px 2308.21px 2308.21px 2308.21px 2308.21px ">ame10</tspan>%</text>
-            <text x="1082px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q1<tspan x="1165.32px " y="2306.7px ">0</tspan>%</text>
-            <text x="1291.02px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U1<tspan x="1375.69px " y="2306.7px ">0</tspan>%</text>
-            <text x="1586.77px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P1<tspan x="1668.78px " y="2306.7px ">0</tspan>%</text>
-            <text x="1752.97px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C1<tspan x="1835.91px " y="2306.7px ">0</tspan>%</text>
+            <text x="182.855px" y="2308.21px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName10%</text>
+            <text x="1082px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q10%</text>
+            <text x="1291.02px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U10%</text>
+            <text x="1586.77px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P10%</text>
+            <text x="1752.97px" y="2306.7px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C10%</text>
             <text x="126.744px" y="2382.34px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">11</text>
             <g transform="matrix(41.6667,0,0,41.6667,496.814,2385.36)">
             </g>
-            <text x="182.855px" y="2385.36px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2385.36px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2385.36px 2385.36px 2385.36px ">ame</tspan>11%</text>
+            <text x="182.855px" y="2385.36px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName11%</text>
             <text x="1082.93px" y="2383.85px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q11%</text>
             <text x="1292.89px" y="2383.85px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U11%</text>
             <text x="1588.64px" y="2383.85px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P11%</text>
@@ -226,7 +221,7 @@
             <text x="126.177px" y="2459.48px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">12</text>
             <g transform="matrix(41.6667,0,0,41.6667,498.23,2462.51)">
             </g>
-            <text x="182.855px" y="2462.51px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2462.51px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2462.51px 2462.51px 2462.51px ">ame</tspan>12%</text>
+            <text x="182.855px" y="2462.51px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName12%</text>
             <text x="1082.3px" y="2461px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q12%</text>
             <text x="1291.62px" y="2461px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U12%</text>
             <text x="1587.37px" y="2461px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P12%</text>
@@ -234,23 +229,23 @@
             <text x="126.361px" y="2536.63px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">13</text>
             <g transform="matrix(41.6667,0,0,41.6667,497.772,2539.66)">
             </g>
-            <text x="182.855px" y="2539.66px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2539.66px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2539.66px 2539.66px 2539.66px ">ame</tspan>13%</text>
+            <text x="182.855px" y="2539.66px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName13%</text>
             <text x="1082.5px" y="2538.14px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q13%</text>
             <text x="1292.03px" y="2538.14px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U13%</text>
             <text x="1587.78px" y="2538.14px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P13%</text>
             <text x="1752.97px" y="2538.14px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C13%</text>
-            <text x="126.577px" y="2613.78px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">1<tspan x="143.077px " y="2613.78px ">4</tspan></text>
+            <text x="126.577px" y="2613.78px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">14</text>
             <g transform="matrix(41.6667,0,0,41.6667,497.23,2616.8)">
             </g>
-            <text x="182.855px" y="2616.8px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2616.8px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px 410.564px 431.189px " y="2616.8px 2616.8px 2616.8px 2616.8px 2616.8px ">ame14</tspan>%</text>
-            <text x="1082.75px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q1<tspan x="1165.69px " y="2615.29px ">4</tspan>%</text>
-            <text x="1292.52px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U1<tspan x="1376.82px " y="2615.29px ">4</tspan>%</text>
-            <text x="1588.27px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P1<tspan x="1669.9px " y="2615.29px ">4</tspan>%</text>
-            <text x="1752.97px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C1<tspan x="1835.54px " y="2615.29px ">4</tspan>%</text>
+            <text x="182.855px" y="2616.8px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName14%</text>
+            <text x="1082.75px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q14%</text>
+            <text x="1292.52px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U14%</text>
+            <text x="1588.27px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P14%</text>
+            <text x="1752.97px" y="2615.29px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C14%</text>
             <text x="126.127px" y="2690.93px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">15</text>
             <g transform="matrix(41.6667,0,0,41.6667,498.355,2693.95)">
             </g>
-            <text x="182.855px" y="2693.95px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2693.95px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2693.95px 2693.95px 2693.95px ">ame</tspan>15%</text>
+            <text x="182.855px" y="2693.95px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName15%</text>
             <text x="1082.24px" y="2692.44px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q15%</text>
             <text x="1291.51px" y="2692.44px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U15%</text>
             <text x="1587.26px" y="2692.44px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P15%</text>
@@ -258,31 +253,31 @@
             <text x="125.711px" y="2768.08px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">16</text>
             <g transform="matrix(41.6667,0,0,41.6667,499.397,2771.1)">
             </g>
-            <text x="182.855px" y="2771.1px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2771.1px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="2771.1px 2771.1px 2771.1px ">ame</tspan>16%</text>
+            <text x="182.855px" y="2771.1px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName16%</text>
             <text x="1081.77px" y="2769.59px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q16%</text>
             <text x="1290.57px" y="2769.59px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U16%</text>
             <text x="1586.32px" y="2769.59px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P16%</text>
             <text x="1752.97px" y="2769.59px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C16%</text>
-            <text x="127.377px" y="2845.22px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">1<tspan x="143.544px " y="2845.22px ">7</tspan></text>
+            <text x="127.377px" y="2845.22px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">17</text>
             <g transform="matrix(41.6667,0,0,41.6667,495.23,2848.25)">
             </g>
-            <text x="182.855px" y="2848.25px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2848.25px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px 410.564px 430.772px " y="2848.25px 2848.25px 2848.25px 2848.25px 2848.25px ">ame17</tspan>%</text>
-            <text x="1083.64px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q1<tspan x="1166.22px " y="2846.74px ">7</tspan>%</text>
-            <text x="1294.32px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U1<tspan x="1378.25px " y="2846.74px ">7</tspan>%</text>
-            <text x="1590.07px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P1<tspan x="1671.33px " y="2846.74px ">7</tspan>%</text>
-            <text x="1752.97px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C1<tspan x="1835.16px " y="2846.74px ">7</tspan>%</text>
-            <text x="126.161px" y="2922.37px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">1<tspan x="142.994px " y="2922.37px ">8</tspan></text>
+            <text x="182.855px" y="2848.25px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName17%</text>
+            <text x="1083.64px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q17%</text>
+            <text x="1294.32px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U17%</text>
+            <text x="1590.07px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P17%</text>
+            <text x="1752.97px" y="2846.74px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C17%</text>
+            <text x="126.161px" y="2922.37px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">18</text>
             <g transform="matrix(41.6667,0,0,41.6667,498.272,2925.4)">
             </g>
-            <text x="182.855px" y="2925.4px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="2925.4px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px 410.564px 431.605px " y="2925.4px 2925.4px 2925.4px 2925.4px 2925.4px ">ame18</tspan>%</text>
-            <text x="1082.28px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q1<tspan x="1165.6px " y="2923.88px ">8</tspan>%</text>
-            <text x="1291.58px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U1<tspan x="1376.26px " y="2923.88px ">8</tspan>%</text>
-            <text x="1587.33px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P1<tspan x="1669.34px " y="2923.88px ">8</tspan>%</text>
-            <text x="1752.97px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C1<tspan x="1835.91px " y="2923.88px ">8</tspan>%</text>
+            <text x="182.855px" y="2925.4px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName18%</text>
+            <text x="1082.28px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q18%</text>
+            <text x="1291.58px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U18%</text>
+            <text x="1587.33px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P18%</text>
+            <text x="1752.97px" y="2923.88px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%C18%</text>
             <text x="125.777px" y="2999.52px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">19</text>
             <g transform="matrix(41.6667,0,0,41.6667,499.23,3002.54)">
             </g>
-            <text x="182.855px" y="3002.54px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="3002.54px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="3002.54px 3002.54px 3002.54px ">ame</tspan>19%</text>
+            <text x="182.855px" y="3002.54px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName19%</text>
             <text x="1081.85px" y="3001.03px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q19%</text>
             <text x="1290.72px" y="3001.03px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U19%</text>
             <text x="1586.47px" y="3001.03px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P19%</text>
@@ -290,7 +285,7 @@
             <text x="124.844px" y="3076.67px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:33.333px;">20</text>
             <g transform="matrix(41.6667,0,0,41.6667,501.564,3079.69)">
             </g>
-            <text x="182.855px" y="3079.69px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%T<tspan x="251.439px " y="3079.69px ">a</tspan>skN<tspan x="340.605px 359.897px 390.48px " y="3079.69px 3079.69px 3079.69px ">ame</tspan>20%</text>
+            <text x="182.855px" y="3079.69px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:41.667px;">%TaskName20%</text>
             <text x="1080.8px" y="3078.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%Q20%</text>
             <text x="1288.62px" y="3078.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%U20%</text>
             <text x="1584.37px" y="3078.18px" style="font-family:'ZenOldMincho-Regular', 'Zen Old Mincho';font-size:37.5px;">%P20%</text>

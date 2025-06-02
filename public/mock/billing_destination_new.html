@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規請求先登録</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .dialog-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .selectable-item {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .selectable-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
@@ -17,8 +49,94 @@
             <!-- 請求先基本情報 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <p class="text-gray-600 mb-1">名前 <span class="text-red-500">*</span></p>
+                    <p class="text-gray-600">顧客 <span class="text-red-500">*</span></p>
+                    <input id="customer" type="text" class="w-full p-2 border rounded" onclick="showCustomerDialog()">
+                </div>
+                <div>
+                    <p class="text-gray-600 mb-1">請求先名称 <span class="text-red-500">*</span></p>
                     <input type="text" class="w-full p-2 border rounded" required>
+                </div>
+            </div>
+            <div class="md:col-span-2 flex gap-4">
+                <div>
+                    <p class="text-gray-600">締め日</p>
+                    <select class="w-auto p-2 border rounded">
+                        <option value="">選択してください</option>
+                        <option value="1">1日</option>
+                        <option value="2">2日</option>
+                        <option value="3">3日</option>
+                        <option value="4">4日</option>
+                        <option value="5">5日</option>
+                        <option value="6">6日</option>
+                        <option value="7">7日</option>
+                        <option value="8">8日</option>
+                        <option value="9">9日</option>
+                        <option value="10">10日</option>
+                        <option value="11">11日</option>
+                        <option value="12">12日</option>
+                        <option value="13">13日</option>
+                        <option value="14">14日</option>
+                        <option value="15">15日</option>
+                        <option value="16">16日</option>
+                        <option value="17">17日</option>
+                        <option value="18">18日</option>
+                        <option value="19">19日</option>
+                        <option value="20">20日</option>
+                        <option value="21">21日</option>
+                        <option value="22">22日</option>
+                        <option value="23">23日</option>
+                        <option value="24">24日</option>
+                        <option value="25">25日</option>
+                        <option value="26">26日</option>
+                        <option value="27">27日</option>
+                        <option value="28">28日</option>
+                        <option value="29">29日</option>
+                        <option value="30">30日</option>
+                        <option value="31">31日(月末)</option>
+                    </select>
+                </div>
+                <div>
+                    <p class="text-gray-600">請求月日</p>
+                    <select class="w-auto p-2 border rounded">
+                        <option value="">選択してください</option>
+                        <option value="1">当月</option>
+                        <option value="2">翌月</option>
+                        <option value="3">翌々月</option>
+                    </select>
+
+                    <select class="w-auto p-2 border rounded">
+                        <option value="1">1日</option>
+                        <option value="2">2日</option>
+                        <option value="3">3日</option>
+                        <option value="4">4日</option>
+                        <option value="5">5日</option>
+                        <option value="6">6日</option>
+                        <option value="7">7日</option>
+                        <option value="8">8日</option>
+                        <option value="9">9日</option>
+                        <option value="10">10日</option>
+                        <option value="11">11日</option>
+                        <option value="12">12日</option>
+                        <option value="13">13日</option>
+                        <option value="14">14日</option>
+                        <option value="15">15日</option>
+                        <option value="16">16日</option>
+                        <option value="17">17日</option>
+                        <option value="18">18日</option>
+                        <option value="19">19日</option>
+                        <option value="20">20日</option>
+                        <option value="21">21日</option>
+                        <option value="22">22日</option>
+                        <option value="23">23日</option>
+                        <option value="24">24日</option>
+                        <option value="25">25日</option>
+                        <option value="26">26日</option>
+                        <option value="27">27日</option>
+                        <option value="28">28日</option>
+                        <option value="29">29日</option>
+                        <option value="30">30日</option>
+                        <option value="31">31日(月末)</option>
+                    </select>
                 </div>
             </div>
 
@@ -65,6 +183,15 @@
         </div>
     </div>
 
+    <!-- 顧客選択ダイアログ -->
+    <div class="dialog-backdrop" id="customerDialogBackdrop"></div>
+    <div class="dialog" id="customerDialog">
+        <h4>顧客選択</h4>
+        <div class="selectable-item" onclick="selectCustomer('XXリース・大阪')">XXリース・大阪</div>
+        <div class="selectable-item" onclick="selectCustomer('XXリース・東京')">東亜リース・東京</div>
+        <div class="selectable-item" onclick="selectCustomer('レオパレス')">レオパレス</div>
+    </div>
+
     <script>
         function addPropertyRow() {
             const tbody = document.querySelector('#propertyTable tbody');
@@ -89,6 +216,35 @@
                 button.closest('tr').remove();
             }
         }
+        // ダイアログ表示関数
+        function showDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).style.display = 'block';
+            document.getElementById(backdropId).style.display = 'block';
+        }
+
+        // ダイアログ非表示関数
+        function hideDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).style.display = 'none';
+            document.getElementById(backdropId).style.display = 'none';
+        }
+
+        // 請求先選択
+        function showCustomerDialog() {
+            showDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        function selectCustomer(customer) {
+            document.getElementById('customer').value = customer;
+            hideDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        // ダイアログの外側クリックで閉じる
+        document.querySelectorAll('.dialog-backdrop').forEach(backdrop => {
+            backdrop.addEventListener('click', function() {
+                const dialogId = this.id.replace('Backdrop', '');
+                hideDialog(dialogId, this.id);
+            });
+        });
     </script>
 </body>
 </html>

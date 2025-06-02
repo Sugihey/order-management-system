@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>請求先情報</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .dialog-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .selectable-item {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .selectable-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
@@ -17,7 +49,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <p class="text-gray-600">顧客</p>
-                    <input type="text" class="w-full p-2 border rounded" value="XXリース">
+                    <input id="customer" type="text" class="w-full p-2 border rounded" value="XXリース" onclick="showCustomerDialog()">
                 </div>
                 <div>
                     <p class="text-gray-600">請求先名</p>
@@ -118,23 +150,19 @@
                     <p class="font-semibold">管理者</p>
                 </div>
             </div>
-            <div class="mt-6 flex gap-4">
-                <button class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600" onclick="window.location.href='./billing_destination_list.html'">キャンセル</button>
-                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./billing_destination_list.html'">更新</button>
-            </div>
         </div>
 
         <!-- 所有物件一覧 -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold">所有物件一覧</h2>
-                <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./property_new.html'">
-                    新規物件
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">物件情報</h2>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="addPropertyRow()">
+                    物件追加
                 </button>
             </div>
             
             <div class="overflow-x-auto">
-                <table class="min-w-full">
+                <table class="min-w-full" id="propertyTable">
                     <thead>
                         <tr class="bg-gray-50">
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">物件名</th>
@@ -144,23 +172,100 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <tr>
-                            <td class="px-6 py-4">サンプルマンション</td>
-                            <td class="px-6 py-4">東京都渋谷区...</td>
                             <td class="px-6 py-4">
-                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./property.html'">表示</button>
+                                <input type="text" class="w-full p-2 border rounded" placeholder="物件名" value="サンプルマンション">
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="text" class="w-full p-2 border rounded" placeholder="住所" value="大阪府大阪市中央区1-1-1">
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600" onclick="removePropertyRow(this)">削除</button>
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4">テストビル</td>
-                            <td class="px-6 py-4">東京都新宿区...</td>
                             <td class="px-6 py-4">
-                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600" onclick="window.location.href='./property.html'">表示</button>
+                                <input type="text" class="w-full p-2 border rounded" placeholder="物件名" value="参考ハイツ">
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="text" class="w-full p-2 border rounded" placeholder="住所" value="大阪府大阪市中央区2-2-1">
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600" onclick="removePropertyRow(this)">削除</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <div class="mt-6 flex gap-4">
+            <button class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600" onclick="window.location.href='./billing_destination_list.html'">キャンセル</button>
+            <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onclick="window.location.href='./billing_destination_list.html'">更新</button>
+        </div>
     </div>
+
+    <!-- 顧客選択ダイアログ -->
+    <div class="dialog-backdrop" id="customerDialogBackdrop"></div>
+    <div class="dialog" id="customerDialog">
+        <h4>顧客選択</h4>
+        <div class="selectable-item" onclick="selectCustomer('XXリース・大阪')">XXリース・大阪</div>
+        <div class="selectable-item" onclick="selectCustomer('XXリース・東京')">東亜リース・東京</div>
+        <div class="selectable-item" onclick="selectCustomer('レオパレス')">レオパレス</div>
+    </div>
+    
+    <script>
+        function addPropertyRow() {
+            const tbody = document.querySelector('#propertyTable tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="px-6 py-4">
+                    <input type="text" class="w-full p-2 border rounded" placeholder="物件名">
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" class="w-full p-2 border rounded" placeholder="住所">
+                </td>
+                <td class="px-6 py-4">
+                    <button class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600" onclick="removePropertyRow(this)">削除</button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        function removePropertyRow(button) {
+            const tbody = document.querySelector('#propertyTable tbody');
+            if (tbody.children.length > 1) {
+                button.closest('tr').remove();
+            }
+        }
+        // ダイアログ表示関数
+        function showDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).style.display = 'block';
+            document.getElementById(backdropId).style.display = 'block';
+        }
+
+        // ダイアログ非表示関数
+        function hideDialog(dialogId, backdropId) {
+            document.getElementById(dialogId).style.display = 'none';
+            document.getElementById(backdropId).style.display = 'none';
+        }
+
+        // 請求先選択
+        function showCustomerDialog() {
+            showDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        function selectCustomer(customer) {
+            document.getElementById('customer').value = customer;
+            hideDialog('customerDialog', 'customerDialogBackdrop');
+        }
+
+        // ダイアログの外側クリックで閉じる
+        document.querySelectorAll('.dialog-backdrop').forEach(backdrop => {
+            backdrop.addEventListener('click', function() {
+                const dialogId = this.id.replace('Backdrop', '');
+                hideDialog(dialogId, this.id);
+            });
+        });
+    </script>
 </body>
 </html>

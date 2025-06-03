@@ -60,7 +60,7 @@
                         <div class="flex gap-4">
                             <div class="flex items-center">
                                 <input class="form-radio" type="radio" name="type" id="typeOriginal" value="原復" checked>
-                                <label class="ml-2" for="typeOriginal">原復</label>
+                                <label class="ml-2" for="typeOriginal">原状回復</label>
                             </div>
                             <div class="flex items-center">
                                 <input class="form-radio" type="radio" name="type" id="typeRepair" value="修繕">
@@ -163,6 +163,8 @@
                             <th class="w-12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業内容</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">発注先</th>
+                            <th class="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                            <th class="w-12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">単位</th>
                             <th class="w-36 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">受注金額</th>
                             <th class="w-36 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">発注金額</th>
                             <th class="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
@@ -173,14 +175,16 @@
                             <td class="px-6 py-4 whitespace-nowrap">1</td>
                             <td class="px-6 py-4"><input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly onclick="showWorkDialog(this)"></td>
                             <td class="px-6 py-4"><input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly onclick="showWorkerDialog(this)"></td>
-                            <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" step="1000" onchange="updateTotals()"></td>
-                            <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" step="1000" onchange="updateTotals()"></td>
+                            <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></td>
+                            <td class="px-6 py-4"><span class="unit"></span></td>
+                            <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateTotals()"></td>
+                            <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateTotals()"></td>
                             <td class="px-6 py-4"><button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700" onclick="deleteRow(this)">削除</button></td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr class="bg-gray-50">
-                            <td colspan="3" class="px-6 py-4 text-right font-medium">合計</td>
+                            <td colspan="5" class="px-6 py-4 text-right font-medium">合計</td>
                             <td class="px-6 py-4"><input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50" id="totalOrderAmount" readonly></td>
                             <td class="px-6 py-4"><input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50" id="totalWorkerAmount" readonly></td>
                             <td></td>
@@ -227,9 +231,9 @@
     <div class="dialog hidden" id="workDialog">
         <h4 class="text-lg font-semibold mb-4">作業選択</h4>
         <div class="space-y-2">
-            <div class="selectable-item" onclick="selectWork('作業1')">作業1</div>
-            <div class="selectable-item" onclick="selectWork('作業2')">作業2</div>
-            <div class="selectable-item" onclick="selectWork('作業3')">作業3</div>
+            <div class="selectable-item" onclick="selectWork('クロス張替え','㎡')">クロス張替え</div>
+            <div class="selectable-item" onclick="selectWork('清掃','㎡')">清掃</div>
+            <div class="selectable-item" onclick="selectWork('カギ交換','個')">カギ交換</div>
         </div>
     </div>
 
@@ -312,8 +316,10 @@
             showDialog('workDialog', 'workDialogBackdrop');
         }
 
-        function selectWork(work) {
+        function selectWork(work,unit) {
             window.currentWorkInput.value = work;
+            const unitElm = window.currentWorkInput.closest('tr').children[4].querySelector('.unit');
+            unitElm.textContent = unit;
             hideDialog('workDialog', 'workDialogBackdrop');
         }
 
@@ -337,8 +343,10 @@
                 <td class="px-6 py-4 whitespace-nowrap">${rowCount}</td>
                 <td class="px-6 py-4"><input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly onclick="showWorkDialog(this)"></td>
                 <td class="px-6 py-4"><input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly onclick="showWorkerDialog(this)"></td>
-                <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" step="1000" onchange="updateTotals()"></td>
-                <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" step="1000" onchange="updateTotals()"></td>
+                <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></td>
+                <td class="px-6 py-4"><span class="unit"></span></td>
+                <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateTotals()"></td>
+                <td class="px-6 py-4"><input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateTotals()"></td>
                 <td class="px-6 py-4"><button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700" onclick="deleteRow(this)">削除</button></td>
             `;
             tbody.appendChild(newRow);
@@ -369,8 +377,8 @@
             let totalWorkerAmount = 0;
 
             Array.from(tbody.children).forEach(row => {
-                const orderAmount = parseInt(row.cells[3].querySelector('input').value) || 0;
-                const workerAmount = parseInt(row.cells[4].querySelector('input').value) || 0;
+                const orderAmount = parseInt(row.cells[5].querySelector('input').value) || 0;
+                const workerAmount = parseInt(row.cells[6].querySelector('input').value) || 0;
                 totalOrderAmount += orderAmount;
                 totalWorkerAmount += workerAmount;
             });

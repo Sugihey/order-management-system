@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作業管理ダッシュボード</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-gray-50">
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">株式会社 エスクラフト</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600">{{ Auth::guard('artisan')->user()->name }}さん</span>
+                    <form method="POST" action="{{ route('artisan.logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="text-sm text-indigo-600 hover:text-indigo-500">
+                            ログアウト
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="marquee mb-2">
+            <p class="marquee-text">新着の依頼があります。新規依頼一覧から内容を確認し、可能な作業があれば受注してください。</p>
+        </div>
+        <style>
+            .marquee {
+                padding: 1em 0;
+                overflow: hidden;
+                border: 1px #fcc solid;
+                border-radius: 5px;
+                background-color: #fee;
+            }   
+
+            .marquee-text {
+                display: inline-block;
+                padding-left: 100%;
+                white-space: nowrap;
+                animation: marquee 15s linear infinite;
+                color: #f00;
+            }
+
+            @keyframes marquee {
+                0% { transform: translate(0); }
+                100% { transform: translate(-100%); }
+            }
+        </style>
+        
+        <div class="text-center mb-8">
+            <button onclick="alert('新規依頼一覧機能は未実装です')" 
+                    class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                新規依頼一覧
+            </button>
+        </div>
+
+        <div class="border-t border-gray-200 my-8"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <button onclick="alert('クライアント別タスク一覧機能は未実装です')" 
+                    class="flex items-center justify-center px-6 py-4 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                東亜リース・大阪
+            </button>
+            <button onclick="alert('クライアント別タスク一覧機能は未実装です')" 
+                    class="flex items-center justify-center px-6 py-4 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                レオパレス
+            </button>
+            <button onclick="alert('クライアント別タスク一覧機能は未実装です')" 
+                    class="flex items-center justify-center px-6 py-4 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                カギ
+            </button>
+            <button onclick="alert('クライアント別タスク一覧機能は未実装です')" 
+                    class="flex items-center justify-center px-6 py-4 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                その他
+            </button>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden mb-8">
+            <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">未完了一覧</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">完工日</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">元請け</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作業場所</th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-03-25</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">東亜リース</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">大阪市中央区 xx町1-1-1 〇〇ハイツ 205</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="alert('タスク詳細機能は未実装です')" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">詳細</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-03-26</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">レオパレス</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">大阪市北区 xx町2-2-2 レジデンスXX 401</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="alert('タスク詳細機能は未実装です')" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">詳細</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2025-03-27</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">その他</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">大阪市西区 xx町3-3-3 △△エステート 101</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="alert('タスク詳細機能は未実装です')" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">詳細</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders');
             $table->integer('index');
-            $table->foreignId('task_id')->constrained('operations');
-            $table->foreignId('artisan_id')->constrained('artisans');
+            $table->foreignId('operation_id')->constrained('operations');
+            $table->foreignId('artisan_id')->nullable()->constrained('artisans');
             $table->decimal('quantity', 9, 2);
             $table->decimal('incoming_order_price', 10, 2);
             $table->decimal('purchase_order_price', 10, 2);

@@ -20,6 +20,7 @@ services:
       - l11dev-mysql
     ports:
       - 5173:5173
+      - 9003:9003
     volumes:
       - ./:/src
       - /src/node_modules

@@ -1,18 +1,22 @@
 FROM php:8.3-fpm
 EXPOSE 5173
-RUN apt-get update \
-    && apt-get install -y \
-    git \
-    zip \
-    unzip \
-    vim \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libpng-dev \
-    libfontconfig1 \
-    libxrender1
-
+RUN apt-get update && \
+    apt-get install -y \
+        git \
+        zip \
+        unzip \
+        vim \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng-dev \
+        libfontconfig1 \
+        libxrender1 \
+        build-essential \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*   
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install bcmath
@@ -32,4 +36,7 @@ RUN npm --version
 WORKDIR /src
 ADD . /src/storage
 RUN chown -R www-data:www-data /src/storage
-ENTRYPOINT [ "bash", "-c", "composer install; npm install; exec php-fpm" ]
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

@@ -65,3 +65,12 @@ $ npm run dev
 環境構築は以下のサイトを参考に行った
 https://qiita.com/hitotch/items/2e816bc1423d00562dc2
 
+## VSCodeでのDocker側phpインタープリタの指定方法
+- DevContainer拡張をインストール
+- \>DevContainer: Reopen in Container を実行
+- リモート開発側でphpへのパスに /usr/local/bin/php を指定
+
+## デバッグ
+- PHP Debugをインストール
+- F5でリッスンスタート
+

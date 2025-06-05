@@ -4,7 +4,7 @@
   "service": "l11dev-app",
   "workspaceFolder": "/src",
   "settings": {
-    "php.validate.executablePath": "/usr/bin/php"
+    "php.validate.executablePath": "/usr/bin/local/php"
   },
   "extensions": ["felixfbecker.php-debug", "bmewburn.vscode-intelephense-client"]
 }

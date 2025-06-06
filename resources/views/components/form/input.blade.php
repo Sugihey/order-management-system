@@ -10,6 +10,11 @@
     'id' => ''
 ])
 
+@php
+$baseClasses = 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500';
+$errorClasses = $name && $errors->has($name) ? ' border-red-500' : '';
+@endphp
+
 <input 
     type="{{ $type }}"
     name="{{ $name }}"
@@ -20,5 +25,5 @@
     @if($disabled) disabled @endif
     @if($onChange) onchange="{{ $onChange }}" @endif
     @if($onClick) onclick="{{ $onClick }}" @endif
-    {{ $attributes->merge(['class' => 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500']) }}
+    {{ $attributes->merge(['class' => $baseClasses . $errorClasses]) }}
 />

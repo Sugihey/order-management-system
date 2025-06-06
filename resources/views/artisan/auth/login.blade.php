@@ -26,7 +26,6 @@
                             type="email" 
                             :value="old('email')"
                             required
-                            class="@error('email') border-red-500 @enderror"
                         />
                         @error('email')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -39,7 +38,6 @@
                             name="password" 
                             type="password" 
                             required
-                            class="@error('password') border-red-500 @enderror"
                         />
                         @error('password')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

@@ -19,9 +19,7 @@
                 @csrf
                 <div class="space-y-4">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            メールアドレス
-                        </label>
+                        <x-form.label for="email" label="メールアドレス"></x-label>
                         <x-form.input 
                             id="email" 
                             name="email" 
@@ -35,10 +33,8 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">
-                            パスワード
-                        </label>
-                        <x-form.input 
+                    <x-form.label for="password" label="パスワード"></x-label>
+                    <x-form.input 
                             id="password" 
                             name="password" 
                             type="password" 

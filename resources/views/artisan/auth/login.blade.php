@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-50">
-    <div>
-        <div class="bg-gray-100 p-4">
-            <h1 class="text-2xl font-bold text-gray-800">株式会社 エスクラフト</h1>
-        </div>
-    </div>
-    <div class="min-h-screen flex items-center justify-center">
+<x-artisan>
+    <x-slot name="title">エスクラフト作業管理 ログイン</x-slot>
+
+    <div class="h-full flex items-center justify-center">
         <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
             <div>
                 <h2 class="mt-6 text-center text-3xl font-bold text-gray-900">
@@ -71,5 +60,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+</x-artisan>

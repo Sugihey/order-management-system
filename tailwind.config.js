@@ -12,7 +12,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                ZenOldMincho: ['Zen Old Mincho', 'san-serif'],
+                ZenKakuGothicNew: ['Zen Kaku Gothic New', 'san-serif'],
             },
         },
     },

@@ -1,90 +1,110 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新規登録</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4 py-8">
-        <div>
-            <div class="bg-gray-100 p-4">
-                <h1 class="text-2xl font-bold text-gray-800">株式会社 エスクラフト</h1>
+<x-artisan>
+    <x-slot name="title">エスクラフト作業管理 新規登録</x-slot>
+
+    <div class="h-full flex items-center justify-center">
+        <div class="max-w-2xl w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-bold text-gray-900">
+                    新規登録
+                </h2>
             </div>
-        </div>
-        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
-            <h1 class="text-2xl font-bold text-gray-800 mb-6">新規登録</h1>
-            
-            <form class="space-y-6" method="POST" action="{{ route('artisan.register') }}">
+
+            <form class="mt-8 space-y-6" method="POST" action="{{ route('artisan.register') }}">
                 @csrf
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">名前</label>
-                    <input type="text" id="name" name="name" required
-                        value="{{ old('name') }}"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('name') border-red-500 @enderror">
-                    @error('name')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                <div class="space-y-4">
+                    <div>
+                        <x-form.label for="name" label="名前"></x-form.label>
+                        <x-form.input 
+                            id="name" 
+                            name="name" 
+                            type="text" 
+                            :value="old('name')"
+                            required
+                        />
+                        @error('name')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700">住所</label>
-                    <input type="text" id="address" name="address" required
-                        value="{{ old('address') }}"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('address') border-red-500 @enderror">
-                    @error('address')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div>
+                        <x-form.label for="address" label="住所"></x-form.label>
+                        <x-form.input 
+                            id="address" 
+                            name="address" 
+                            type="text" 
+                            :value="old('address')"
+                            required
+                        />
+                        @error('address')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="phone_no" class="block text-sm font-medium text-gray-700">電話番号</label>
-                    <input type="tel" id="phone_no" name="phone_no" required
-                        value="{{ old('phone_no') }}"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('phone_no') border-red-500 @enderror">
-                    @error('phone_no')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div>
+                        <x-form.label for="phone_no" label="電話番号"></x-form.label>
+                        <x-form.input 
+                            id="phone_no" 
+                            name="phone_no" 
+                            type="tel" 
+                            :value="old('phone_no')"
+                            required
+                        />
+                        @error('phone_no')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">メールアドレス</label>
-                    <input type="email" id="email" name="email" required
-                        value="{{ old('email') }}"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('email') border-red-500 @enderror">
-                    @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div>
+                        <x-form.label for="email" label="メールアドレス"></x-form.label>
+                        <x-form.input 
+                            id="email" 
+                            name="email" 
+                            type="email" 
+                            :value="old('email')"
+                            required
+                        />
+                        @error('email')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">パスワード</label>
-                    <input type="password" id="password" name="password" required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('password') border-red-500 @enderror">
-                    @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div>
+                        <x-form.label for="password" label="パスワード"></x-form.label>
+                        <x-form.input 
+                            id="password" 
+                            name="password" 
+                            type="password" 
+                            required
+                        />
+                        @error('password')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">パスワード確認</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    <div>
+                        <x-form.label for="password_confirmation" label="パスワード確認"></x-form.label>
+                        <x-form.input 
+                            id="password_confirmation" 
+                            name="password_confirmation" 
+                            type="password" 
+                            required
+                        />
+                    </div>
                 </div>
 
                 <div class="flex justify-end space-x-4 pt-4">
-                    <a href="{{ route('artisan.login') }}" 
-                        class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        キャンセル
-                    </a>
-                    <button type="submit"
-                        class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        登録
-                    </button>
+                    <x-form.buttons.base-component 
+                        type="button" 
+                        label="キャンセル" 
+                        onClick="window.location.href='{{ route('artisan.login') }}'"
+                    />
+                    <x-form.buttons.action-component 
+                        type="submit" 
+                        label="登録" 
+                        onClick=""
+                    />
                 </div>
             </form>
         </div>
     </div>
-</body>
-</html>
+</x-artisan>

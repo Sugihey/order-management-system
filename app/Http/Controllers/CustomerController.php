@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UseCase\CustomerUseCase;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::orderBy('sort')->get();
+        $customers = CustomerUseCase::getCustomersAll();
         return view('customers.index', compact('customers'));
     }
 

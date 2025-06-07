@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanAuthController;
 use App\Http\Controllers\ArtisanEmailVerificationController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -17,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+    Route::resource('customers', CustomerController::class);
+    Route::post('/customers/sort-order', [CustomerController::class, 'updateSortOrder'])->name('customers.sort-order');
 });
 
 Route::get('/password/reset', [AuthController::class, 'showResetForm'])->name('password.request');

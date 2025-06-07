@@ -5,7 +5,7 @@ use App\Models\CompanyInfo;
 
 class CompanyInfoUseCase
 {
-    public static function get() : CompanyInfo
+    public static function get() : ?CompanyInfo
     {
         return CompanyInfo::first();
     }

@@ -46,9 +46,7 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="{{ route('artisan.login') }}" class="text-sm text-indigo-600 hover:text-indigo-500">
-                        ログイン画面に戻る
-                    </a>
+                    <x-link-component :scheme="'artisan'" :href="route('artisan.login')" :label="'ログイン画面に戻る'" :class="'text-sm'" />
                 </div>
             </form>
         </div>

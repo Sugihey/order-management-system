@@ -46,9 +46,7 @@
                 </div>
 
                 <div class="flex items-center justify-end">
-                    <a href="{{ route('artisan.password.request') }}" class="text-sm text-indigo-600 hover:text-indigo-500">
-                        パスワードを忘れた
-                    </a>
+                    <x-link-component :scheme="'artisan'" :href="route('artisan.password.request')" :label="'パスワードを忘れた'" :class="'text-sm'" />
                 </div>
 
                 <div>
@@ -60,7 +58,7 @@
             </form>
             <hr>
             <div class="text-center">
-                <a href="{{ route('artisan.register') }}" class="text-indigo-500">新規登録</a>
+                <x-link-component :scheme="'artisan'" :href="route('artisan.register')" :label="'新規登録'" />
             </div>
         </div>
     </div>

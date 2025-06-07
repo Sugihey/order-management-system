@@ -41,9 +41,7 @@
                 </div>
 
                 <div class="flex items-center justify-end">
-                    <a href="{{ route('password.request') }}" class="text-sm text-indigo-600 hover:text-indigo-500">
-                        パスワードを忘れた
-                    </a>
+                    <x-link-component :scheme="'scraft'" :href="route('password.request')" :label="'パスワードを忘れた'" :class="'text-sm'" />
                 </div>
 
                 <div>

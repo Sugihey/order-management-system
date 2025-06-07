@@ -22,12 +22,11 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'sort' => 'required|integer|min:0',
         ]);
 
         Customer::create([
             'name' => $request->name,
-            'sort' => $request->sort,
+            'sort' => 0,
         ]);
 
         return redirect()->route('customers.index')->with('success', '顧客が登録されました。');
@@ -47,12 +46,10 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'sort' => 'required|integer|min:0',
         ]);
 
         $customer->update([
             'name' => $request->name,
-            'sort' => $request->sort,
         ]);
 
         return redirect()->route('customers.index')->with('success', '顧客情報が更新されました。');
@@ -62,5 +59,19 @@ class CustomerController extends Controller
     {
         $customer->delete();
         return redirect()->route('customers.index')->with('success', '顧客が削除されました。');
+    }
+
+    public function updateSortOrder(Request $request)
+    {
+        $request->validate([
+            'customer_ids' => 'required|array',
+            'customer_ids.*' => 'exists:customers,id',
+        ]);
+
+        foreach ($request->customer_ids as $index => $customerId) {
+            Customer::where('id', $customerId)->update(['sort' => $index + 1]);
+        }
+
+        return response()->json(['success' => true]);
     }
 }

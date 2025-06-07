@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
     
     Route::resource('customers', CustomerController::class);
+    Route::post('/customers/sort-order', [CustomerController::class, 'updateSortOrder'])->name('customers.sort-order');
 });
 
 Route::get('/password/reset', [AuthController::class, 'showResetForm'])->name('password.request');

@@ -7,7 +7,7 @@
             
             <form method="POST" action="{{ route('customers.store') }}">
                 @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="mb-6">
                     <div>
                         <x-form.label for="name" label="名前"></x-form.label>
                         <x-form.input 
@@ -19,20 +19,6 @@
                             class="@error('name') border-red-500 @enderror"
                         />
                         @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div>
-                        <x-form.label for="sort" label="並び順"></x-form.label>
-                        <x-form.input 
-                            id="sort" 
-                            name="sort" 
-                            type="number" 
-                            :value="old('sort', 0)"
-                            required
-                            class="@error('sort') border-red-500 @enderror"
-                        />
-                        @error('sort')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>

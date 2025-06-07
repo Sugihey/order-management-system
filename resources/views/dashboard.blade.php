@@ -102,6 +102,17 @@
                             </svg>
                         </div>
                     </a>
+                    <a href="{{ route('company-info.edit') }}" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-medium text-gray-900">会社情報</h3>
+                                <p class="text-sm text-gray-500">会社情報の管理</p>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="space-y-4">

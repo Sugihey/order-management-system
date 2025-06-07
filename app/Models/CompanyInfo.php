@@ -7,4 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyInfo extends Model
 {
     protected $table = 'company_info';
+    
+    protected $fillable = [
+        'name',
+        'zip',
+        'address',
+        'phone_no',
+        'fax_no',
+        'invoice_no',
+        'bank_name',
+        'bank_branch',
+        'account_type',
+        'account_name'
+    ];
 }

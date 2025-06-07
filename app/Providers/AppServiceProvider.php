@@ -20,7 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $companyInfo = CompanyInfoUseCase::get();
-        config(['CompanyName'=> $companyInfo->name]);
+        try {
+            $companyInfo = CompanyInfoUseCase::get();
+            if ($companyInfo) {
+                config(['CompanyName'=> $companyInfo->name]);
+            }
+        } catch (\Exception $e) {
+            config(['CompanyName'=> 'エス・クラフト']);
+        }
     }
 }

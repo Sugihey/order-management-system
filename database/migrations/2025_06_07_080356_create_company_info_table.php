@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('zip', 12);
             $table->string('address', 256);
             $table->string('phone_no', 20);
-            $table->string('fax_no', 20);
-            $table->string('invoice_no', 14);
+            $table->string('fax_no', 20)->nullable();
+            $table->string('invoice_no', 14)->nullable();
             $table->string('bank_name', 46);
             $table->string('bank_branch', 46);
             $table->string('account_type', 10);

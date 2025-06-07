@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\UseCase\CompanyInfoUseCase;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $companyInfo = CompanyInfoUseCase::get();
+        config(['CompanyName'=> $companyInfo->name]);
     }
 }

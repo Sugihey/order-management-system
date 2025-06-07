@@ -9,6 +9,7 @@
                     新規顧客
                 </a>
             </div>
+            <p class="text-xs">顧客の表はドラッグアンドドロップで並び順を変更できます。この表での並び順は、他の画面での顧客の並び順にも反映されます。</p>
             
             @if(session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -22,7 +23,7 @@
                         <tr class="bg-gray-50">
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-8"></th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">顧客名</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-[300px]">操作</th>
                         </tr>
                     </thead>
                     <tbody id="sortable-customers" class="bg-white divide-y divide-gray-200">

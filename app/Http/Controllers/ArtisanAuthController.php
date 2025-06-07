@@ -26,6 +26,15 @@ class ArtisanAuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('artisan')->attempt($credentials, $request->filled('remember'))) {
+            $artisan = Auth::guard('artisan')->user();
+            
+            if (!$artisan->hasVerifiedEmail()) {
+                Auth::guard('artisan')->logout();
+                return redirect()->route('artisan.verification.notice')
+                    ->with('email', $artisan->email)
+                    ->withErrors(['email' => 'メールアドレスの確認が必要です。']);
+            }
+            
             $request->session()->regenerate();
             return redirect()->intended('/artisan_dashboard');
         }
@@ -66,9 +75,11 @@ class ArtisanAuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::guard('artisan')->login($artisan);
+        $token = $artisan->generateEmailVerificationToken();
+        $artisan->notify(new \App\Notifications\ArtisanEmailVerification($token));
 
-        return redirect('/artisan_dashboard');
+        return redirect()->route('artisan.verification.notice')
+            ->with('email', $artisan->email);
     }
 
     public function showResetForm()

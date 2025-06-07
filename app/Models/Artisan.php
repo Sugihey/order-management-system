@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Artisan extends Authenticatable
 {
@@ -17,6 +18,7 @@ class Artisan extends Authenticatable
         'address',
         'email',
         'password',
+        'email_verification_token',
     ];
 
     protected $hidden = [
@@ -28,6 +30,27 @@ class Artisan extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'email_verified_at' => 'datetime',
         ];
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return !is_null($this->email_verified_at);
+    }
+
+    public function markEmailAsVerified()
+    {
+        return $this->forceFill([
+            'email_verified_at' => $this->freshTimestamp(),
+            'email_verification_token' => null,
+        ])->save();
+    }
+
+    public function generateEmailVerificationToken()
+    {
+        $this->email_verification_token = Str::random(60);
+        $this->save();
+        return $this->email_verification_token;
     }
 }

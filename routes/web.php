@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanAuthController;
+use App\Http\Controllers\ArtisanEmailVerificationController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -30,6 +31,10 @@ Route::prefix('artisan')->group(function () {
     
     Route::get('/register', [ArtisanAuthController::class, 'showRegistrationForm'])->name('artisan.register');
     Route::post('/register', [ArtisanAuthController::class, 'register']);
+    
+    Route::get('/email/verify', [ArtisanEmailVerificationController::class, 'notice'])->name('artisan.verification.notice');
+    Route::get('/email/verify/{token}', [ArtisanEmailVerificationController::class, 'verify'])->name('artisan.verification.verify');
+    Route::post('/email/resend', [ArtisanEmailVerificationController::class, 'resend'])->name('artisan.verification.resend');
     
     Route::get('/password/reset', [ArtisanAuthController::class, 'showResetForm'])->name('artisan.password.request');
     Route::post('/password/email', [ArtisanAuthController::class, 'sendResetLinkEmail'])->name('artisan.password.email');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UseCase\BillingDestinationUseCase;
 use App\Models\BillingDestination;
 use App\Models\Customer;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class BillingDestinationController extends Controller
@@ -82,14 +83,23 @@ class BillingDestinationController extends Controller
             'due_day' => $request->due_day,
         ]);
 
+        //BulkUpsert
+        // 1.SoftDelete all
+        // 2.Restore items if it's still remains
+        // 3.Upsert with input data
         $billingDestination->properties()->delete();
         if ($request->properties) {
             foreach ($request->properties as $index => $property) {
-                $billingDestination->properties()->create([
+                $propertyData = [
                     'name' => $property['name'],
                     'address' => $property['address'],
                     'sort' => $index + 1,
-                ]);
+                ];
+                if(isset($property['id'])){
+                    $propertyData['id'] = $property['id'];
+                    Property::onlyTrashed()->where('id','=',$property['id'])->restore();
+                }
+                $billingDestination->properties()->upsert($propertyData,['id'],['name','address','sort']);
             }
         }
 

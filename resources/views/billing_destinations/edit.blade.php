@@ -83,6 +83,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <x-button type="button" scheme="danger" onClick="removePropertyRow(this)">削除</x-button>
+                                            <input name="properties[{{ $index }}][id]" type="hidden" value="{{ $property->id }}"
                                         </td>
                                     </tr>
                                 @empty

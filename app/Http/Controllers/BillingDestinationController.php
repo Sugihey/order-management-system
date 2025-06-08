@@ -7,6 +7,7 @@ use App\Models\BillingDestination;
 use App\Models\Customer;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BillingDestinationController extends Controller
 {
@@ -77,30 +78,36 @@ class BillingDestinationController extends Controller
             'properties.*.address' => 'required|string|max:255',
         ]);
 
-        $billingDestination->update([
-            'customer_id' => $request->customer_id,
-            'name' => $request->name,
-            'due_day' => $request->due_day,
-        ]);
-
-        //BulkUpsert
-        // 1.SoftDelete all
-        // 2.Restore items if it's still remains
-        // 3.Upsert with input data
-        $billingDestination->properties()->delete();
-        if ($request->properties) {
-            foreach ($request->properties as $index => $property) {
-                $propertyData = [
-                    'name' => $property['name'],
-                    'address' => $property['address'],
-                    'sort' => $index + 1,
-                ];
-                if(isset($property['id'])){
-                    $propertyData['id'] = $property['id'];
-                    Property::onlyTrashed()->where('id','=',$property['id'])->restore();
+        try{
+            DB::transaction(function() use($billingDestination, $request){
+                $billingDestination->update([
+                    'customer_id' => $request->customer_id,
+                    'name' => $request->name,
+                    'due_day' => $request->due_day,
+                ]);
+        
+                //BulkUpsert
+                // 1.SoftDelete all
+                // 2.Restore items if it's still remains
+                // 3.Upsert with input data
+                $billingDestination->properties()->delete();
+                if ($request->properties) {
+                    foreach ($request->properties as $index => $property) {
+                        $propertyData = [
+                            'name' => $property['name'],
+                            'address' => $property['address'],
+                            'sort' => $index + 1,
+                        ];
+                        if(isset($property['id'])){
+                            $propertyData['id'] = $property['id'];
+                            Property::onlyTrashed()->where('id','=',$property['id'])->restore();
+                        }
+                        $billingDestination->properties()->upsert($propertyData,['id'],['name','address','sort']);
+                    }
                 }
-                $billingDestination->properties()->upsert($propertyData,['id'],['name','address','sort']);
-            }
+            });
+        } catch(\Exception $e) {
+            return redirect()->route('billing_destinations.edit', $billingDestination)->with('error', '請求先の更新に失敗しました。');
         }
 
         return redirect()->route('billing_destinations.index')->with('success', '請求先情報が更新されました。');

@@ -50,7 +50,7 @@
 
         <h2 class="bg-indigo-200 p-2 font-bold text-xl rounded mb-4">マスタ管理</h2>
         <div class="grid grid-flow-row grid-cols-2 gap-4">
-            <a href="#" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <a href="{{ route('users.index') }}" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div class="flex items-center">
                     <div class="flex-1">
                         <h3 class="text-lg font-medium text-gray-900">ユーザー一覧</h3>

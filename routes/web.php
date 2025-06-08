@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyInfoController;
 use App\Http\Controllers\BillingDestinationController;
+use App\Http\Controllers\OperationController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('customers', CustomerController::class);
     Route::post('/customers/sort-order', [CustomerController::class, 'updateSortOrder'])->name('customers.sort-order');
     Route::resource('billing_destinations', BillingDestinationController::class);
+    
+    Route::resource('operations', OperationController::class);
+    Route::post('/operations/sort-order', [OperationController::class, 'updateSortOrder'])->name('operations.sort-order');
     
     Route::resource('users', UserController::class);
     

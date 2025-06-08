@@ -5,9 +5,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold">顧客一覧</h1>
-                <a href="{{ route('customers.create') }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-                    新規顧客
-                </a>
+                <x-link scheme="scraft" :href="route('customers.create')" button>新規顧客</x-link>
             </div>
             <p class="text-xs">顧客の表はドラッグアンドドロップで並び順を変更できます。この表での並び順は、他の画面での顧客の並び順にも反映されます。</p>
             
@@ -36,12 +34,12 @@
                                 </td>
                                 <td class="px-6 py-4">{{ $customer->name }}</td>
                                 <td class="px-6 py-4 space-x-2">
-                                    <a href="{{ route('customers.show', $customer) }}" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">表示</a>
-                                    <a href="{{ route('customers.edit', $customer) }}" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">編集</a>
+                                    <x-link scheme="scraft" :href="route('customers.show', $customer)" button>表示</x-link>
+                                    <x-link scheme="action" :href="route('customers.edit', $customer)" button>編集</x-link>
                                     <form method="POST" action="{{ route('customers.destroy', $customer) }}" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600" onclick="return confirm('本当に削除しますか？')">削除</button>
+                                        <x-button scheme="danger" onclick="return confirm('顧客「{{$customer->name}}」を本当に削除しますか？')">削除</x-button>
                                     </form>
                                 </td>
                             </tr>

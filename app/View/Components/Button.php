@@ -32,18 +32,8 @@ class Button extends Component
             'type' => $this->type,
             'userClass' => $this->class,
             'onClick' => $this->onClick,
+            'scheme' => $this->scheme,
         ];
-        switch($this->scheme){
-            case 'scraft':
-                return view('components.form.buttons.scraft-component', $args);
-            case 'artisan':
-                return view('components.form.buttons.artisan-component', $args);
-            case 'danger':
-                return view('components.form.buttons.danger-component', $args);
-            case 'action':
-                return view('components.form.buttons.action-component', $args);
-            default:
-                return view('components.form.buttons.base-component', $args);
-        }
+        return view('components.form.button-component', $args);
     }
 }

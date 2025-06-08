@@ -13,35 +13,29 @@ class Link extends Component
     private $href;
     private $target;
     private $class;
+    private $button;
 
-    public function __construct(string $href, string $scheme='base', string $label='', string $target='', string $class='')
+    public function __construct(string $href, string $scheme='base', string $label='', string $target='', string $class='', bool $button=false)
     {
         $this->scheme = $scheme;
         $this->label = $label;
         $this->href = $href;
         $this->target = $target;
         $this->class = $class;
+        $this->button = $button;
     }
 
     public function render(): View|Closure|string
     {
+
         $args = [
+            'scheme' => $this->scheme,
             'label' => $this->label,
             'href' => $this->href,
             'target' => $this->target,
             'class' => $this->class,
+            'button' => $this->button,
         ];
-        switch($this->scheme){
-            case 'scraft':
-                return view('components.form.links.scraft-component', $args);
-            case 'artisan':
-                return view('components.form.links.artisan-component', $args);
-            case 'danger':
-                return view('components.form.links.danger-component', $args);
-            case 'action':
-                return view('components.form.links.action-component', $args);
-            default:
-                return view('components.form.links.base-component', $args);
-        }
+        return view('components.form.link-component', $args);
     }
 }

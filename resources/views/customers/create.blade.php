@@ -24,8 +24,8 @@
                 </div>
                 <div class="flext justify-items-end">
                     <div class="flex gap-4 w-[30%]">
-                        <x-backlink destination="customers.index">キャンセル</x-backlink>
-                        <x-button :scheme="'scraft'">登録</x-button>
+                        <x-link scheme="base" :href="route('customers.index')" button>キャンセル</x-link>
+                        <x-button scheme="action">登録</x-button>
                     </div>
                 </div>
             </form>

@@ -156,7 +156,7 @@
                 </div>
                 
                 <div class="flex gap-4">
-                    <x-form.buttons.backlink label="キャンセル" destination="dashboard"></x-form.buttons.backlink>
+                    <x-link scheme="base" :href="route('dashboard')" button>キャンセル</x-link>
                     <x-button scheme="action" type="submit">更新</x-button>
                 </div>
             </form>

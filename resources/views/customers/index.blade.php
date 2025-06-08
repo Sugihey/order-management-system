@@ -8,7 +8,7 @@
                 <h1 class="text-2xl font-bold">顧客一覧</h1>
                 <x-link scheme="scraft" :href="route('customers.create')" button>新規顧客</x-link>
             </div>
-            <p class="text-xs">顧客の表はドラッグアンドドロップで並び順を変更できます。この表での並び順は、他の画面での顧客の並び順にも反映されます。</p>
+            <p class="text-xs">顧客の表はドラッグアンドドロップで並び順を変更できます。この表での並び順は他の画面での顧客の並び順にも反映されます。</p>
             
             @if(session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">

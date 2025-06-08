@@ -5,9 +5,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold">ユーザー一覧</h1>
-                <a href="{{ route('users.create') }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-                    新規ユーザー
-                </a>
+                <x-link scheme="scraft" :href="route('users.create')" button>新規ユーザー</x-link>
             </div>
             
             @if(session('success'))
@@ -37,12 +35,12 @@
                                 <td class="px-6 py-4">{{ $user->name }}</td>
                                 <td class="px-6 py-4">{{ $user->email }}</td>
                                 <td class="px-6 py-4 space-x-2">
-                                    <a href="{{ route('users.show', $user) }}" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">表示</a>
-                                    <a href="{{ route('users.edit', $user) }}" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">編集</a>
+                                    <x-link scheme="scraft" :href="route('users.show', $user)" button>表示</x-link>
+                                    <x-link scheme="action" :href="route('users.edit', $user)" button>編集</x-link>
                                     <form method="POST" action="{{ route('users.destroy', $user) }}" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600" onclick="return confirm('本当に削除しますか？')">削除</button>
+                                        <x-button scheme="danger" onclick="return confirm('ユーザー「{{$user->name}}」を本当に削除しますか？')">削除</x-button>
                                     </form>
                                 </td>
                             </tr>

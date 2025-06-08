@@ -23,12 +23,12 @@
                 </div>
             </div>
             <div class="mt-6 flex gap-4">
-                <a href="{{ route('users.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">戻る</a>
-                <a href="{{ route('users.edit', $user) }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">編集</a>
+                <x-link scheme="base" :href="route('users.index')" button>戻る</x-link>
+                <x-link scheme="scraft" :href="route('users.edit', $user)" button>編集</x-link>
                 <form method="POST" action="{{ route('users.destroy', $user) }}" class="inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600" onclick="return confirm('本当に削除しますか？')">削除</button>
+                    <x-button scheme="danger" onclick="return confirm('本当に削除しますか？')">削除</x-button>
                 </form>
             </div>
         </div>

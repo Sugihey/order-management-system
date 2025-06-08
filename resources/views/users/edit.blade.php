@@ -56,8 +56,8 @@
                     </div>
                 </div>
                 <div class="flex gap-4">
-                    <a href="{{ route('users.index') }}" class="bg-gray-400 text-white px-6 py-2 rounded hover:bg-gray-300">キャンセル</a>
-                    <x-button :scheme="'scraft'">更新</x-button>
+                    <x-link scheme="base" :href="route('users.index')" button>キャンセル</x-link>
+                    <x-button scheme="action">更新</x-button>
                 </div>
             </form>
         </div>

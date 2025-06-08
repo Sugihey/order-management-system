@@ -9,8 +9,8 @@
             <form method="POST" action="{{ route('billing_destinations.store') }}" id="billingDestinationForm">
                 @csrf
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+                    <div class="md:col-span-2">
                         <x-form.label for="customer" label="顧客" required></x-form.label>
                         <x-form.input 
                             id="customer_display" 
@@ -27,7 +27,7 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                    <div>
+                    <div class="md:col-span-2">
                         <x-form.label for="name" label="請求先名称" required></x-form.label>
                         <x-form.input 
                             id="name" 
@@ -40,9 +40,6 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                </div>
-                
-                <div class="md:col-span-2 flex gap-4 mb-6">
                     <div>
                         <x-form.label for="due_day" label="締め日" required></x-form.label>
                         <select name="due_day" id="due_day" class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
@@ -58,7 +55,7 @@
                         @enderror
                     </div>
                 </div>
-
+                
                 <div class="mb-6">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold">物件情報</h2>

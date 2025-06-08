@@ -3,25 +3,22 @@
 
     <div class="py-8">
         <x-breads scheme="scraft" :nodes="[['title'=>'請求先一覧','route'=>'billing_destinations.index']]" current="請求先詳細"/>
-            <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">請求先詳細</h1>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+                <div class="md:col-span-2">
                     <x-form.label for="customer" label="顧客"></x-form.label>
                     <div class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50">
                         {{ $billingDestination->customer->name }}
                     </div>
                 </div>
-                <div>
+                <div class="md:col-span-2">
                     <x-form.label for="name" label="請求先名称"></x-form.label>
                     <div class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50">
                         {{ $billingDestination->name }}
                     </div>
                 </div>
-            </div>
-            
-            <div class="md:col-span-2 flex gap-4 mb-6">
                 <div>
                     <x-form.label for="due_day" label="締め日"></x-form.label>
                     <div class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md bg-gray-50">

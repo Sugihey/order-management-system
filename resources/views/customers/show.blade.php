@@ -2,6 +2,7 @@
     <x-slot name="title">顧客情報</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" :nodes="[['title'=>'顧客一覧','route'=>'customers.index']]" current="顧客情報"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">顧客情報</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

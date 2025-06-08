@@ -2,6 +2,7 @@
     <x-slot name="title">会社情報編集</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" current="会社情報編集"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">会社情報編集</h1>
             
@@ -17,7 +18,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <x-form.label for="name" label="会社名"></x-form.label>
+                        <x-form.label for="name" label="会社名" required></x-form.label>
                         <x-form.input 
                             id="name" 
                             name="name" 
@@ -31,7 +32,7 @@
                     </div>
                     
                     <div>
-                        <x-form.label for="zip" label="郵便番号"></x-form.label>
+                        <x-form.label for="zip" label="郵便番号" required></x-form.label>
                         <x-form.input 
                             id="zip" 
                             name="zip" 
@@ -45,7 +46,7 @@
                     </div>
                     
                     <div class="md:col-span-2">
-                        <x-form.label for="address" label="住所"></x-form.label>
+                        <x-form.label for="address" label="住所" required></x-form.label>
                         <x-form.input 
                             id="address" 
                             name="address" 
@@ -59,7 +60,7 @@
                     </div>
                     
                     <div>
-                        <x-form.label for="phone_no" label="電話番号"></x-form.label>
+                        <x-form.label for="phone_no" label="電話番号" required></x-form.label>
                         <x-form.input 
                             id="phone_no" 
                             name="phone_no" 
@@ -99,7 +100,7 @@
                     </div>
                     
                     <div>
-                        <x-form.label for="bank_name" label="銀行名"></x-form.label>
+                        <x-form.label for="bank_name" label="銀行名" required></x-form.label>
                         <x-form.input 
                             id="bank_name" 
                             name="bank_name" 
@@ -113,7 +114,7 @@
                     </div>
                     
                     <div>
-                        <x-form.label for="bank_branch" label="支店名"></x-form.label>
+                        <x-form.label for="bank_branch" label="支店名" required></x-form.label>
                         <x-form.input 
                             id="bank_branch" 
                             name="bank_branch" 
@@ -127,7 +128,7 @@
                     </div>
                     
                     <div>
-                        <x-form.label for="account_type" label="口座種別"></x-form.label>
+                        <x-form.label for="account_type" label="口座種別" required></x-form.label>
                         <x-form.input 
                             id="account_type" 
                             name="account_type" 
@@ -141,7 +142,7 @@
                     </div>
                     
                     <div>
-                        <x-form.label for="account_name" label="口座名義"></x-form.label>
+                        <x-form.label for="account_name" label="口座名義" required></x-form.label>
                         <x-form.input 
                             id="account_name" 
                             name="account_name" 

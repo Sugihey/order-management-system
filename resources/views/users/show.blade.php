@@ -2,6 +2,7 @@
     <x-slot name="title">ユーザー情報</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" :nodes="[['title'=>'ユーザー一覧','route'=>'users.index']]" current="ユーザー情報"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">ユーザー情報</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -2,7 +2,8 @@
     <x-slot name="title">新規請求先登録</x-slot>
 
     <div class="py-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <x-breads scheme="scraft" :nodes="[['title'=>'請求先一覧','route'=>'billing_destinations.index']]" current="新規請求先登録"/>
+            <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">新規請求先登録</h1>
             
             <form method="POST" action="{{ route('billing_destinations.store') }}" id="billingDestinationForm">
@@ -10,8 +11,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <x-form.label for="customer" label="顧客"></x-form.label>
-                        <span class="text-red-500">*</span>
+                        <x-form.label for="customer" label="顧客" required></x-form.label>
                         <x-form.input 
                             id="customer_display" 
                             name="customer_display"
@@ -28,8 +28,7 @@
                         @enderror
                     </div>
                     <div>
-                        <x-form.label for="name" label="請求先名称"></x-form.label>
-                        <span class="text-red-500">*</span>
+                        <x-form.label for="name" label="請求先名称" required></x-form.label>
                         <x-form.input 
                             id="name" 
                             name="name" 
@@ -45,7 +44,7 @@
                 
                 <div class="md:col-span-2 flex gap-4 mb-6">
                     <div>
-                        <x-form.label for="due_day" label="締め日"></x-form.label>
+                        <x-form.label for="due_day" label="締め日" required></x-form.label>
                         <select name="due_day" id="due_day" class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                             <option value="">選択してください</option>
                             @for($i = 1; $i <= 31; $i++)
@@ -63,7 +62,7 @@
                 <div class="mb-6">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold">物件情報</h2>
-                        <x-button type="button" scheme="scraft" onClick="addPropertyRow()">物件追加</x-button>
+                        <x-button type="button" scheme="scraft" onClick="addPropertyRow()">物件行追加</x-button>
                     </div>
                     
                     <div class="overflow-x-auto">

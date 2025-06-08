@@ -2,7 +2,8 @@
     <x-slot name="title">請求先情報編集</x-slot>
 
     <div class="py-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <x-breads scheme="scraft" :nodes="[['title'=>'請求先一覧','route'=>'billing_destinations.index']]" current="請求先情報編集"/>
+            <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">請求先情報編集</h1>
             
             <form method="POST" action="{{ route('billing_destinations.update', $billingDestination) }}" id="billingDestinationForm">
@@ -11,8 +12,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <x-form.label for="customer" label="顧客"></x-form.label>
-                        <span class="text-red-500">*</span>
+                        <x-form.label for="customer" label="顧客" required></x-form.label>
                         <x-form.input 
                             id="customer_display" 
                             name="customer_display"
@@ -29,8 +29,7 @@
                         @enderror
                     </div>
                     <div>
-                        <x-form.label for="name" label="請求先名称"></x-form.label>
-                        <span class="text-red-500">*</span>
+                        <x-form.label for="name" label="請求先名称" required></x-form.label>
                         <x-form.input 
                             id="name" 
                             name="name" 

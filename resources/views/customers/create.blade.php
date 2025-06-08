@@ -2,6 +2,7 @@
     <x-slot name="title">新規顧客登録</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" :nodes="[['title'=>'顧客一覧','route'=>'customers.index']]" current="新規顧客登録"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">新規顧客登録</h1>
             
@@ -9,7 +10,7 @@
                 @csrf
                 <div class="mb-6">
                     <div>
-                        <x-form.label for="name" label="顧客名"></x-form.label>
+                        <x-form.label for="name" label="顧客名" required></x-form.label>
                         <x-form.input 
                             id="name" 
                             name="name" 

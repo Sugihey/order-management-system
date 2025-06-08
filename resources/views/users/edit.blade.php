@@ -2,6 +2,7 @@
     <x-slot name="title">ユーザー情報編集</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" :nodes="[['title'=>'ユーザー一覧','route'=>'users.index']]" current="ユーザー情報編集"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">ユーザー情報編集</h1>
             

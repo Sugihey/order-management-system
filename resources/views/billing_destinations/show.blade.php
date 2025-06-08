@@ -2,7 +2,8 @@
     <x-slot name="title">請求先詳細</x-slot>
 
     <div class="py-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <x-breads scheme="scraft" :nodes="[['title'=>'請求先一覧','route'=>'billing_destinations.index']]" current="請求先詳細"/>
+            <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">請求先詳細</h1>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

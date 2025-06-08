@@ -2,6 +2,7 @@
     <x-slot name="title">新規ユーザー登録</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" :nodes="[['title'=>'ユーザー一覧','route'=>'users.index']]" current="新規ユーザー登録"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">新規ユーザー登録</h1>
             
@@ -9,7 +10,7 @@
                 @csrf
                 <div class="mb-6">
                     <div class="mb-4">
-                        <x-form.label for="name" label="ユーザー名"></x-form.label>
+                        <x-form.label for="name" label="ユーザー名" required></x-form.label>
                         <x-form.input 
                             id="name" 
                             name="name" 
@@ -22,7 +23,7 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <x-form.label for="email" label="メールアドレス"></x-form.label>
+                        <x-form.label for="email" label="メールアドレス" required></x-form.label>
                         <x-form.input 
                             id="email" 
                             name="email" 
@@ -35,7 +36,7 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <x-form.label for="password" label="パスワード"></x-form.label>
+                        <x-form.label for="password" label="パスワード" required></x-form.label>
                         <x-form.input 
                             id="password" 
                             name="password" 
@@ -47,7 +48,7 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <x-form.label for="password_confirmation" label="パスワード確認"></x-form.label>
+                        <x-form.label for="password_confirmation" label="パスワード確認" required></x-form.label>
                         <x-form.input 
                             id="password_confirmation" 
                             name="password_confirmation" 

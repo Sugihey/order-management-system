@@ -2,6 +2,7 @@
     <x-slot name="title">顧客一覧</x-slot>
 
     <div class="py-8">
+        <x-breads scheme="scraft" current="顧客一覧"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold">顧客一覧</h1>

@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyInfoController;
 use App\Http\Controllers\BillingDestinationController;
 use App\Http\Controllers\OperationController;
+use App\Http\Controllers\UnitPriceController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -29,6 +30,10 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('operations', OperationController::class);
     Route::post('/operations/sort-order', [OperationController::class, 'updateSortOrder'])->name('operations.sort-order');
+    
+    Route::get('/unit-prices', [UnitPriceController::class, 'index'])->name('unit-prices.index');
+    Route::get('/unit-prices/operations', [UnitPriceController::class, 'getOperationsByCustomer'])->name('unit-prices.operations');
+    Route::post('/unit-prices', [UnitPriceController::class, 'store'])->name('unit-prices.store');
     
     Route::resource('users', UserController::class);
     

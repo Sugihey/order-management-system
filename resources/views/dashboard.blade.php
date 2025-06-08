@@ -105,7 +105,7 @@
                     </svg>
                 </div>
             </a>
-            <a href="#" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <a href="{{ route('unit-prices.index') }}" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div class="flex items-center">
                     <div class="flex-1">
                         <h3 class="text-lg font-medium text-gray-900">作業単価一覧</h3>

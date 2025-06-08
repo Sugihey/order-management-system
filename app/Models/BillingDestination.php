@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Customer extends Model
+class BillingDestination extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'customer_id',
         'name',
+        'due_day',
         'sort',
     ];
 
@@ -24,8 +26,13 @@ class Customer extends Model
         ];
     }
 
-    public function billingDestinations()
+    public function customer()
     {
-        return $this->hasMany(BillingDestination::class)->orderBy('sort');
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class)->orderBy('sort');
     }
 }

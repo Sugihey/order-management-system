@@ -7,6 +7,7 @@ use App\Http\Controllers\ArtisanEmailVerificationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyInfoController;
+use App\Http\Controllers\BillingDestinationController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('customers', CustomerController::class);
     Route::post('/customers/sort-order', [CustomerController::class, 'updateSortOrder'])->name('customers.sort-order');
+    Route::resource('billing_destinations', BillingDestinationController::class);
     
     Route::resource('users', UserController::class);
     

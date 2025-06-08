@@ -10,6 +10,7 @@ use App\Http\Controllers\CompanyInfoController;
 use App\Http\Controllers\BillingDestinationController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\UnitPriceController;
+use App\Http\Controllers\TaxRateController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/unit-prices', [UnitPriceController::class, 'store'])->name('unit-prices.store');
     
     Route::resource('users', UserController::class);
+    Route::resource('tax-rates', TaxRateController::class)->except(['show']);
     
     Route::get('/company-info/edit', [CompanyInfoController::class, 'edit'])->name('company-info.edit');
     Route::put('/company-info', [CompanyInfoController::class, 'update'])->name('company-info.update');

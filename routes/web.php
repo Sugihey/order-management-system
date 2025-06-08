@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanAuthController;
 use App\Http\Controllers\ArtisanEmailVerificationController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyInfoController;
 
 Route::get('/', function () {
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('customers', CustomerController::class);
     Route::post('/customers/sort-order', [CustomerController::class, 'updateSortOrder'])->name('customers.sort-order');
+    
+    Route::resource('users', UserController::class);
     
     Route::get('/company-info/edit', [CompanyInfoController::class, 'edit'])->name('company-info.edit');
     Route::put('/company-info', [CompanyInfoController::class, 'update'])->name('company-info.update');

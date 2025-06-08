@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArtisanAuthController;
 use App\Http\Controllers\ArtisanEmailVerificationController;
+use App\Http\Controllers\ArtisanController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyInfoController;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('customers', CustomerController::class);
     Route::post('/customers/sort-order', [CustomerController::class, 'updateSortOrder'])->name('customers.sort-order');
+    Route::resource('artisans', ArtisanController::class);
     Route::resource('billing_destinations', BillingDestinationController::class);
     
     Route::resource('operations', OperationController::class);

@@ -24,10 +24,9 @@
                             type="text" 
                             :value="old('name', $companyInfo->name ?? '')"
                             required
-                            class="@error('name') border-red-500 @enderror"
                         />
                         @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -39,10 +38,9 @@
                             type="text" 
                             :value="old('zip', $companyInfo->zip ?? '')"
                             required
-                            class="@error('zip') border-red-500 @enderror"
                         />
                         @error('zip')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -54,10 +52,9 @@
                             type="text" 
                             :value="old('address', $companyInfo->address ?? '')"
                             required
-                            class="@error('address') border-red-500 @enderror"
                         />
                         @error('address')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -69,10 +66,9 @@
                             type="text" 
                             :value="old('phone_no', $companyInfo->phone_no ?? '')"
                             required
-                            class="@error('phone_no') border-red-500 @enderror"
                         />
                         @error('phone_no')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -83,10 +79,9 @@
                             name="fax_no" 
                             type="text" 
                             :value="old('fax_no', $companyInfo->fax_no ?? '')"
-                            class="@error('fax_no') border-red-500 @enderror"
                         />
                         @error('fax_no')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -97,10 +92,9 @@
                             name="invoice_no" 
                             type="text" 
                             :value="old('invoice_no', $companyInfo->invoice_no ?? '')"
-                            class="@error('invoice_no') border-red-500 @enderror"
                         />
                         @error('invoice_no')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -112,10 +106,9 @@
                             type="text" 
                             :value="old('bank_name', $companyInfo->bank_name ?? '')"
                             required
-                            class="@error('bank_name') border-red-500 @enderror"
                         />
                         @error('bank_name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -127,10 +120,9 @@
                             type="text" 
                             :value="old('bank_branch', $companyInfo->bank_branch ?? '')"
                             required
-                            class="@error('bank_branch') border-red-500 @enderror"
                         />
                         @error('bank_branch')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -142,10 +134,9 @@
                             type="text" 
                             :value="old('account_type', $companyInfo->account_type ?? '')"
                             required
-                            class="@error('account_type') border-red-500 @enderror"
                         />
                         @error('account_type')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     
@@ -157,17 +148,16 @@
                             type="text" 
                             :value="old('account_name', $companyInfo->account_name ?? '')"
                             required
-                            class="@error('account_name') border-red-500 @enderror"
                         />
                         @error('account_name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                 </div>
                 
                 <div class="flex gap-4">
-                    <a href="{{ route('dashboard') }}" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">キャンセル</a>
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">更新</button>
+                    <x-form.buttons.backlink label="キャンセル" destination="dashboard"></x-form.buttons.backlink>
+                    <x-button scheme="action" type="submit">更新</x-button>
                 </div>
             </form>
         </div>

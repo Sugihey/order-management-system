@@ -18,14 +18,14 @@
                             required
                         />
                         @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                 </div>
                 <div class="flext justify-items-end">
                     <div class="flex gap-4 w-[30%]">
-                        <a href="{{ route('customers.index') }}" class="w-full bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600 text-center">キャンセル</a>
-                        <x-button-component :scheme="'scraft'" :label="'登録'"></x-button-component>
+                        <x-backlink destination="customers.index">キャンセル</x-backlink>
+                        <x-button :scheme="'scraft'">登録</x-button>
                     </div>
                 </div>
             </form>

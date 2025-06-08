@@ -30,20 +30,16 @@
                         required
                     />
                    @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <x-form.error>{{ $message }}</x-form.error>
                     @enderror
                 </div>
 
                 <div>
-                    <x-form.buttons.artisan-component 
-                        type="submit" 
-                        label="パスワードリセットリンクを送信" 
-                        onClick=""
-                    />
+                    <x-button type="submit" scheme="artisan">パスワードリセットリンクを送信</x-button>
                 </div>
 
                 <div class="text-center">
-                    <x-link-component :scheme="'artisan'" :href="route('artisan.login')" :label="'ログイン画面に戻る'" :class="'text-sm'" />
+                    <x-link :scheme="'artisan'" :href="route('artisan.login')" :label="'ログイン画面に戻る'" :class="'text-sm'" />
                 </div>
             </form>
         </div>

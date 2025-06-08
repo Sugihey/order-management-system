@@ -36,7 +36,7 @@
                             required
                         />
                     @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <x-form.error>{{ $message }}</x-form.error>
                     @enderror
                 </div>
 
@@ -49,11 +49,7 @@
                     required
                 />
                 <div>
-                    <x-form.buttons.action-component 
-                        type="submit" 
-                        label="パスワードをリセット" 
-                        onClick=""
-                    />
+                    <x-button type="submit" scheme="action">パスワードをリセット</x-button>
                 </div>
             </form>
         </div>

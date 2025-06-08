@@ -34,7 +34,7 @@
                         value="{{ old('email') }}"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 @error('email') border-red-500 @enderror">
                     @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <x-form.error>{{ $message }}</x-form.error>
                     @enderror
                 </div>
 
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="text-center">
-                    <x-link-component :scheme="'scraft'" :href="route('login')" :label="'ログイン画面に戻る'" :class="'text-sm'" />
+                    <x-link :scheme="'scraft'" :href="route('login')" :label="'ログイン画面に戻る'" :class="'text-sm'" />
                 </div>
             </form>
         </div>

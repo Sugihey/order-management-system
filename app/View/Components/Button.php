@@ -6,20 +6,20 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ButtonComponent extends Component
+class Button extends Component
 {
     private $scheme;
-    private $label;
+    private $class;
     private $type;
     private $onClick;
     /**
      * Create a new component instance.
      */
-    public function __construct(string $label, string $scheme='base', string $type='submit', string $onClick='')
+    public function __construct(string $scheme='base', string $type='submit', string $class='', string $onClick='')
     {
         $this->scheme = $scheme;
-        $this->label = $label;
         $this->type = $type;
+        $this->class = !empty($class) ? ' '.$class:'';
         $this->onClick = $onClick;
     }
 
@@ -29,8 +29,8 @@ class ButtonComponent extends Component
     public function render(): View|Closure|string
     {
         $args = [
-            'label' => $this->label,
             'type' => $this->type,
+            'userClass' => $this->class,
             'onClick' => $this->onClick,
         ];
         switch($this->scheme){

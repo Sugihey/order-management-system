@@ -28,7 +28,7 @@
                             required
                         />
                         @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     <div>
@@ -40,26 +40,22 @@
                             required
                         />
                         @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                 </div>
 
                 <div class="flex items-center justify-end">
-                    <x-link-component :scheme="'artisan'" :href="route('artisan.password.request')" :label="'パスワードを忘れた'" :class="'text-sm'" />
+                    <x-link :scheme="'artisan'" :href="route('artisan.password.request')" :label="'パスワードを忘れた'" :class="'text-sm'" />
                 </div>
 
                 <div>
-                    <x-form.buttons.artisan-component 
-                        type="submit" 
-                        label="ログイン" 
-                        onClick=""
-                    />
+                    <x-button scheme="artisan" class="w-full">ログイン</x-button>
                </div>
             </form>
             <hr>
             <div class="text-center">
-                <x-link-component :scheme="'artisan'" :href="route('artisan.register')" :label="'新規登録'" />
+                <x-link :scheme="'artisan'" :href="route('artisan.register')" :label="'新規登録'" />
             </div>
         </div>
     </div>

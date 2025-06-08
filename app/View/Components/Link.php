@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class LinkComponent extends Component
+class Link extends Component
 {
     private $scheme;
     private $label;

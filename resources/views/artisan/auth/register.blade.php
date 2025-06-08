@@ -22,7 +22,7 @@
                             required
                         />
                         @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
 
@@ -36,7 +36,7 @@
                             required
                         />
                         @error('address')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
 
@@ -50,7 +50,7 @@
                             required
                         />
                         @error('phone_no')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
 
@@ -64,7 +64,7 @@
                             required
                         />
                         @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
 
@@ -77,7 +77,7 @@
                             required
                         />
                         @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
 
@@ -93,16 +93,8 @@
                 </div>
 
                 <div class="flex justify-end space-x-4 pt-4">
-                    <x-form.buttons.base-component 
-                        type="button" 
-                        label="キャンセル" 
-                        onClick="window.location.href='{{ route('artisan.login') }}'"
-                    />
-                    <x-form.buttons.action-component 
-                        type="submit" 
-                        label="登録" 
-                        onClick=""
-                    />
+                    <x-button scheme="base" type="button" onClick="window.location.href='{{ route('artisan.login') }}'">キャンセル</x-button>
+                    <x-button scheme="action">登録</x-button>
                 </div>
             </form>
         </div>

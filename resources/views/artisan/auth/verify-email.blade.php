@@ -46,12 +46,12 @@
                             required
                         />
                         @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
 
                     <div class="mt-6">
-                        <x-form.buttons.action-component 
+                        <x-form.buttons.action
                             type="submit" 
                             label="確認メールを再送信" 
                             onClick=""

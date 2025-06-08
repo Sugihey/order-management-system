@@ -19,10 +19,9 @@
                             type="email" 
                             :value="old('email')"
                             required
-                            class="@error('email') border-red-500 @enderror"
                         />
                         @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     <div>
@@ -32,20 +31,19 @@
                             name="password" 
                             type="password" 
                             required
-                            class="@error('password') border-red-500 @enderror"
                         />
                         @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                           <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                 </div>
 
                 <div class="flex items-center justify-end">
-                    <x-link-component :scheme="'scraft'" :href="route('password.request')" :label="'パスワードを忘れた'" :class="'text-sm'" />
+                    <x-link :scheme="'scraft'" :href="route('password.request')" :label="'パスワードを忘れた'" :class="'text-sm'" />
                 </div>
 
                 <div>
-                    <x-button-component :scheme="'scraft'" :label="'ログイン'"></x-button-component>
+                    <x-button scheme="scraft" class="w-full">ログイン</x-button>
                 </div>
             </form>
         </div>

@@ -17,16 +17,15 @@
                             type="text" 
                             :value="old('name', $customer->name)"
                             required
-                            class="@error('name') border-red-500 @enderror"
                         />
                         @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                 </div>
                 <div class="flex gap-4">
                     <a href="{{ route('customers.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">キャンセル</a>
-                    <x-button-component :scheme="'scraft'" :label="'更新'"></x-button-component>
+                    <x-button :scheme="'scraft'">更新</x-button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,4 @@
-<x-scraft>
+<x-layout.scraft>
     <x-slot name="title">新規顧客登録</x-slot>
 
     <div class="py-8">
@@ -31,4 +31,4 @@
             </form>
         </div>
     </div>
-</x-scraft>
+</x-layout.scraft>

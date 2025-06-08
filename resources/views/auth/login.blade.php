@@ -1,4 +1,4 @@
-<x-scraft>
+<x-layout.scraft>
     <x-slot name="title">エスクラフト受発注管理システム ログイン</x-slot>
 
     <div class="h-full flex items-center justify-center">
@@ -48,4 +48,4 @@
             </form>
         </div>
     </div>
-</x-scraft>
+</x-layout.scraft>

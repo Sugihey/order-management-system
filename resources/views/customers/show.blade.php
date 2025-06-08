@@ -1,4 +1,4 @@
-<x-scraft>
+<x-layout.scraft>
     <x-slot name="title">顧客情報</x-slot>
 
     <div class="py-8">
@@ -33,4 +33,4 @@
             </div>
         </div>
     </div>
-</x-scraft>
+</x-layout.scraft>

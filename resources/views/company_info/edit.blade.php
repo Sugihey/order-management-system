@@ -1,4 +1,4 @@
-<x-scraft>
+<x-layout.scraft>
     <x-slot name="title">会社情報編集</x-slot>
 
     <div class="py-8">
@@ -162,4 +162,4 @@
             </form>
         </div>
     </div>
-</x-scraft>
+</x-layout.scraft>

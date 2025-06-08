@@ -1,4 +1,4 @@
-<x-artisan>
+<x-layout.artisan>
     <x-slot name="title">エスクラフト作業管理 ログイン</x-slot>
 
     <div class="h-full flex items-center justify-center">
@@ -59,4 +59,4 @@
             </div>
         </div>
     </div>
-</x-artisan>
+</x-layout.artisan>

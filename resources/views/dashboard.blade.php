@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理画面</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-50">
-    <div class="min-h-screen p-8">
+<x-layout.scraft>
+    <x-slot name="title">管理画面</x-slot>
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-3xl font-bold text-gray-900">管理画面</h1>
@@ -164,6 +156,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
+</x-layout.scraft>
+

@@ -1,4 +1,4 @@
-<x-artisan>
+<x-layout.artisan>
     <x-slot name="title">メール確認</x-slot>
 
     <div class="h-full flex items-center justify-center">
@@ -67,4 +67,4 @@
             </div>
         </div>
     </div>
-</x-artisan>
+</x-layout.artisan>

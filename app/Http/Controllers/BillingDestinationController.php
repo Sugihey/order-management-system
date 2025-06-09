@@ -26,31 +26,35 @@ class BillingDestinationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'name' => 'required|string|max:255',
-            'due_day' => 'required|integer|min:1|max:31',
+            'billing_destinations.customer_id' => 'required|exists:customers,id',
+            'billing_destinations.name' => 'required|unique:billing_destinations,name|string|max:255',
+            'billing_destinations.due_day' => 'required|integer|min:1|max:31',
             'properties' => 'array',
             'properties.*.name' => 'required|string|max:255',
             'properties.*.address' => 'required|string|max:255',
         ]);
-
-        $billingDestination = BillingDestination::create([
-            'customer_id' => $request->customer_id,
-            'name' => $request->name,
-            'due_day' => $request->due_day,
-            'sort' => 0,
-        ]);
-
-        if ($request->properties) {
-            foreach ($request->properties as $index => $property) {
-                $billingDestination->properties()->create([
-                    'name' => $property['name'],
-                    'address' => $property['address'],
-                    'sort' => $index + 1,
+        try {
+            DB::transaction(function() use($request) {
+                $billingDestination = BillingDestination::create([
+                    'customer_id' => $request->billing_destinations['customer_id'],
+                    'name' => $request->billing_destinations['name'],
+                    'due_day' => $request->billing_destinations['due_day'],
+                    'sort' => 0,
                 ]);
-            }
+        
+                if ($request->properties) {
+                    foreach ($request->properties as $index => $property) {
+                        $billingDestination->properties()->create([
+                            'name' => $property['name'],
+                            'address' => $property['address'],
+                            'sort' => $index + 1,
+                        ]);
+                    }
+                }
+            });
+        }catch(\Exception $e) {
+            return redirect()->route('billing_destinations.index')->with('success', '請求先が登録されました。');
         }
-
         return redirect()->route('billing_destinations.index')->with('success', '請求先が登録されました。');
     }
 
@@ -71,7 +75,7 @@ class BillingDestinationController extends Controller
     {
         $request->validate([
             'customer_id' => 'required|exists:customers,id',
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:billing_destinations,name|string|max:255',
             'due_day' => 'required|integer|min:1|max:31',
             'properties' => 'array',
             'properties.*.name' => 'required|string|max:255',

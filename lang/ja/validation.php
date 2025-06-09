@@ -260,6 +260,11 @@ return [
         'updated_at' => '更新日',
         'username' => 'ユーザー名',
         'year' => '年',
+        '*.customer_id' => '顧客',
+        '*.due_day' => '締め日',
+        'billing_destinations.name' => '請求先名称',
+        'properties.*.name' => '物件名',
+        'properties.*.address' => '住所',
     ],
 
 ];

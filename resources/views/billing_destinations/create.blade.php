@@ -22,8 +22,8 @@
                             placeholder="顧客を選択してください"
                             required
                         />
-                        <input type="hidden" id="customer_id" name="customer_id" value="{{ old('customer_id') }}">
-                        @error('customer_id')
+                        <input type="hidden" id="customer_id" name="billing_destinations[customer_id]" value="{{ old('billing_destinations.customer_id') }}">
+                        @error('billing_destinations.customer_id')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
@@ -31,26 +31,26 @@
                         <x-form.label for="name" label="請求先名称" required></x-form.label>
                         <x-form.input 
                             id="name" 
-                            name="name" 
+                            name="billing_destinations[name]" 
                             type="text" 
-                            :value="old('name')"
+                            :value="old('billing_destinations.name')"
                             required
                         />
-                        @error('name')
+                        @error('billing_destinations.name')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     <div>
                         <x-form.label for="due_day" label="締め日" required></x-form.label>
-                        <select name="due_day" id="due_day" class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        <select name="billing_destinations[due_day]" id="due_day" class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                             <option value="">選択してください</option>
                             @for($i = 1; $i <= 31; $i++)
-                                <option value="{{ $i }}" {{ old('due_day') == $i ? 'selected' : '' }}>
+                                <option value="{{ $i }}" {{ old('billing_destinations.due_day') == $i ? 'selected' : '' }}>
                                     {{ $i == 31 ? '31日(月末)' : $i . '日' }}
                                 </option>
                             @endfor
                         </select>
-                        @error('due_day')
+                        @error('billing_destinations.due_day')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
@@ -74,10 +74,16 @@
                             <tbody class="bg-white divide-y divide-gray-200" id="propertyTableBody">
                                 <tr>
                                     <td class="px-6 py-4">
-                                        <x-form.input name="properties[0][name]" type="text" placeholder="物件名" />
+                                        <x-form.input name="properties[0][name]" type="text" placeholder="物件名" :value="old('properties.0.name')" />
+                                        @error('properties.0.name')
+                                            <x-form.error>{{ $message }}</x-form.error>
+                                        @enderror
                                     </td>
                                     <td class="px-6 py-4">
                                         <x-form.input name="properties[0][address]" type="text" placeholder="住所" />
+                                        @error('properties.0.address')
+                                            <x-form.error>{{ $message }}</x-form.error>
+                                        @enderror
                                     </td>
                                     <td class="px-6 py-4">
                                         <x-button type="button" scheme="danger" onClick="removePropertyRow(this)">削除</x-button>
@@ -112,9 +118,13 @@
         function addPropertyRow() {
             const tbody = document.getElementById('propertyTableBody');
             const newRow = document.createElement('tr');
+            const template = `<x-form.input name="properties[][name]" type="text" placeholder="物件名" />`;
             newRow.innerHTML = `
                 <td class="px-6 py-4">
                     <input type="text" name="properties[${propertyIndex}][name]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="物件名">
+                    @error('properties[1][name]')
+                        <x-form.error>{{ $message }}</x-form.error>
+                    @enderror
                 </td>
                 <td class="px-6 py-4">
                     <input type="text" name="properties[${propertyIndex}][address]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="住所">
@@ -129,9 +139,7 @@
 
         function removePropertyRow(button) {
             const tbody = document.getElementById('propertyTableBody');
-            if (tbody.children.length > 1) {
-                button.closest('tr').remove();
-            }
+            button.closest('tr').remove();
         }
 
         function showCustomerDialog() {

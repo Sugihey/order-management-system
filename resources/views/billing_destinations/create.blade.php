@@ -72,16 +72,17 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="propertyTableBody">
+                                @for($i=0;$i<$propertyRow;$i++)
                                 <tr>
                                     <td class="px-6 py-4">
-                                        <x-form.input name="properties[0][name]" type="text" placeholder="物件名" :value="old('properties.0.name')" />
-                                        @error('properties.0.name')
+                                        <x-form.input name="properties[{{$i}}][name]" type="text" placeholder="物件名" :value="old('properties.'.$i.'.name')" />
+                                        @error("properties.$i.name")
                                             <x-form.error>{{ $message }}</x-form.error>
                                         @enderror
                                     </td>
                                     <td class="px-6 py-4">
-                                        <x-form.input name="properties[0][address]" type="text" placeholder="住所" />
-                                        @error('properties.0.address')
+                                        <x-form.input name="properties[{{$i}}][address]" type="text" placeholder="住所" :value="old('properties.'.$i.'.address')" />
+                                        @error("properties.$i.address")
                                             <x-form.error>{{ $message }}</x-form.error>
                                         @enderror
                                     </td>
@@ -89,6 +90,7 @@
                                         <x-button type="button" scheme="danger" onClick="removePropertyRow(this)">削除</x-button>
                                     </td>
                                 </tr>
+                                @endfor
                             </tbody>
                         </table>
                     </div>

@@ -17,10 +17,12 @@ class BillingDestinationController extends Controller
         return view('billing_destinations.index', compact('billingDestinations'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $properties = $request->old('properties');
+        $propertyRow = isset($properties) ? count($properties) : 1;
         $customers = BillingDestinationUseCase::getCustomersForSelection();
-        return view('billing_destinations.create', compact('customers'));
+        return view('billing_destinations.create', compact('customers','propertyRow'));
     }
 
     public function store(Request $request)

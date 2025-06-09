@@ -7,7 +7,9 @@ use App\Models\BillingDestination;
 use App\Models\Customer;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\BiilingDestinationStoreRequest;
 
 class BillingDestinationController extends Controller
 {
@@ -25,16 +27,8 @@ class BillingDestinationController extends Controller
         return view('billing_destinations.create', compact('customers','propertyRow'));
     }
 
-    public function store(Request $request)
+    public function store(BiilingDestinationStoreRequest $request): RedirectResponse
     {
-        $request->validate([
-            'billing_destinations.customer_id' => 'required|exists:customers,id',
-            'billing_destinations.name' => 'required|unique:billing_destinations,name|string|max:255',
-            'billing_destinations.due_day' => 'required|integer|min:1|max:31',
-            'properties' => 'array',
-            'properties.*.name' => 'required|string|max:255',
-            'properties.*.address' => 'required|string|max:255',
-        ]);
         try {
             DB::transaction(function() use($request) {
                 $billingDestination = BillingDestination::create([
@@ -55,7 +49,7 @@ class BillingDestinationController extends Controller
                 }
             });
         }catch(\Exception $e) {
-            return redirect()->route('billing_destinations.index')->with('success', '請求先が登録されました。');
+            return redirect()->route('billing_destinations.create')->with('success', '請求先の登録に失敗しました。');
         }
         return redirect()->route('billing_destinations.index')->with('success', '請求先が登録されました。');
     }

@@ -150,9 +150,7 @@
 
         function removePropertyRow(button) {
             const tbody = document.getElementById('propertyTableBody');
-            if (tbody.children.length > 1) {
-                button.closest('tr').remove();
-            }
+            button.closest('tr').remove();
         }
 
         function showCustomerDialog() {

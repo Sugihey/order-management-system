@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\UseCase\BillingDestinationUseCase;
 use App\Models\BillingDestination;
-use App\Models\Customer;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\BiilingDestinationStoreRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class BillingDestinationController extends Controller
 {
@@ -30,24 +30,9 @@ class BillingDestinationController extends Controller
     public function store(BiilingDestinationStoreRequest $request): RedirectResponse
     {
         try {
-            DB::transaction(function() use($request) {
-                $billingDestination = BillingDestination::create([
-                    'customer_id' => $request->billing_destinations['customer_id'],
-                    'name' => $request->billing_destinations['name'],
-                    'due_day' => $request->billing_destinations['due_day'],
-                    'sort' => 0,
-                ]);
-        
-                if ($request->properties) {
-                    foreach ($request->properties as $index => $property) {
-                        $billingDestination->properties()->create([
-                            'name' => $property['name'],
-                            'address' => $property['address'],
-                            'sort' => $index + 1,
-                        ]);
-                    }
-                }
-            });
+            BillingDestinationUseCase::storeBillingDestinationAndProperties($request);
+        }catch(ValidationException $e) {
+
         }catch(\Exception $e) {
             return redirect()->route('billing_destinations.create')->with('success', '請求先の登録に失敗しました。');
         }
@@ -67,45 +52,10 @@ class BillingDestinationController extends Controller
         return view('billing_destinations.edit', compact('billingDestination', 'customers'));
     }
 
-    public function update(Request $request, BillingDestination $billingDestination)
+    public function update(BiilingDestinationStoreRequest $request, BillingDestination $billingDestination)
     {
-        $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'name' => 'required|unique:billing_destinations,name|string|max:255',
-            'due_day' => 'required|integer|min:1|max:31',
-            'properties' => 'array',
-            'properties.*.name' => 'required|string|max:255',
-            'properties.*.address' => 'required|string|max:255',
-        ]);
-
         try{
-            DB::transaction(function() use($billingDestination, $request){
-                $billingDestination->update([
-                    'customer_id' => $request->customer_id,
-                    'name' => $request->name,
-                    'due_day' => $request->due_day,
-                ]);
-        
-                //BulkUpsert
-                // 1.SoftDelete all
-                // 2.Restore items if it's still remains
-                // 3.Upsert with input data
-                $billingDestination->properties()->delete();
-                if ($request->properties) {
-                    foreach ($request->properties as $index => $property) {
-                        $propertyData = [
-                            'name' => $property['name'],
-                            'address' => $property['address'],
-                            'sort' => $index + 1,
-                        ];
-                        if(isset($property['id'])){
-                            $propertyData['id'] = $property['id'];
-                            Property::onlyTrashed()->where('id','=',$property['id'])->restore();
-                        }
-                        $billingDestination->properties()->upsert($propertyData,['id'],['name','address','sort']);
-                    }
-                }
-            });
+            BillingDestinationUseCase::storeBillingDestinationAndProperties($request, $billingDestination);
         } catch(\Exception $e) {
             return redirect()->route('billing_destinations.edit', $billingDestination)->with('error', '請求先の更新に失敗しました。');
         }

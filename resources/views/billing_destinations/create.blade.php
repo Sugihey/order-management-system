@@ -22,8 +22,8 @@
                             placeholder="顧客を選択してください"
                             required
                         />
-                        <input type="hidden" id="customer_id" name="billing_destinations[customer_id]" value="{{ old('billing_destinations.customer_id') }}">
-                        @error('billing_destinations.customer_id')
+                        <input type="hidden" id="customer_id" name="customer_id" value="{{ old('customer_id') }}">
+                        @error('customer_id')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
@@ -31,26 +31,26 @@
                         <x-form.label for="name" label="請求先名称" required></x-form.label>
                         <x-form.input 
                             id="name" 
-                            name="billing_destinations[name]" 
+                            name="name" 
                             type="text" 
-                            :value="old('billing_destinations.name')"
+                            :value="old('name')"
                             required
                         />
-                        @error('billing_destinations.name')
+                        @error('name')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
                     <div>
                         <x-form.label for="due_day" label="締め日" required></x-form.label>
-                        <select name="billing_destinations[due_day]" id="due_day" class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        <select name="due_day" id="due_day" class="mt-1 block w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                             <option value="">選択してください</option>
                             @for($i = 1; $i <= 31; $i++)
-                                <option value="{{ $i }}" {{ old('billing_destinations.due_day') == $i ? 'selected' : '' }}>
+                                <option value="{{ $i }}" {{ old('due_day') == $i ? 'selected' : '' }}>
                                     {{ $i == 31 ? '31日(月末)' : $i . '日' }}
                                 </option>
                             @endfor
                         </select>
-                        @error('billing_destinations.due_day')
+                        @error('due_day')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>

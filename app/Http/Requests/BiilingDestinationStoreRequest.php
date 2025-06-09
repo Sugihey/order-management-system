@@ -24,30 +24,40 @@ class BiilingDestinationStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'billing_destinations.customer_id' => 'required|exists:customers,id',
-            'billing_destinations.name' => 'required|unique:billing_destinations,name|string|max:255',
-            'billing_destinations.due_day' => 'required|integer|min:1|max:31',
+            'customer_id' => 'required|exists:customers,id',
+            'name' => 'required|string|max:255',
+            'due_day' => 'required|integer|min:1|max:31',
             'properties' => 'array',
             'properties.*.name' => 'required|string|max:255',
             'properties.*.address' => 'required|string|max:255',
         ];
     }
+    public function attributes()
+    {
+        return [
+            'customer_id' => '顧客',
+            'name' => '請求先名',
+            'due_day' => '締め日',
+            'properties' => '物件',
+            'properties.*.name' => '物件名',
+            'properties.*.address' => '住所',
+        ];
+    }
     protected function prepareForValidation(): void
     {
-        $billingDestinations = [
-            'customer_id' => $this->billing_destinations['customer_id'],
-            'name' => MyUtil::toStoreText($this->billing_destinations['name']),
-            'due_day' => $this->billing_destinations['due_day'],
-        ];
         $properties = [];
-        foreach($this->properties as $property){
-            $properties[] = [
-                'name' => MyUtil::toStoreText($property['name']),
-                'address' => MyUtil::toStoreText($property['address']),
-            ];
+        if($this->properties){
+            foreach($this->properties as $property){
+                $properties[] = [
+                    'name' => MyUtil::toStoreText($property['name']),
+                    'address' => MyUtil::toStoreText($property['address']),
+                ];
+            }
         }
         $this->merge([
-            'billing_destinations' => $billingDestinations,
+            'customer_id' => $this->customer_id,
+            'name' => MyUtil::toStoreText($this->name),
+            'due_day' => $this->due_day,
             'properties' => $properties,
         ]);
     }

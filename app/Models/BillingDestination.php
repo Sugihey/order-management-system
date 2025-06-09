@@ -35,4 +35,13 @@ class BillingDestination extends Model
     {
         return $this->hasMany(Property::class)->orderBy('sort');
     }
+
+    public static function isUniqueInCustomer($customer_id, $name ,$this_id=null)
+    {
+        $query = BillingDestination::query();
+        $query->where('customer_id', $customer_id);
+        $query->where('name', $name);
+        if($this_id) $query->where('id','!=', $this_id);
+        return !$query->first();
+    }
 }

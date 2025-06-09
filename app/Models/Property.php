@@ -30,4 +30,12 @@ class Property extends Model
     {
         return $this->belongsTo(BillingDestination::class);
     }
+
+    public static function isUniqueInBillingDestination($billingDestination_id, $name, $this_id=null) {
+        $query = SELF::query();
+        $query->where('billing_destination_id', $billingDestination_id);
+        $query->where('name', $name);
+        if($this_id) $query->where('id','!=', $this_id);
+        return !$query->first();
+    }
 }

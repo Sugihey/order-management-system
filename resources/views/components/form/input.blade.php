@@ -7,7 +7,8 @@
     'onChange' => '',
     'onClick' => '',
     'name' => '',
-    'id' => ''
+    'id' => '',
+    'autocomplete' => '',
 ])
 
 @php
@@ -25,5 +26,6 @@ $errorClasses = $name && $errors->has($name) ? ' border-red-500' : '';
     @if($disabled) disabled @endif
     @if($onChange) onchange="{{ $onChange }}" @endif
     @if($onClick) onclick="{{ $onClick }}" @endif
+    @if($autocomplete) autocomplete="{{ $autocomplete }}" @endif
     {{ $attributes->merge(['class' => $baseClasses . $errorClasses]) }}
 />

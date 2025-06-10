@@ -42,6 +42,7 @@
                             name="password" 
                             type="password" 
                             required
+                            autocomplete="new-password"
                         />
                         @error('password')
                             <x-form.error>{{ $message }}</x-form.error>
@@ -54,6 +55,7 @@
                             name="password_confirmation" 
                             type="password" 
                             required
+                            autocomplete="new-password"
                         />
                     </div>
                 </div>

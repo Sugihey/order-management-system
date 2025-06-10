@@ -22,7 +22,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|unique:customers|max:255',
         ]);
 
         Customer::create([
@@ -46,7 +46,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|unique:customers,name,'.$customer->id.'|max:255',
         ]);
 
         $customer->update([

@@ -48,16 +48,13 @@ class BillingDestinationUseCase
             // 4.Diff to destroy.
             $exProperties = Property::getBillingDestinationProperties($billingDestination->id);
             if ($request->properties) {
-                $properties = [];
-                foreach($request->properties as $key => $p){
-                    $p['billing_destination_id'] = $billingDestination->id;
-                    $p['sort'] = $key;
-                    $properties[] = $p;
+                foreach($request->properties as $key => $property){
+                    $property['billing_destination_id'] = $billingDestination->id;
+                    $property['sort'] = $key;
+                    Property::upsert($property,['id'],null);
                 }
-                Property::upsert($properties,['id'],null);
-                $nowProperties = Property::getBillingDestinationProperties($billingDestination->id);
                 $exId = $exProperties->pluck('id');
-                $nowId = $nowProperties->pluck('id')->toArray();
+                $nowId = array_column($request->properties,'id');
                 $delId = $exId->diff($nowId)->all();
                 if($delId){
                     Property::destroy($delId);

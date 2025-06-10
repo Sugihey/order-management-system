@@ -52,6 +52,7 @@ class BillingDestinationController extends Controller
         $billingDestination->load('customer', 'properties');
         $properties = $request->old('properties');
         if(!$properties){
+            $properties = [];
             foreach($billingDestination->properties as $p){
                 $properties[] = [
                     'id' => $p->id,

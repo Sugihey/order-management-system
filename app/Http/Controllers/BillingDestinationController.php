@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BiilingDestinationStoreRequest;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 
 class BillingDestinationController extends Controller
 {
@@ -29,12 +28,14 @@ class BillingDestinationController extends Controller
 
     public function store(BiilingDestinationStoreRequest $request): RedirectResponse
     {
+        //Additional Validations
+        BillingDestination::validateIsUniqueInCustomer($request->customer_id, $request->name);
+        Property::validateIsUniqueInBillingDestination($request->properties);
+        
         try {
             BillingDestinationUseCase::storeBillingDestinationAndProperties($request);
-        }catch(ValidationException $e) {
-
         }catch(\Exception $e) {
-            return redirect()->route('billing_destinations.create')->with('success', '請求先の登録に失敗しました。');
+            return redirect()->route('billing_destinations.create')->with('error', "請求先の登録に失敗しました。\n".$e->getMessage());
         }
         return redirect()->route('billing_destinations.index')->with('success', '請求先が登録されました。');
     }
@@ -45,19 +46,34 @@ class BillingDestinationController extends Controller
         return view('billing_destinations.show', compact('billingDestination'));
     }
 
-    public function edit(BillingDestination $billingDestination)
+    public function edit(Request $request, BillingDestination $billingDestination)
     {
         $customers = BillingDestinationUseCase::getCustomersForSelection();
         $billingDestination->load('customer', 'properties');
-        return view('billing_destinations.edit', compact('billingDestination', 'customers'));
+        $properties = $request->old('properties');
+        if(!$properties){
+            foreach($billingDestination->properties as $p){
+                $properties[] = [
+                    'id' => $p->id,
+                    'billing_destination_id' => $p->billing_destinaton_id,
+                    'name' => $p->name,
+                    'address' => $p->address,
+                    'sort' => $p->sort,
+                ];
+            }
+        }
+        return view('billing_destinations.edit', compact('billingDestination', 'customers', 'properties'));
     }
 
     public function update(BiilingDestinationStoreRequest $request, BillingDestination $billingDestination)
     {
+        //Additional Validations
+        BillingDestination::validateIsUniqueInCustomer($request->customer_id, $request->name, $billingDestination->id);
+        Property::validateIsUniqueInBillingDestination($request->properties);
         try{
             BillingDestinationUseCase::storeBillingDestinationAndProperties($request, $billingDestination);
         } catch(\Exception $e) {
-            return redirect()->route('billing_destinations.edit', $billingDestination)->with('error', '請求先の更新に失敗しました。');
+            return redirect()->route('billing_destinations.edit', $billingDestination)->with('error', '請求先の更新に失敗しました。'.$e->getMessage());
         }
 
         return redirect()->route('billing_destinations.index')->with('success', '請求先情報が更新されました。');

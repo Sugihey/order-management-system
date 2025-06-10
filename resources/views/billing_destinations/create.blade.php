@@ -6,6 +6,12 @@
             <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">新規請求先登録</h1>
             
+            @if(session('error'))
+                <x-alert scheme="danger">{{ session('error') }}</x-alert>
+            @endif
+            @error('details')
+                <x-alert scheme="danger">{{ $message }}</x-alert>
+            @enderror
             <form method="POST" action="{{ route('billing_destinations.store') }}" id="billingDestinationForm">
                 @csrf
                 
@@ -87,7 +93,7 @@
                                         @enderror
                                     </td>
                                     <td class="px-6 py-4">
-                                        <x-button type="button" scheme="danger" onClick="removePropertyRow(this)">削除</x-button>
+                                        <x-button type="button" scheme="scraft" onClick="removePropertyRow(this)">削除</x-button>
                                     </td>
                                 </tr>
                                 @endfor
@@ -124,9 +130,6 @@
             newRow.innerHTML = `
                 <td class="px-6 py-4">
                     <input type="text" name="properties[${propertyIndex}][name]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="物件名">
-                    @error('properties[1][name]')
-                        <x-form.error>{{ $message }}</x-form.error>
-                    @enderror
                 </td>
                 <td class="px-6 py-4">
                     <input type="text" name="properties[${propertyIndex}][address]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="住所">

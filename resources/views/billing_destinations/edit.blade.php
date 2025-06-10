@@ -7,10 +7,11 @@
             <h1 class="text-2xl font-bold mb-6">請求先情報編集</h1>
             
             @if(session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                    {{ session('error') }}
-                </div>
+                <x-alert scheme="danger">{{ session('error') }}</x-alert>
             @endif
+            @error('details')
+                <x-alert scheme="danger">{{ $message }}</x-alert>
+            @enderror
             <form method="POST" action="{{ route('billing_destinations.update', $billingDestination) }}" id="billingDestinationForm">
                 @csrf
                 @method('PUT')
@@ -78,29 +79,43 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="propertyTableBody">
-                                @forelse($billingDestination->properties as $index => $property)
+                                @forelse($properties as $i => $property)
                                     <tr>
                                         <td class="px-6 py-4">
-                                            <x-form.input name="properties[{{ $index }}][name]" type="text" placeholder="物件名" :value="old('properties.' . $index . '.name', $property->name)" />
+                                            <x-form.input name="properties[{{ $i }}][name]" type="text" placeholder="物件名" :value="old('properties.' . $i . '.name', $property['name'])" />
+                                            @error("properties.$i.name")
+                                                <x-form.error>{{ $message }}</x-form.error>
+                                            @enderror
                                         </td>
                                         <td class="px-6 py-4">
-                                            <x-form.input name="properties[{{ $index }}][address]" type="text" placeholder="住所" :value="old('properties.' . $index . '.address', $property->address)" />
+                                            <x-form.input name="properties[{{ $i }}][address]" type="text" placeholder="住所" :value="old('properties.' . $i . '.address', $property['address'])" />
+                                            @error("properties.$i.address")
+                                                <x-form.error>{{ $message }}</x-form.error>
+                                            @enderror
                                         </td>
                                         <td class="px-6 py-4">
-                                            <x-button type="button" scheme="danger" onClick="removePropertyRow(this)">削除</x-button>
-                                            <input name="properties[{{ $index }}][id]" type="hidden" value="{{ $property->id }}"
+                                            <x-button type="button" scheme="scraft" onClick="removePropertyRow(this)">削除</x-button>
+                                            @if(isset($property['id']))
+                                            <input name="properties[{{ $i }}][id]" type="hidden" value="{{ $property['id'] }}"
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td class="px-6 py-4">
                                             <x-form.input name="properties[0][name]" type="text" placeholder="物件名" />
+                                            @error("properties.$i.name")
+                                                <x-form.error>{{ $message }}</x-form.error>
+                                            @enderror
                                         </td>
                                         <td class="px-6 py-4">
                                             <x-form.input name="properties[0][address]" type="text" placeholder="住所" />
+                                            @error("properties.$i.address")
+                                                <x-form.error>{{ $message }}</x-form.error>
+                                            @enderror
                                         </td>
                                         <td class="px-6 py-4">
-                                            <x-button type="button" scheme="danger" onClick="removePropertyRow(this)">削除</x-button>
+                                            <x-button type="button" scheme="scraft" onClick="removePropertyRow(this)">削除</x-button>
                                         </td>
                                     </tr>
                                 @endforelse

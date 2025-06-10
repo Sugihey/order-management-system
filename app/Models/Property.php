@@ -31,11 +31,16 @@ class Property extends Model
         return $this->belongsTo(BillingDestination::class);
     }
 
-    public static function isUniqueInBillingDestination($billingDestination_id, $name, $this_id=null) {
-        $query = SELF::query();
-        $query->where('billing_destination_id', $billingDestination_id);
-        $query->where('name', $name);
-        if($this_id) $query->where('id','!=', $this_id);
-        return !$query->first();
+    public static function getBillingDestinationProperties($billingDestination_id)
+    {
+        return Property::where('billing_destination_id',$billingDestination_id)->get();
+    }
+    public static function validateIsUniqueInBillingDestination($properties, $billingDestination_id=null) {
+        //Has duplicate properties in properties param
+//         $query = SELF::query();
+//         $query->where('billing_destination_id', $billingDestination_id);
+//         $query->where('name', $name);
+// //        if($this_id) $query->where('id','!=', $this_id);
+//         return !$query->first();
     }
 }

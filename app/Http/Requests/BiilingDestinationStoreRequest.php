@@ -43,15 +43,43 @@ class BiilingDestinationStoreRequest extends FormRequest
             'properties.*.address' => '住所',
         ];
     }
+    public function after(): array
+    {
+        return [
+            function (Validator $validator) {
+                $name = array_column($this->properties, 'name');
+                $dupIndex = MyUtil::arrayDuplicateItemKeys($name);
+                foreach($dupIndex as $i){
+                    $validator->errors()->add(
+                        'properties.'.$i.'.name',
+                        '物件名が重複しています'
+                    );
+                    $validator->errors()->add(
+                        'details','明細部にエラーがあります'
+                    );
+                }
+                $address = array_column($this->properties, 'address');
+                $dupIndex = MyUtil::arrayDuplicateItemKeys($address);
+                foreach($dupIndex as $i){
+                    $validator->errors()->add(
+                        'properties.'.$i.'.address',
+                        '住所が重複しています'
+                    );
+                    $validator->errors()->add(
+                        'details','明細部にエラーがあります'
+                    );
+                }
+            }
+        ];
+    }
     protected function prepareForValidation(): void
     {
         $properties = [];
         if($this->properties){
             foreach($this->properties as $property){
-                $properties[] = [
-                    'name' => MyUtil::toStoreText($property['name']),
-                    'address' => MyUtil::toStoreText($property['address']),
-                ];
+                $property['name'] = MyUtil::toStoreText($property['name']);
+                $property['address'] = MyUtil::toStoreText($property['address']);
+                $properties[] = $property;
             }
         }
         $this->merge([

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\ValidationException;
 
 class BillingDestination extends Model
 {
@@ -36,12 +37,24 @@ class BillingDestination extends Model
         return $this->hasMany(Property::class)->orderBy('sort');
     }
 
-    public static function isUniqueInCustomer($customer_id, $name ,$this_id=null)
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($billingDestination) {
+            $billingDestination->properties()->delete();
+        });
+    }
+    public static function validateIsUniqueInCustomer($customer_id, $name ,$this_id=null)
     {
         $query = BillingDestination::query();
         $query->where('customer_id', $customer_id);
         $query->where('name', $name);
         if($this_id) $query->where('id','!=', $this_id);
-        return !$query->first();
+        if($query->first()){
+            throw ValidationException::withMessages([
+                'name' => ['この顧客には既に同じ名称の請求先が存在します'],
+            ]);
+        }
     }
 }

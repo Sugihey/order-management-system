@@ -22,7 +22,7 @@ class OperationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|unique:operations|max:255',
             'unit' => 'required|string|max:3',
         ]);
 
@@ -48,7 +48,7 @@ class OperationController extends Controller
     public function update(Request $request, Operation $operation)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|unique:operations,name,'.$operation->name.',name|max:255',
             'unit' => 'required|string|max:3',
         ]);
 

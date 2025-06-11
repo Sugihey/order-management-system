@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UseCase\TaxRateUseCase;
 use App\Models\TaxRate;
 use Illuminate\Http\Request;
+use App\Http\Requests\TaxRateStoreRequest;
 
 class TaxRateController extends Controller
 {
@@ -19,13 +20,9 @@ class TaxRateController extends Controller
         return view('tax_rates.create');
     }
 
-    public function store(Request $request)
+    public function store(TaxRateStoreRequest $request)
     {
-        $request->validate([
-            'apply_date' => 'required|date|unique:tax_rates,apply_date',
-            'rate' => 'required|integer|min:0|max:100',
-        ]);
-
+        TaxRate::validateIsUniqueApplyDate($request->apply_date);
         TaxRate::create([
             'apply_date' => $request->apply_date,
             'rate' => $request->rate,
@@ -39,13 +36,9 @@ class TaxRateController extends Controller
         return view('tax_rates.edit', compact('taxRate'));
     }
 
-    public function update(Request $request, TaxRate $taxRate)
+    public function update(TaxRateStoreRequest $request, TaxRate $taxRate)
     {
-        $request->validate([
-            'apply_date' => 'required|date|unique:tax_rates,apply_date,' . $taxRate->id,
-            'rate' => 'required|integer|min:0|max:100',
-        ]);
-
+        TaxRate::validateIsUniqueApplyDate($request->apply_date, $taxRate->id);
         $taxRate->update([
             'apply_date' => $request->apply_date,
             'rate' => $request->rate,

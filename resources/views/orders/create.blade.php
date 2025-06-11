@@ -26,13 +26,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div>
                         <x-form.label for="order_type" label="受注種別" required="true" />
-                        <x-form.input 
-                            id="order_type" 
-                            name="order_type" 
-                            type="text" 
-                            value="{{ old('order_type') }}" 
-                            required="true"
-                        />
+                        <select id="order_type" name="order_type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">選択してください</option>
+                            <option value="1" {{ old('order_type') == '1' ? 'selected' : '' }}>通常</option>
+                            <option value="2" {{ old('order_type') == '2' ? 'selected' : '' }}>緊急</option>
+                        </select>
                         @error('order_type')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
@@ -293,8 +291,8 @@
             const searchInput = document.getElementById('billing_destination_search');
             const resultsDiv = document.getElementById('billing_destination_results');
             
-            searchInput.addEventListener('input', debounce(function() {
-                const query = this.value.trim();
+            searchInput.addEventListener('input', debounce(function(e) {
+                const query = e.target.value.trim();
                 if (query.length < 1) {
                     resultsDiv.classList.add('hidden');
                     return;
@@ -455,8 +453,8 @@
             const searchInput = row.querySelector('.operation-search');
             const resultsDiv = row.querySelector('.operation-results');
             
-            searchInput.addEventListener('input', debounce(function() {
-                const query = this.value.trim();
+            searchInput.addEventListener('input', debounce(function(e) {
+                const query = e.target.value.trim();
                 if (query.length < 1) {
                     resultsDiv.classList.add('hidden');
                     return;
@@ -508,8 +506,8 @@
             const searchInput = row.querySelector('.artisan-search');
             const resultsDiv = row.querySelector('.artisan-results');
             
-            searchInput.addEventListener('input', debounce(function() {
-                const query = this.value.trim();
+            searchInput.addEventListener('input', debounce(function(e) {
+                const query = e.target.value.trim();
                 if (query.length < 1) {
                     resultsDiv.classList.add('hidden');
                     return;
@@ -552,6 +550,59 @@
             row.querySelector('.artisan-search').value = item.name;
             row.querySelector('.artisan-id').value = item.id;
             row.querySelector('.artisan-results').classList.add('hidden');
+        }
+
+        function setupOperationSearch(row) {
+            const searchInput = row.querySelector('.operation-search');
+            const resultsDiv = row.querySelector('.operation-results');
+            
+            searchInput.addEventListener('input', debounce(function(e) {
+                const query = e.target.value.trim();
+                if (query.length < 1) {
+                    resultsDiv.classList.add('hidden');
+                    return;
+                }
+                
+                fetch(`{{ route('orders.api.operations.search') }}?q=${encodeURIComponent(query)}`, {
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayOperationResults(resultsDiv, data.data, row);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }, 300));
+        }
+
+        function displayOperationResults(resultsDiv, results, row) {
+            resultsDiv.innerHTML = '';
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する作業内容が見つかりません</div>';
+            } else {
+                results.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
+                    div.innerHTML = `<div class="font-medium">${item.name}</div><div class="text-sm text-gray-500">単位: ${item.unit}</div>`;
+                    div.onclick = () => selectOperation(item, row);
+                    resultsDiv.appendChild(div);
+                });
+            }
+            
+            resultsDiv.classList.remove('hidden');
+        }
+
+        function selectOperation(item, row) {
+            row.querySelector('.operation-search').value = item.name;
+            row.querySelector('.operation-id').value = item.id;
+            row.querySelector('.unit-display').textContent = item.unit;
+            row.querySelector('.operation-results').classList.add('hidden');
+            
+            calculatePrices(row.querySelector('.quantity'));
         }
 
         function calculatePrices(quantityInput) {

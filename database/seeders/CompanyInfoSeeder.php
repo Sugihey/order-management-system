@@ -16,6 +16,7 @@ class CompanyInfoSeeder extends Seeder
             'zip' => '546-0041',
             'address' => '大阪市東住吉区桑津1-32-29-1階',
             'phone_no' => '06-6776-2985',
+            'email' => 'info@s-craft.co.jp',
             'fax_no' => '06-6776-2986',
             'invoice_no' => 'T7120001118616',
             'bank_name' => '尼崎信用金庫',

@@ -21,6 +21,7 @@ class CompanyInfoController extends Controller
             'zip' => 'required|string|max:12',
             'address' => 'required|string|max:256',
             'phone_no' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
             'fax_no' => 'nullable|string|max:20',
             'invoice_no' => 'nullable|string|max:14',
             'bank_name' => 'required|string|max:46',

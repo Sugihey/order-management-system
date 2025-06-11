@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\ValidationException;
 
 class Customer extends Model
 {
@@ -27,5 +28,16 @@ class Customer extends Model
     public function billingDestinations()
     {
         return $this->hasMany(BillingDestination::class)->orderBy('sort');
+    }
+
+    public function validateIsUnique($name ,$this_id=null){
+        $query = Customer::query();
+        $query->where('name', $name);
+        if($this_id) $query->where('id','!=', $this_id);
+        if($query->first()){
+            throw ValidationException::withMessages([
+                'name' => ['同じ名前の顧客が存在します'],
+            ]);
+        }
     }
 }

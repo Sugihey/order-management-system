@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UseCase\OperationUseCase;
 use App\Models\Operation;
 use Illuminate\Http\Request;
+use App\Http\Requests\OperationStoreRequest;
 
 class OperationController extends Controller
 {
@@ -19,17 +20,13 @@ class OperationController extends Controller
         return view('operations.create');
     }
 
-    public function store(Request $request)
+    public function store(OperationStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|unique:operations|max:255',
-            'unit' => 'required|string|max:3',
-        ]);
+        Operation::validateIsUnique($request->name);
 
-        Operation::create([
+        Operation::createOrRecover([
             'name' => $request->name,
             'unit' => $request->unit,
-            'sort' => 0,
         ]);
 
         return redirect()->route('operations.index')->with('success', '作業が登録されました。');
@@ -45,13 +42,9 @@ class OperationController extends Controller
         return view('operations.edit', compact('operation'));
     }
 
-    public function update(Request $request, Operation $operation)
+    public function update(OperationStoreRequest $request, Operation $operation)
     {
-        $request->validate([
-            'name' => 'required|string|unique:operations,name,'.$operation->name.',name|max:255',
-            'unit' => 'required|string|max:3',
-        ]);
-
+        Operation::validateIsUnique($request->name, $operation->id);
         $operation->update([
             'name' => $request->name,
             'unit' => $request->unit,

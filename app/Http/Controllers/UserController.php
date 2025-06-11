@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserEditRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -45,7 +45,7 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(UserEditRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         User::validateIsUniqueEmail($request->email, $user->id);
         $updateData = [

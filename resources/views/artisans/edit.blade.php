@@ -65,6 +65,27 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
+                    <div class="mb-4">
+                        <x-form.label for="password" label="新しいパスワード（変更する場合のみ）"></x-form.label>
+                        <x-form.input 
+                            id="password" 
+                            name="password" 
+                            type="password" 
+                            autocomplete="new-password"
+                        />
+                        @error('password')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <x-form.label for="password_confirmation" label="パスワード確認"></x-form.label>
+                        <x-form.input 
+                            id="password_confirmation" 
+                            name="password_confirmation" 
+                            type="password" 
+                            autocomplete="new-password"
+                        />
+                    </div>
                 </div>
                 <div class="flex gap-4 mt-6">
                     <x-link scheme="base" :href="route('artisans.index')" button>キャンセル</x-link>

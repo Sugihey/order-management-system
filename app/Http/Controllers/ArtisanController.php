@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\UseCase\ArtisanUseCase;
 use App\Models\Artisan;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Http\Requests\ArtisanStoreRequest;
+use App\Http\Requests\ArtisanUpdateRequest;
+use Illuminate\Support\Str;
 
 class ArtisanController extends Controller
 {
@@ -19,22 +23,18 @@ class ArtisanController extends Controller
         return view('artisans.create');
     }
 
-    public function store(Request $request)
+    public function store(ArtisanStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'phone_no' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:artisans',
-        ]);
-
-        Artisan::create([
+        Artisan::validateIsUniqueEmail($request->email);
+        $autoGenPassword = Str::random(10);
+        Artisan::createOrRecover([
             'name' => $request->name,
             'phone_no' => $request->phone_no,
             'address' => $request->address,
             'email' => $request->email,
-            'password' => bcrypt('password'),
+            'password' => Hash::make($autoGenPassword),
         ]);
+        info('NewArtisan', ['name' => $request->name,'email'=>$request->email,'password'=>$autoGenPassword]);
 
         return redirect()->route('artisans.index')->with('success', '職人が登録されました。');
     }
@@ -49,21 +49,20 @@ class ArtisanController extends Controller
         return view('artisans.edit', compact('artisan'));
     }
 
-    public function update(Request $request, Artisan $artisan)
+    public function update(ArtisanUpdateRequest $request, Artisan $artisan)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'phone_no' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:artisans,email,' . $artisan->id,
-        ]);
-
-        $artisan->update([
+        Artisan::validateIsUniqueEmail($request->email, $artisan->id);
+        $updateData = [
             'name' => $request->name,
             'phone_no' => $request->phone_no,
             'address' => $request->address,
             'email' => $request->email,
-        ]);
+        ];
+
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+        $artisan->update($updateData);
 
         return redirect()->route('artisans.index')->with('success', '職人情報が更新されました。');
     }

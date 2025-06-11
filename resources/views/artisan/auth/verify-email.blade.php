@@ -51,11 +51,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <x-form.buttons.action
-                            type="submit" 
-                            label="確認メールを再送信" 
-                            onClick=""
-                        />
+                        <x-button scheme="artisan" type="submit" class="w-full">確認メールを再送信</x-button>
                     </div>
                 </form>
 

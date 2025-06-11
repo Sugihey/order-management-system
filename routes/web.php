@@ -12,6 +12,7 @@ use App\Http\Controllers\BillingDestinationController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\UnitPriceController;
 use App\Http\Controllers\TaxRateController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -37,6 +38,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/unit-prices', [UnitPriceController::class, 'index'])->name('unit-prices.index');
     Route::get('/unit-prices/operations', [UnitPriceController::class, 'getOperationsByCustomer'])->name('unit-prices.operations');
     Route::post('/unit-prices', [UnitPriceController::class, 'store'])->name('unit-prices.store');
+    
+    Route::resource('orders', OrderController::class);
+    Route::get('/orders/api/billing-destinations/search', [OrderController::class, 'searchBillingDestinations'])->name('orders.api.billing-destinations.search');
+    Route::get('/orders/api/properties/{billingDestinationId}', [OrderController::class, 'getPropertiesByBillingDestination'])->name('orders.api.properties');
+    Route::get('/orders/api/operations/search', [OrderController::class, 'searchOperations'])->name('orders.api.operations.search');
+    Route::get('/orders/api/artisans/search', [OrderController::class, 'searchArtisans'])->name('orders.api.artisans.search');
+    Route::get('/orders/api/unit-prices/{customerId}', [OrderController::class, 'getUnitPricesByCustomer'])->name('orders.api.unit-prices');
     
     Route::resource('users', UserController::class);
     Route::resource('tax-rates', TaxRateController::class)->except(['show']);

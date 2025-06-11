@@ -2,7 +2,7 @@
     <x-slot name="title">管理画面</x-slot>
         <h2 class="bg-indigo-200 p-2 font-bold text-xl rounded mb-4">受発注管理</h2>
         <div class="grid grid-flow-row grid-cols-2 gap-4 mb-8">
-            <a href="#" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <a href="{{ route('orders.create') }}" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div class="flex items-center">
                     <div class="flex-1">
                         <h3 class="text-lg font-medium text-gray-900">新規受注入力</h3>

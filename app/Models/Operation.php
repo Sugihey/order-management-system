@@ -38,9 +38,9 @@ class Operation extends Model
         }
     }
 
-    public static function createOrRecover($createArray){
-        extract($createArray);
-        DB::transaction(function() use($name,$unit){
+    public static function createOrRecover($attributes){
+        DB::transaction(function() use($attributes){
+            extract($attributes);
             $exist = Operation::withTrashed()->where('name',$name)->first();
             if(!$exist){
                 return Operation::create([
@@ -50,6 +50,11 @@ class Operation extends Model
                 ]);
             }elseif($exist && $exist->trashed()){
                 $exist->restore();
+                $exist->update([
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $password,
+                ]);
                 return $exist;
             }
             throw ValidationException::withMessages([

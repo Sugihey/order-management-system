@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -44,5 +46,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function validateIsUniqueEmail($email, $this_id=null){
+        $query = User::query();
+        $query->where('email', $email);
+        if($this_id) $query->where('id','!=', $this_id);
+        if($query->first()){
+            throw ValidationException::withMessages([
+                'email' => ['同じメールアドレスのユーザーが存在します'],
+            ]);
+        }
     }
 }

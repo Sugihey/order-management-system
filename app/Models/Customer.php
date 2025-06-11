@@ -42,9 +42,9 @@ class Customer extends Model
         }
     }
 
-    public static function createOrRecover($createArray){
-        extract($createArray);
-        DB::transaction(function() use($name){
+    public static function createOrRecover($attributes){
+        DB::transaction(function() use($attributes){
+            extract($attributes);
             $exist = Customer::withTrashed()->where('name',$name)->first();
             if(!$exist){
                 return Customer::create([

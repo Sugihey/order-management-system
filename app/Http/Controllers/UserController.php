@@ -6,6 +6,8 @@ use App\UseCase\UserUseCase;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserEditRequest;
 
 class UserController extends Controller
 {
@@ -20,13 +22,9 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        User::validateIsUniqueEmail($request->email);
 
         User::create([
             'name' => $request->name,
@@ -47,14 +45,9 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserEditRequest $request, User $user)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
-        ]);
-
+        User::validateIsUniqueEmail($request->email, $user->id);
         $updateData = [
             'name' => $request->name,
             'email' => $request->email,

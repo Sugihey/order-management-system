@@ -1,11 +1,11 @@
 <x-layout.scraft>
-    <x-slot name="title">新規受注入力</x-slot>
+    <x-slot name="title">新規受書注入力</x-slot>
 
     <div class="py-8">
-        <x-breads scheme="scraft" current="新規受注入力"/>
+        <x-breads scheme="scraft" current="新規受注書入力"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold">新規受注入力</h1>
+                <h1 class="text-2xl font-bold">新規受注書入力</h1>
             </div>
             
             @if(session('success'))
@@ -23,17 +23,57 @@
             <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
                 @csrf
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div>
-                        <x-form.label for="order_type" label="受注種別" required="true" />
-                        <select id="order_type" name="order_type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            <option value="">選択してください</option>
-                            <option value="1" {{ old('order_type') == '1' ? 'selected' : '' }}>通常</option>
-                            <option value="2" {{ old('order_type') == '2' ? 'selected' : '' }}>緊急</option>
-                        </select>
-                        @error('order_type')
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-8">
+                    <div class="md:col-span-5">
+                        <x-form.label for="title" label="件名" required="true" />
+                        <x-form.input 
+                            id="title" 
+                            name="title" 
+                            type="text" 
+                            value="{{ old('title') }}"
+                        />
+                        @error('title')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
+                    </div>
+                    <div class="md:col-span-2">
+                        <x-form.label for="order_no" label="発注番号" required="true" />
+                        <x-form.input 
+                            id="order_no" 
+                            name="order_no" 
+                            type="text" 
+                            value="{{ old('order_no') }}"
+                        />
+                        @error('order_no')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+                    <div class="md:col-span-2">
+                        <x-form.label for="jurisdiction" label="管轄店" />
+                        <x-form.input 
+                            id="jurisdiction" 
+                            name="jurisdiction" 
+                            type="text" 
+                            value="{{ old('jurisdiction') }}"
+                        />
+                        @error('jurisdiction')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+                    <div class="md:col-span-3">
+                        <x-form.label for="order_type" label="受注種別" required="true" />
+                        <div class="flex gap-4">
+                            @php
+                                $checked = \App\Enums\OrderType::RECOVER;//default
+                                if(old('order_type') && old('order_type') == \App\Enum\OrderType::REPAIR) $checked = \App\Enum\OrderType::REPAIR;
+                            @endphp
+                            @foreach(\App\Enums\OrderType::cases() as $key => $orderType)
+                            <div class="flex items-center">
+                                <input class="form-radio" type="radio" name="order_type" id="order-type-{{ $orderType->value }}" value="{{ $orderType->value }} {{ $orderType->value == $checked ? 'checked' : '' }}"/>
+                                <label class="ml-2" for="order-type-{{ $orderType->value }}">{{ $orderType->label() }}</label>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <div>
@@ -61,6 +101,7 @@
                             id="billing_destination_name" 
                             name="billing_destination_name" 
                             type="text" 
+                            placeholder="請求先にその他を選択した場合は請求先名を入力"
                             value="{{ old('billing_destination_name') }}"
                         />
                         @error('billing_destination_name')
@@ -142,15 +183,13 @@
                     </div>
 
                     <div>
-                        <x-form.label for="jurisdiction" label="管轄" required="true" />
-                        <x-form.input 
-                            id="jurisdiction" 
-                            name="jurisdiction" 
-                            type="text" 
-                            value="{{ old('jurisdiction') }}" 
-                            required="true"
-                        />
-                        @error('jurisdiction')
+                        <x-form.label for="is_emergency" label="受注種別" required="true" />
+                        <select id="order_type" name="order_type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">選択してください</option>
+                            <option value="1" {{ old('order_type') == '1' ? 'selected' : '' }}>通常</option>
+                            <option value="2" {{ old('order_type') == '2' ? 'selected' : '' }}>緊急</option>
+                        </select>
+                        @error('order_type')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
@@ -254,6 +293,7 @@
         </div>
     </div>
 
+    <!-- 作業員募集期限ダイアログ -->
     <div id="assignDeadlineModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
             <h3 class="text-lg font-bold mb-4">作業員募集期限</h3>

@@ -12,6 +12,7 @@ class CompanyInfo extends Model
         'name',
         'zip',
         'address',
+        'email',
         'phone_no',
         'fax_no',
         'invoice_no',

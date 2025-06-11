@@ -74,6 +74,19 @@
                     </div>
                     
                     <div>
+                        <x-form.label for="email" label="メールアドレス"></x-form.label>
+                        <x-form.input 
+                            id="email" 
+                            name="email" 
+                            type="email" 
+                            :value="old('email', $companyInfo->email ?? '')"
+                        />
+                        @error('email')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+                    
+                    <div>
                         <x-form.label for="fax_no" label="FAX番号"></x-form.label>
                         <x-form.input 
                             id="fax_no" 

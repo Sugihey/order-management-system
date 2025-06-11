@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Lib\MyUtil;
 
-class OperationStoreRequest extends FormRequest
+class CustomerStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,23 +24,18 @@ class OperationStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'unit' => 'required|string|max:3',
         ];
     }
-
     public function attributes()
     {
         return [
-            'name' => '作業名',
-            'unit' => '単位',
+            'name' => '顧客名',
         ];
     }
-
     protected function prepareForValidation(): void
     {
         $this->merge([
             'name' => MyUtil::toStoreText($this->name),
-            'unit' => MyUtil::toStoreText($this->unit),
         ]);
     }
 }

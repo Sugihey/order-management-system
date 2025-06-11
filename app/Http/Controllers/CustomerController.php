@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UseCase\CustomerUseCase;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomerStoreRequest;
 
 class CustomerController extends Controller
 {
@@ -19,13 +20,11 @@ class CustomerController extends Controller
         return view('customers.create');
     }
 
-    public function store(Request $request)
+    public function store(CustomerStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|unique:customers|max:255',
-        ]);
+        Customer::validateIsUnique($request->name);
 
-        Customer::create([
+        Customer::createOrRecover([
             'name' => $request->name,
             'sort' => 0,
         ]);
@@ -43,11 +42,9 @@ class CustomerController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customer $customer)
+    public function update(CustomerStoreRequest $request, Customer $customer)
     {
-        $request->validate([
-            'name' => 'required|string|unique:customers,name,'.$customer->name.',name|max:255',
-        ]);
+        Customer::validateIsUnique($request->name, $customer->id);
 
         $customer->update([
             'name' => $request->name,

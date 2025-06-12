@@ -83,6 +83,7 @@
                                 type="text" 
                                 placeholder="請求先を検索..."
                                 autocomplete="off"
+                                value="{{ old('billng_destination_search') }}"
                             />
                             <div id="billing_destination_results" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                         </div>
@@ -118,6 +119,7 @@
                                 placeholder="物件を検索..."
                                 autocomplete="off"
                                 disabled="true"
+                                value={{ old('property_search') }}
                             />
                             <div id="property_results" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                         </div>

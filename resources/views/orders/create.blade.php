@@ -336,8 +336,8 @@
                 </div>
             </div>
             <div class="flex justify-end space-x-2">
-                <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded" onclick="closeAssignDeadlineModal()">閉じる</button>
-                <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded" onclick="submitWithAssignDeadline()">登録</button>
+                <x-button type="button" class="px-4 py-2" scheme="base" onclick="closeAssignDeadlineModal()">閉じる</x-button>
+                <x-button type="button" class="px-4 py-2" scheme="action" onclick="submitWithAssignDeadline()">登録</x-button>
             </div>
         </div>
     </div>
@@ -699,32 +699,57 @@
             newRow.innerHTML = `
                 <td class="px-4 py-2 border border-gray-300">
                     <div class="relative">
-                        <input type="text" class="operation-search w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="作業内容を検索..." autocomplete="off">
+                        <x-form.input 
+                            name="order_details[${rowIndex}][operation_name]" 
+                            type="text" 
+                            placeholder="作業内容を検索..."
+                            autocomplete="off"
+                            class="operation-search"
+                        />
                         <div class="operation-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                     </div>
                     <input type="hidden" class="operation-id" name="order_details[${rowIndex}][operation_id]">
                 </td>
                 <td class="px-4 py-2 border border-gray-300">
                     <div class="relative">
-                        <input type="text" class="artisan-search w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="作業担当を検索..." autocomplete="off">
+                        <x-form.input 
+                            name="order_details[${rowIndex}][artisan_name]" 
+                            type="text" 
+                            placeholder="作業担当を検索..."
+                            autocomplete="off"
+                            class="artisan-search"
+                        />
                         <div class="artisan-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                     </div>
                     <input type="hidden" class="artisan-id" name="order_details[${rowIndex}][artisan_id]">
                 </td>
                 <td class="px-4 py-2 border border-gray-300">
-                    <input type="number" class="quantity w-full px-3 py-2 border border-gray-300 rounded-md" name="order_details[${rowIndex}][quantity]" step="0.01" min="0.01" onchange="calculatePrices(this)">
+                    <x-form.input 
+                        name="order_details[${rowIndex}][quantity]" 
+                        type="number" 
+                        class="quantity"
+                        onchange="calculatePrices(this)"
+                    />
                 </td>
                 <td class="px-4 py-2 border border-gray-300">
                     <span class="unit-display"></span>
                 </td>
                 <td class="px-4 py-2 border border-gray-300">
-                    <input type="number" class="incoming-price w-full px-3 py-2 border border-gray-300 rounded-md" name="order_details[${rowIndex}][incoming_order_price]" step="0.01" min="0" readonly>
+                    <x-form.input 
+                        name="order_details[${rowIndex}][incoming_order_price]" 
+                        type="number" 
+                        class="incoming-price"
+                    />
                 </td>
                 <td class="px-4 py-2 border border-gray-300">
-                    <input type="number" class="purchase-price w-full px-3 py-2 border border-gray-300 rounded-md" name="order_details[${rowIndex}][purchase_order_price]" step="0.01" min="0" readonly>
+                    <x-form.input 
+                        name="order_details[${rowIndex}][purchase_order_price]" 
+                        type="number" 
+                        class="purchase-price"
+                    />
                 </td>
                 <td class="px-4 py-2 border border-gray-300">
-                    <button type="button" class="remove-row bg-red-500 text-white px-2 py-1 rounded text-sm" onclick="removeOrderDetailRow(this)">削除</button>
+                    <x-button type="button" scheme="danger" class="remove-row" onclick="removeOrderDetailRow(this)">削除</x-button>
                 </td>
             `;
             

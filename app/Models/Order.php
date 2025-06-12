@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\OrderType;
+use App\Enums\Priority;
 
 class Order extends Model
 {
@@ -33,6 +35,8 @@ class Order extends Model
             'order_date' => 'date',
             'deadline' => 'date',
             'assign_deadline' => 'date',
+            'priority' => Priority::class,
+            'order_type' => OrderType::class,
             'is_photo_required' => 'boolean',
             'is_call_required' => 'boolean',
             'created_at' => 'datetime',

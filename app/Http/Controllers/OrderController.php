@@ -10,12 +10,16 @@ use App\Models\Artisan;
 use App\Models\UnitPrice;
 use App\Http\Requests\OrderStoreRequest;
 use Illuminate\Http\Request;
+use App\Enums\OrderType;
+use App\Enums\Priority;
 
 class OrderController extends Controller
 {
     public function create()
     {
-        return view('orders.create');
+        $priorities = Priority::cases();
+        $orderTypes = OrderType::cases();
+        return view('orders.create', compact('priorities', 'orderTypes'));
     }
 
     public function store(OrderStoreRequest $request)

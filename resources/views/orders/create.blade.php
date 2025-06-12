@@ -62,7 +62,7 @@
                         @enderror
                     </div>
                     <div class="md:col-span-3">
-                        <x-form.label for="order_type" label="受注種別" required="true" />
+                        <x-form.label for="order_type" label="依頼区分" required="true" />
                         <div class="flex gap-4">
                             @foreach($orderTypes as $key => $orderType)
                             <div class="flex items-center">
@@ -85,7 +85,7 @@
                                 autocomplete="off"
                                 value="{{ old('billng_destination_search') }}"
                             />
-                            <div id="billing_destination_results" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
+                            <x-form.incremental-results id="billing_destination_results"/>
                         </div>
                         <input type="hidden" id="billing_destination_id" name="billing_destination_id" value="{{ old('billing_destination_id') }}">
                         <input type="hidden" id="customer_id" name="customer_id" value="{{ old('customer_id') }}">
@@ -121,7 +121,7 @@
                                 disabled="true"
                                 value="{{ old('property_search') }}"
                             />
-                            <div id="property_results" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
+                            <x-form.incremental-results id='property_results'/>
                         </div>
                         <input type="hidden" id="property_name" name="property_name" value="{{ old('property_name') }}">
                         @error('property_name')
@@ -259,7 +259,7 @@
                                                 value="{{ old('order_details[0][operation_name]') }}"
                                                 class="operation-search"
                                             />
-                                            <div class="operation-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
+                                            <x-form.incremental-results class="operation-results"/>
                                         </div>
                                         <input type="hidden" class="operation-id" name="order_details[0][operation_id]">
                                     </td>
@@ -273,7 +273,7 @@
                                                 value="{{ old('order_details[0][artisan_name]') }}"
                                                 class="artisan-search"
                                             />
-                                            <div class="artisan-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
+                                            <x-form.incremental-results class="artisan-results"/>
                                         </div>
                                         <input type="hidden" class="artisan-id" name="order_details[0][artisan_id]">
                                     </td>
@@ -706,7 +706,7 @@
                             autocomplete="off"
                             class="operation-search"
                         />
-                        <div class="operation-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
+                        <x-form.incremental-results class="operation-results"/>
                     </div>
                     <input type="hidden" class="operation-id" name="order_details[${rowIndex}][operation_id]">
                 </td>
@@ -719,7 +719,7 @@
                             autocomplete="off"
                             class="artisan-search"
                         />
-                        <div class="artisan-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
+                        <x-form.incremental-results class="artisan-results"/>
                     </div>
                     <input type="hidden" class="artisan-id" name="order_details[${rowIndex}][artisan_id]">
                 </td>

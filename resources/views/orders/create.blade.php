@@ -99,7 +99,7 @@
                             id="billing_destination_name" 
                             name="billing_destination_name" 
                             type="text"
-                            :disabled="true"
+                            disabled="true"
                             placeholder="請求先に「その他」を選択した場合は請求先名を入力"
                             value="{{ old('billing_destination_name') }}"
                         />
@@ -119,7 +119,7 @@
                                 placeholder="物件を検索..."
                                 autocomplete="off"
                                 disabled="true"
-                                value={{ old('property_search') }}
+                                value="{{ old('property_search') }}"
                             />
                             <div id="property_results" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                         </div>
@@ -235,7 +235,7 @@
                 <div class="mb-8">
                     <h2 class="text-xl font-bold mb-4">作業明細</h2>
                     <!-- div class="overflow-x-auto" -->
-                        <table id="orderDetailsTable" class="min-w-full border border-gray-300">
+                        <table id="orderDetailsTable" class="min-w-full border border-gray-300 mb-4">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th class="px-4 py-2 border border-gray-300 text-left">作業内容</th>
@@ -251,44 +251,74 @@
                                 <tr class="order-detail-row">
                                     <td class="px-4 py-2 border border-gray-300">
                                         <div class="relative">
-                                            <input type="text" class="operation-search w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="作業内容を検索..." autocomplete="off">
+                                            <x-form.input 
+                                                name="order_details[0][operation_name]" 
+                                                type="text" 
+                                                placeholder="作業内容を検索..."
+                                                autocomplete="off"
+                                                value="{{ old('order_details[0][operation_name]') }}"
+                                                class="operation-search"
+                                            />
                                             <div class="operation-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                                         </div>
                                         <input type="hidden" class="operation-id" name="order_details[0][operation_id]">
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300">
                                         <div class="relative">
-                                            <input type="text" class="artisan-search w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="作業担当を検索..." autocomplete="off">
+                                            <x-form.input 
+                                                name="order_details[0][artisan_name]" 
+                                                type="text" 
+                                                placeholder="作業担当を検索..."
+                                                autocomplete="off"
+                                                value="{{ old('order_details[0][artisan_name]') }}"
+                                                class="artisan-search"
+                                            />
                                             <div class="artisan-results absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg hidden max-h-60 overflow-y-auto"></div>
                                         </div>
                                         <input type="hidden" class="artisan-id" name="order_details[0][artisan_id]">
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300">
-                                        <input type="number" class="quantity w-full px-3 py-2 border border-gray-300 rounded-md" name="order_details[0][quantity]" step="0.01" min="0.01" onchange="calculatePrices(this)">
+                                        <x-form.input 
+                                            name="order_details[0][quantity]" 
+                                            type="number" 
+                                            value="{{ old('order_details[0][quantity]') }}"
+                                            class="quantity"
+                                            onchange="calculatePrices(this)"
+                                        />
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300">
                                         <span class="unit-display"></span>
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300">
-                                        <input type="number" class="incoming-price w-full px-3 py-2 border border-gray-300 rounded-md" name="order_details[0][incoming_order_price]" step="0.01" min="0" readonly>
+                                        <x-form.input 
+                                            name="order_details[0][incoming_order_price]" 
+                                            type="number" 
+                                            value="{{ old('order_details[0][incoming_order_price]') }}"
+                                            class="incoming-price"
+                                        />
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300">
-                                        <input type="number" class="purchase-price w-full px-3 py-2 border border-gray-300 rounded-md" name="order_details[0][purchase_order_price]" step="0.01" min="0" readonly>
+                                        <x-form.input 
+                                            name="order_details[0][purchase_order_price]" 
+                                            type="number" 
+                                            value="{{ old('order_details[0][purchase_order_price]') }}"
+                                            class="purchase-price"
+                                        />
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300">
-                                        <button type="button" class="remove-row bg-red-500 text-white px-2 py-1 rounded text-sm" onclick="removeOrderDetailRow(this)">削除</button>
+                                        <x-button type="button" scheme="danger" class="remove-row" onclick="removeOrderDetailRow(this)">削除</x-button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     <!-- /div -->
-                    <button type="button" id="addRowBtn" class="mt-4 bg-green-500 text-white px-4 py-2 rounded" onclick="addOrderDetailRow()">行追加</button>
+                    <x-button type="button" id="addRowBtn" scheme="scraft" onclick="addOrderDetailRow()">行追加</x-button>
                 </div>
 
                 <!-- ボタン　-->
                 <div class="flex justify-end space-x-4">
-                    <a href="{{ route('dashboard') }}" class="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">キャンセル</a>
-                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">登録</button>
+                    <x-link scheme="base" button :href="route('dashboard')" class="px-6 py-2">キャンセル</x-link>
+                    <x-button type="submit" scheme="action" class="px-6 py-2">登録</x-button>
                 </div>
             </form>
         </div>
@@ -385,7 +415,6 @@
             document.getElementById('customer_id').value = item.customer_id;
             document.getElementById('billing_destination_results').classList.add('hidden');
             document.getElementById('billing_destination_name').classList.add('disabled');
-            document.getElementById('billing_destination_name').value = item.name;
             document.getElementById('billing_destination_name').disabled = true;
             
             document.getElementById('property_search').disabled = false;

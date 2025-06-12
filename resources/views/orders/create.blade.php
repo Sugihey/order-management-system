@@ -66,7 +66,7 @@
                         <div class="flex gap-4">
                             @foreach($orderTypes as $key => $orderType)
                             <div class="flex items-center">
-                                <input class="form-radio" type="radio" name="order_type" id="order-type-{{ $orderType->value }}" value="{{ $orderType->value }} {{ old('order_type') == $orderType->value ? 'checked' : '' }}"/>
+                                <input class="form-radio" type="radio" name="order_type" id="order-type-{{ $orderType->value }}" value="{{ $orderType->value }}" {{ old('order_type') == $orderType->value ? 'checked' : '' }}/>
                                 <label class="ml-2" for="order-type-{{ $orderType->value }}">{{ $orderType->label() }}</label>
                             </div>
                             @endforeach

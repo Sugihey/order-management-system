@@ -64,18 +64,15 @@
                     <div class="md:col-span-3">
                         <x-form.label for="order_type" label="受注種別" required="true" />
                         <div class="flex gap-4">
-                            @php
-                                $checked = \App\Enums\OrderType::RECOVER;//default
-                                if(old('order_type') && old('order_type') == \App\Enum\OrderType::REPAIR) $checked = \App\Enum\OrderType::REPAIR;
-                            @endphp
-                            @foreach(\App\Enums\OrderType::cases() as $key => $orderType)
+                            @foreach($orderTypes as $key => $orderType)
                             <div class="flex items-center">
-                                <input class="form-radio" type="radio" name="order_type" id="order-type-{{ $orderType->value }}" value="{{ $orderType->value }} {{ $orderType->value == $checked ? 'checked' : '' }}"/>
+                                <input class="form-radio" type="radio" name="order_type" id="order-type-{{ $orderType->value }}" value="{{ $orderType->value }} {{ old('order_type') == $orderType->value ? 'checked' : '' }}"/>
                                 <label class="ml-2" for="order-type-{{ $orderType->value }}">{{ $orderType->label() }}</label>
                             </div>
                             @endforeach
                         </div>
                     </div>
+
                     <!-- Row:2 -->
                     <div class="md:col-span-4">
                         <x-form.label for="billing_destination_search" label="請求先" required="true" />
@@ -95,20 +92,21 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
-                    <div id="billing_destination_other_div" class="hidden md:col-span-4">
+                    <div id="billing_destination_other_div" class="md:col-span-6">
                         <x-form.label for="billing_destination_name" label="請求先名" required="true" />
                         <x-form.input 
                             id="billing_destination_name" 
                             name="billing_destination_name" 
-                            type="text" 
-                            placeholder="請求先にその他を選択した場合は請求先名を入力"
+                            type="text"
+                            :disabled="true"
+                            placeholder="請求先に「その他」を選択した場合は請求先名を入力"
                             value="{{ old('billing_destination_name') }}"
                         />
                         @error('billing_destination_name')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
+
                     <!-- Row:3 -->
                     <div class="md:col-span-4">
                         <x-form.label for="property_search" label="物件" required="true" />
@@ -128,7 +126,6 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
                     <div class="md:col-span-6">
                         <x-form.label for="property_address" label="物件住所" required="true" />
                         <x-form.input 
@@ -141,7 +138,6 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
                     <div class="md:col-span-2">
                         <x-form.label for="room_no" label="部屋番号" />
                         <x-form.input 
@@ -154,8 +150,9 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
+
                     <!-- Row:4 -->
-                    <div class="md:col-span-3">
+                    <div class="md:col-span-2">
                         <x-form.label for="order_date" label="依頼日" required="true" />
                         <x-form.input 
                             id="order_date" 
@@ -168,8 +165,7 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
-                    <div class="md:col-span-3">
+                    <div class="md:col-span-2">
                         <x-form.label for="deadline" label="完了期日" required="true" />
                         <x-form.input 
                             id="deadline" 
@@ -182,20 +178,19 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
-                    <div class="md:col-span-3">
-                        <x-form.label for="is_emergency" label="受注種別" required="true" />
-                        <select id="order_type" name="order_type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <div class="md:col-span-2">
+                        <x-form.label for="priority" label="優先度" required="true" />
+                        <select id="priority" name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                             <option value="">選択してください</option>
-                            <option value="1" {{ old('order_type') == '1' ? 'selected' : '' }}>通常</option>
-                            <option value="2" {{ old('order_type') == '2' ? 'selected' : '' }}>緊急</option>
+                            @foreach($priorities as $priority)
+                            <option value="{{ $priority->value }}" {{ old('priority') == $priority->value ? 'selected' : '' }}>{{$priority->label()}}</option>
+                            @endforeach
                         </select>
                         @error('order_type')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
-                    <div class="md:col-span-3 flex items-center space-x-4">
+                    <div class="md:col-span-2 flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" id="is_photo_required" name="is_photo_required" value="1" {{ old('is_photo_required') ? 'checked' : '' }} class="mr-2">
                             写真必要
@@ -205,9 +200,10 @@
                             電話確認
                         </label>
                     </div>
+
                     <!-- Row:5 -->
-                    <div id="resident_name_div" class="hidden md:col-span-4">
-                        <x-form.label for="resident_name" label="入居者名" />
+                    <div id="resident_name_div" class="hidden md:col-span-2">
+                        <x-form.label for="resident_name" label="入居者名" required="true" />
                         <x-form.input 
                             id="resident_name" 
                             name="resident_name" 
@@ -219,8 +215,8 @@
                         @enderror
                     </div>
 
-                    <div id="resident_phone_div" class="hidden md:col-span-4">
-                        <x-form.label for="resident_phone_no" label="入居者TEL" />
+                    <div id="resident_phone_div" class="hidden md:col-span-2">
+                        <x-form.label for="resident_phone_no" label="入居者TEL" required="true"/>
                         <x-form.input 
                             id="resident_phone_no" 
                             name="resident_phone_no" 
@@ -242,11 +238,11 @@
                                 <tr>
                                     <th class="px-4 py-2 border border-gray-300 text-left">作業内容</th>
                                     <th class="px-4 py-2 border border-gray-300 text-left">作業担当</th>
-                                    <th class="px-4 py-2 border border-gray-300 text-left">数量</th>
-                                    <th class="px-4 py-2 border border-gray-300 text-left">単位</th>
-                                    <th class="px-4 py-2 border border-gray-300 text-left">受注価格</th>
-                                    <th class="px-4 py-2 border border-gray-300 text-left">発注価格</th>
-                                    <th class="px-4 py-2 border border-gray-300 text-left">操作</th>
+                                    <th class="px-4 py-2 border border-gray-300 text-left w-36">数量</th>
+                                    <th class="px-4 py-2 border border-gray-300 text-left w-18">単位</th>
+                                    <th class="px-4 py-2 border border-gray-300 text-left w-36">受注価格</th>
+                                    <th class="px-4 py-2 border border-gray-300 text-left w-36">発注価格</th>
+                                    <th class="px-4 py-2 border border-gray-300 text-left w-24">操作</th>
                                 </tr>
                             </thead>
                             <tbody id="orderDetailsBody">
@@ -386,8 +382,9 @@
             document.getElementById('billing_destination_id').value = item.id;
             document.getElementById('customer_id').value = item.customer_id;
             document.getElementById('billing_destination_results').classList.add('hidden');
-            document.getElementById('billing_destination_other_div').classList.add('hidden');
+            document.getElementById('billing_destination_name').classList.add('disabled');
             document.getElementById('billing_destination_name').value = item.name;
+            document.getElementById('billing_destination_name').disabled = true;
             
             document.getElementById('property_search').disabled = false;
             document.getElementById('property_search').placeholder = '物件を検索...';
@@ -401,8 +398,9 @@
             document.getElementById('billing_destination_id').value = '';
             document.getElementById('customer_id').value = '';
             document.getElementById('billing_destination_results').classList.add('hidden');
-            document.getElementById('billing_destination_other_div').classList.remove('hidden');
+            document.getElementById('billing_destination_name').classList.remove('disabled');
             document.getElementById('billing_destination_name').value = '';
+            document.getElementById('billing_destination_name').disabled = false;
             
             document.getElementById('property_search').disabled = true;
             document.getElementById('property_search').placeholder = '請求先を選択してください';

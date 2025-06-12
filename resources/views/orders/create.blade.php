@@ -24,6 +24,7 @@
                 @csrf
                 
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-8">
+                    <!-- Row:1 -->
                     <div class="md:col-span-5">
                         <x-form.label for="title" label="件名" required="true" />
                         <x-form.input 
@@ -75,8 +76,8 @@
                             @endforeach
                         </div>
                     </div>
-
-                    <div>
+                    <!-- Row:2 -->
+                    <div class="md:col-span-4">
                         <x-form.label for="billing_destination_search" label="請求先" required="true" />
                         <div class="relative">
                             <x-form.input 
@@ -95,7 +96,7 @@
                         @enderror
                     </div>
 
-                    <div id="billing_destination_other_div" class="hidden">
+                    <div id="billing_destination_other_div" class="hidden md:col-span-4">
                         <x-form.label for="billing_destination_name" label="請求先名" required="true" />
                         <x-form.input 
                             id="billing_destination_name" 
@@ -108,8 +109,8 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
-                    <div>
+                    <!-- Row:3 -->
+                    <div class="md:col-span-4">
                         <x-form.label for="property_search" label="物件" required="true" />
                         <div class="relative">
                             <x-form.input 
@@ -128,7 +129,7 @@
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="md:col-span-6">
                         <x-form.label for="property_address" label="物件住所" required="true" />
                         <x-form.input 
                             id="property_address" 
@@ -141,7 +142,7 @@
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="md:col-span-2">
                         <x-form.label for="room_no" label="部屋番号" />
                         <x-form.input 
                             id="room_no" 
@@ -153,8 +154,8 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-
-                    <div>
+                    <!-- Row:4 -->
+                    <div class="md:col-span-3">
                         <x-form.label for="order_date" label="依頼日" required="true" />
                         <x-form.input 
                             id="order_date" 
@@ -168,7 +169,7 @@
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="md:col-span-3">
                         <x-form.label for="deadline" label="完了期日" required="true" />
                         <x-form.input 
                             id="deadline" 
@@ -182,7 +183,7 @@
                         @enderror
                     </div>
 
-                    <div>
+                    <div class="md:col-span-3">
                         <x-form.label for="is_emergency" label="受注種別" required="true" />
                         <select id="order_type" name="order_type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                             <option value="">選択してください</option>
@@ -194,7 +195,7 @@
                         @enderror
                     </div>
 
-                    <div class="flex items-center space-x-4">
+                    <div class="md:col-span-3 flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" id="is_photo_required" name="is_photo_required" value="1" {{ old('is_photo_required') ? 'checked' : '' }} class="mr-2">
                             写真必要
@@ -204,8 +205,8 @@
                             電話確認
                         </label>
                     </div>
-
-                    <div id="resident_name_div" class="hidden">
+                    <!-- Row:5 -->
+                    <div id="resident_name_div" class="hidden md:col-span-4">
                         <x-form.label for="resident_name" label="入居者名" />
                         <x-form.input 
                             id="resident_name" 
@@ -218,7 +219,7 @@
                         @enderror
                     </div>
 
-                    <div id="resident_phone_div" class="hidden">
+                    <div id="resident_phone_div" class="hidden md:col-span-4">
                         <x-form.label for="resident_phone_no" label="入居者TEL" />
                         <x-form.input 
                             id="resident_phone_no" 
@@ -232,9 +233,10 @@
                     </div>
                 </div>
 
+                <!-- 明細部 -->
                 <div class="mb-8">
                     <h2 class="text-xl font-bold mb-4">作業明細</h2>
-                    <div class="overflow-x-auto">
+                    <!-- div class="overflow-x-auto" -->
                         <table id="orderDetailsTable" class="min-w-full border border-gray-300">
                             <thead class="bg-gray-50">
                                 <tr>
@@ -281,10 +283,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    <!-- /div -->
                     <button type="button" id="addRowBtn" class="mt-4 bg-green-500 text-white px-4 py-2 rounded" onclick="addOrderDetailRow()">行追加</button>
                 </div>
 
+                <!-- ボタン　-->
                 <div class="flex justify-end space-x-4">
                     <a href="{{ route('dashboard') }}" class="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">キャンセル</a>
                     <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">登録</button>

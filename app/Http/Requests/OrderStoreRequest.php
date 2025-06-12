@@ -14,6 +14,7 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => 'required|string|max:255',
             'billing_destination_id' => 'required|exists:billing_destinations,id',
             'order_type' => 'required|string|max:45',
             'billing_destination_name' => 'required|string|max:255',

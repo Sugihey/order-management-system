@@ -16,6 +16,7 @@ class OrderStoreRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'billing_destination_id' => 'required|exists:billing_destinations,id',
+            'order_no' => 'required|string|max:24',
             'order_type' => 'required|string|max:45',
             'billing_destination_name' => 'required|string|max:255',
             'property_name' => 'required|string|max:255',
@@ -43,7 +44,8 @@ class OrderStoreRequest extends FormRequest
         return [
             'billing_destination_id.required' => '請求先を選択してください。',
             'billing_destination_id.exists' => '選択された請求先が存在しません。',
-            'order_type.required' => '受注種別を入力してください。',
+            'order_type.required' => '依頼区分を入力してください。',
+            'order_no.required' => '発注番号を入力してください。',
             'billing_destination_name.required' => '請求先名を入力してください。',
             'property_name.required' => '物件名を入力してください。',
             'property_address.required' => '物件住所を入力してください。',

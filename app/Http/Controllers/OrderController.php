@@ -15,11 +15,13 @@ use App\Enums\Priority;
 
 class OrderController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
         $priorities = Priority::cases();
         $orderTypes = OrderType::cases();
-        return view('orders.create', compact('priorities', 'orderTypes'));
+        $details = $request->old('order_details');
+        $detailRow = isset($details) ? count($details) : 1;
+        return view('orders.create', compact('priorities', 'orderTypes','detailRow'));
     }
 
     public function store(OrderStoreRequest $request)

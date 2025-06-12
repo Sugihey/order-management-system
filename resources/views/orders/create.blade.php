@@ -83,7 +83,7 @@
                                 type="text" 
                                 placeholder="請求先を検索..."
                                 autocomplete="off"
-                                value="{{ old('billng_destination_search') }}"
+                                value="{{ old('billing_destination_search') }}"
                             />
                             <x-form.incremental-results id="billing_destination_results"/>
                         </div>
@@ -248,67 +248,9 @@
                                 </tr>
                             </thead>
                             <tbody id="orderDetailsBody">
-                                <tr class="order-detail-row">
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <div class="relative">
-                                            <x-form.input 
-                                                name="order_details[0][operation_name]" 
-                                                type="text" 
-                                                placeholder="作業内容を検索..."
-                                                autocomplete="off"
-                                                value="{{ old('order_details[0][operation_name]') }}"
-                                                class="operation-search"
-                                            />
-                                            <x-form.incremental-results class="operation-results"/>
-                                        </div>
-                                        <input type="hidden" class="operation-id" name="order_details[0][operation_id]">
-                                    </td>
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <div class="relative">
-                                            <x-form.input 
-                                                name="order_details[0][artisan_name]" 
-                                                type="text" 
-                                                placeholder="作業担当を検索..."
-                                                autocomplete="off"
-                                                value="{{ old('order_details[0][artisan_name]') }}"
-                                                class="artisan-search"
-                                            />
-                                            <x-form.incremental-results class="artisan-results"/>
-                                        </div>
-                                        <input type="hidden" class="artisan-id" name="order_details[0][artisan_id]">
-                                    </td>
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <x-form.input 
-                                            name="order_details[0][quantity]" 
-                                            type="number" 
-                                            value="{{ old('order_details[0][quantity]') }}"
-                                            class="quantity"
-                                            onchange="calculatePrices(this)"
-                                        />
-                                    </td>
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <span class="unit-display"></span>
-                                    </td>
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <x-form.input 
-                                            name="order_details[0][incoming_order_price]" 
-                                            type="number" 
-                                            value="{{ old('order_details[0][incoming_order_price]') }}"
-                                            class="incoming-price"
-                                        />
-                                    </td>
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <x-form.input 
-                                            name="order_details[0][purchase_order_price]" 
-                                            type="number" 
-                                            value="{{ old('order_details[0][purchase_order_price]') }}"
-                                            class="purchase-price"
-                                        />
-                                    </td>
-                                    <td class="px-4 py-2 border border-gray-300">
-                                        <x-button type="button" scheme="danger" class="remove-row" onclick="removeOrderDetailRow(this)">削除</x-button>
-                                    </td>
-                                </tr>
+                                @for($index=0;$index<$detailRow;$index++)
+                                <x-order.detail-row :index="$index"/>
+                                @endfor
                             </tbody>
                         </table>
                     <!-- /div -->
@@ -696,62 +638,7 @@
             const tbody = document.getElementById('orderDetailsBody');
             const newRow = document.createElement('tr');
             newRow.className = 'order-detail-row';
-            newRow.innerHTML = `
-                <td class="px-4 py-2 border border-gray-300">
-                    <div class="relative">
-                        <x-form.input 
-                            name="order_details[${rowIndex}][operation_name]" 
-                            type="text" 
-                            placeholder="作業内容を検索..."
-                            autocomplete="off"
-                            class="operation-search"
-                        />
-                        <x-form.incremental-results class="operation-results"/>
-                    </div>
-                    <input type="hidden" class="operation-id" name="order_details[${rowIndex}][operation_id]">
-                </td>
-                <td class="px-4 py-2 border border-gray-300">
-                    <div class="relative">
-                        <x-form.input 
-                            name="order_details[${rowIndex}][artisan_name]" 
-                            type="text" 
-                            placeholder="作業担当を検索..."
-                            autocomplete="off"
-                            class="artisan-search"
-                        />
-                        <x-form.incremental-results class="artisan-results"/>
-                    </div>
-                    <input type="hidden" class="artisan-id" name="order_details[${rowIndex}][artisan_id]">
-                </td>
-                <td class="px-4 py-2 border border-gray-300">
-                    <x-form.input 
-                        name="order_details[${rowIndex}][quantity]" 
-                        type="number" 
-                        class="quantity"
-                        onchange="calculatePrices(this)"
-                    />
-                </td>
-                <td class="px-4 py-2 border border-gray-300">
-                    <span class="unit-display"></span>
-                </td>
-                <td class="px-4 py-2 border border-gray-300">
-                    <x-form.input 
-                        name="order_details[${rowIndex}][incoming_order_price]" 
-                        type="number" 
-                        class="incoming-price"
-                    />
-                </td>
-                <td class="px-4 py-2 border border-gray-300">
-                    <x-form.input 
-                        name="order_details[${rowIndex}][purchase_order_price]" 
-                        type="number" 
-                        class="purchase-price"
-                    />
-                </td>
-                <td class="px-4 py-2 border border-gray-300">
-                    <x-button type="button" scheme="danger" class="remove-row" onclick="removeOrderDetailRow(this)">削除</x-button>
-                </td>
-            `;
+            newRow.innerHTML = `<x-order.detail-row index="${rowIndex}" />`;
             
             tbody.appendChild(newRow);
             setupOperationSearch(newRow);

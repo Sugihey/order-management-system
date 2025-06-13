@@ -21,8 +21,6 @@ class UnitPrice extends Model
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
-            'incoming_order_price' => 'decimal:2',
-            'purchase_order_price' => 'decimal:2',
         ];
     }
 

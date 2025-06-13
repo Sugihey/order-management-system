@@ -23,9 +23,7 @@ class OrderDetail extends Model
     protected function casts(): array
     {
         return [
-            'quantity' => 'decimal:2',
-            'incoming_order_price' => 'decimal:2',
-            'purchase_order_price' => 'decimal:2',
+            'quantity' => 'decimal:1',
             'completion_date' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

@@ -15,7 +15,8 @@ class BillingDestinationController extends Controller
     public function index()
     {
         $billingDestinations = BillingDestinationUseCase::getBillingDestinationsAll();
-        return view('billing_destinations.index', compact('billingDestinations'));
+        $customers = BillingDestinationUseCase::getCustomersForSelection();
+        return view('billing_destinations.index', compact('billingDestinations','customers'));
     }
 
     public function create(Request $request)

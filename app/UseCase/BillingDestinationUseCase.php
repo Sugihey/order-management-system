@@ -12,7 +12,8 @@ class BillingDestinationUseCase
 {
     public static function getBillingDestinationsAll()
     {
-        return BillingDestination::with('customer')->orderBy('sort')->get();
+
+        return BillingDestination::with('customer')->orderBy('customer_id')->orderBy('sort')->get();
     }
 
     public static function getCustomersForSelection()

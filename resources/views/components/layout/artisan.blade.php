@@ -16,6 +16,13 @@
             -moz-appearance: textfield;
             appearance: textfield;
         }
+        input.disabled {
+            border:1px solid #ddd;
+            background-color: #eee;
+        }
+        select{
+            background-color:#fafafa;
+        }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

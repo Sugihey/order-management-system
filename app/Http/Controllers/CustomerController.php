@@ -6,6 +6,7 @@ use App\UseCase\CustomerUseCase;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\CustomerStoreRequest;
+use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
@@ -55,6 +56,11 @@ class CustomerController extends Controller
 
     public function destroy(Customer $customer)
     {
+        if(CustomerUseCase::hasBillingDestinations($customer->id)){
+            throw ValidationException::withMessages([
+                'error' => ['この顧客には請求先が存在するため削除できません。'],
+            ]);
+        }
         $customer->delete();
         return redirect()->route('customers.index')->with('success', '顧客が削除されました。');
     }

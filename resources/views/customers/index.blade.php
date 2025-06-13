@@ -15,6 +15,9 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @error('error')
+                <x-alert scheme="danger">{{ $message }}</x-alert>
+            @enderror
             
             <div class="overflow-x-auto">
                 <table class="min-w-full">

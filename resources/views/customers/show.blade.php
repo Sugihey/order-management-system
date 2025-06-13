@@ -5,6 +5,9 @@
         <x-breads scheme="scraft" :nodes="[['title'=>'顧客一覧','route'=>'customers.index']]" current="顧客情報"/>
         <div class="bg-white rounded-lg shadow-md p-6">
             <h1 class="text-2xl font-bold mb-6">顧客情報</h1>
+            @error('error')
+                <x-alert scheme="danger">{{ $message }}</x-alert>
+            @enderror
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <p class="text-gray-600">名前</p>

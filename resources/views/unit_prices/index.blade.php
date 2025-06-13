@@ -18,7 +18,7 @@
                 <div class="mb-4">
                     <x-form.label for="customer_select" label="顧客" />
                     <select id="customer_select" class="w-auto p-2 border rounded" onchange="changePriceList(this.value)">
-                        <option value="">-- 選択 --</option>
+                        <option value="">選択してください</option>
                         @foreach($customers as $customer)
                             <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                         @endforeach
@@ -43,8 +43,8 @@
                     </table>
                     
                     <div class="mt-6 flex justify-end space-x-4">
-                        <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" onclick="cancel()">キャンセル</button>
-                        <button type="submit" id="register_btn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">登録</button>
+                        <x-button scheme="base" button class="px-4 py-2" onclick="cancel()">キャンセル</x-button>
+                        <x-button type="submit" scheme="action" id="register_btn" class="px-4 py-2">登録</x-button>
                     </div>
                 </form>
             </div>

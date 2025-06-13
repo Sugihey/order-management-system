@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class BillingDestinationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $billingDestinations = BillingDestinationUseCase::getBillingDestinationsAll();
+        $customerId = $request->get('customer_id');
+        $billingDestinations = BillingDestinationUseCase::getBillingDestinationsFiltered($customerId);
         $customers = BillingDestinationUseCase::getCustomersForSelection();
-        return view('billing_destinations.index', compact('billingDestinations','customers'));
+        return view('billing_destinations.index', compact('billingDestinations','customers', 'customerId'));
     }
 
     public function create(Request $request)

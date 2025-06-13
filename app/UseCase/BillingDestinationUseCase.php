@@ -16,6 +16,17 @@ class BillingDestinationUseCase
         return BillingDestination::with('customer')->orderBy('customer_id')->orderBy('sort')->get();
     }
 
+    public static function getBillingDestinationsFiltered($customerId = null)
+    {
+        $query = BillingDestination::with('customer');
+        
+        if ($customerId) {
+            $query->where('customer_id', $customerId);
+        }
+        
+        return $query->orderBy('customer_id')->orderBy('sort')->get();
+    }
+
     public static function getCustomersForSelection()
     {
         return Customer::orderBy('sort')->get();

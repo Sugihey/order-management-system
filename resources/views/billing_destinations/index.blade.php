@@ -13,6 +13,20 @@
                 <x-alert scheme="success">{{ session('success') }}</x-alert>
             @endif
             
+            <div class="mb-6">
+                <form method="GET" action="{{ route('billing_destinations.index') }}" class="flex items-center gap-4">
+                    <label for="customer_filter" class="text-sm font-medium text-gray-700">顧客で絞り込み:</label>
+                    <select id="customer_filter" name="customer_id" class="border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="this.form.submit()">
+                        <option value="">すべての顧客</option>
+                        @foreach($customers as $customer)
+                            <option value="{{ $customer->id }}" {{ $customerId == $customer->id ? 'selected' : '' }}>
+                                {{ $customer->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
+            
             <div class="overflow-x-auto">
                 <table class="min-w-full">
                     <thead>

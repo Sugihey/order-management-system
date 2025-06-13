@@ -79,45 +79,10 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="propertyTableBody">
-                                @forelse($properties as $i => $property)
-                                    <tr>
-                                        <td class="px-6 py-4">
-                                            <x-form.input name="properties[{{ $i }}][name]" type="text" placeholder="物件名" :value="old('properties.' . $i . '.name', $property['name'])" />
-                                            @error("properties.$i.name")
-                                                <x-form.error>{{ $message }}</x-form.error>
-                                            @enderror
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <x-form.input name="properties[{{ $i }}][address]" type="text" placeholder="住所" :value="old('properties.' . $i . '.address', $property['address'])" />
-                                            @error("properties.$i.address")
-                                                <x-form.error>{{ $message }}</x-form.error>
-                                            @enderror
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <x-button type="button" scheme="scraft" onClick="removePropertyRow(this)">削除</x-button>
-                                            @if(isset($property['id']))
-                                            <input name="properties[{{ $i }}][id]" type="hidden" value="{{ $property['id'] }}"
-                                            @endif
-                                        </td>
-                                    </tr>
+                                @forelse($properties as $index => $property)
+                                <x-billingDestination.detail-row :index="$index" :property="$property"/>
                                 @empty
-                                    <tr>
-                                        <td class="px-6 py-4">
-                                            <x-form.input name="properties[0][name]" type="text" placeholder="物件名" />
-                                            @error("properties.$i.name")
-                                                <x-form.error>{{ $message }}</x-form.error>
-                                            @enderror
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <x-form.input name="properties[0][address]" type="text" placeholder="住所" />
-                                            @error("properties.$i.address")
-                                                <x-form.error>{{ $message }}</x-form.error>
-                                            @enderror
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <x-button type="button" scheme="scraft" onClick="removePropertyRow(this)">削除</x-button>
-                                        </td>
-                                    </tr>
+                                <x-billingDestination.detail-row :index="0"/>
                                 @endforelse
                             </tbody>
                         </table>
@@ -148,17 +113,7 @@
         function addPropertyRow() {
             const tbody = document.getElementById('propertyTableBody');
             const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td class="px-6 py-4">
-                    <input type="text" name="properties[${propertyIndex}][name]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="物件名">
-                </td>
-                <td class="px-6 py-4">
-                    <input type="text" name="properties[${propertyIndex}][address]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="住所">
-                </td>
-                <td class="px-6 py-4">
-                    <button type="button" class="text-white bg-red-500 hover:bg-red-600 focus:ring-red-400 text-center py-1 px-4 border border-transparent rounded shadow-sm text-sm font-medium focus:outline-none" onclick="removePropertyRow(this)">削除</button>
-                </td>
-            `;
+            newRow.innerHTML = `<x-billingDestination.detail-row index="${propertyIndex}"/>`;
             tbody.appendChild(newRow);
             propertyIndex++;
         }

@@ -1,5 +1,9 @@
 <x-layout.scraft>
     <x-slot name="title">管理画面</x-slot>
+        @if(session('error'))
+            <x-alert scheme="danger">{{ session('error') }}</x-alert>
+        @endif
+
         <h2 class="bg-indigo-200 p-2 font-bold text-xl rounded mb-4">受発注管理</h2>
         <div class="grid grid-flow-row grid-cols-2 gap-4 mb-8">
             <a href="{{ route('orders.create') }}" class="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">

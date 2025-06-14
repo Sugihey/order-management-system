@@ -114,7 +114,7 @@
                             name="customer_name"
                             type="text"
                             disabled="false"
-                            value="xst"
+                            value="{{ old('customer_name') }}"
                             class="disabled"
                         />
                     </div>
@@ -372,6 +372,10 @@
                             };
                             selectBillingDestination(itemData);
                         }
+                        break;
+
+                    case 'Tab':
+                        console.log('tab');
                         break;
                 }
             });

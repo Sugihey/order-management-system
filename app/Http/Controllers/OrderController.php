@@ -8,6 +8,7 @@ use App\Models\Property;
 use App\Models\Operation;
 use App\Models\Artisan;
 use App\Models\UnitPrice;
+use App\Models\Customer;
 use App\Http\Requests\OrderStoreRequest;
 use Illuminate\Http\Request;
 use App\Enums\OrderType;
@@ -21,14 +22,22 @@ class OrderController extends Controller
         $orderTypes = OrderType::cases();
         $details = $request->old('order_details');
         $detailRow = isset($details) ? count($details) : 1;
-        return view('orders.create', compact('priorities', 'orderTypes','detailRow'));
+        $others = BillingDestination::getOthersBillingDestination();
+        if(!$others){
+            return redirect()->route('dashboard')->with('error', '請求先マスターに「その他」を登録してください。');
+        }
+        if(!$others->customer){
+            return redirect()->route('dashboard')->with('error', '顧客マスターに「その他」を登録してください。');
+        }
+
+        return view('orders.create', compact('priorities', 'orderTypes','detailRow','others'));
     }
 
     public function store(OrderStoreRequest $request)
     {
         try {
             $order = OrderUseCase::createOrder($request);
-            return redirect()->route('dashboard')->with('success', '受注書が登録されました。受注番号: ' . $order->order_no);
+            return redirect()->route('dashboard')->with('success', '受注書が登録されました。発注書番号: ' . $order->order_no);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', '受注書の登録に失敗しました。' . $e->getMessage())->withInput();
         }

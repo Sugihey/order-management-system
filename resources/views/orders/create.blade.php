@@ -371,11 +371,13 @@
                                 customer_name: item.querySelector('.text-sm').textContent
                             };
                             selectBillingDestination(itemData);
+                        }else{
+                            closeBillingDestinationWithoutSelect(items);
                         }
                         break;
 
                     case 'Tab':
-                        console.log('tab');
+                        closeBillingDestinationWithoutSelect(items);
                         break;
                 }
             });
@@ -417,8 +419,8 @@
             document.getElementById('billing_destination_name').value = item.name;
             document.getElementById('billing_destination_id').value = item.id;
             document.getElementById('customer_id').value = item.customer_id;
-            document.getElementById('billing_destination_results').classList.add('hidden');
             document.getElementById('customer_name').value = item.customer_name;
+            document.getElementById('billing_destination_results').classList.add('hidden');
             
             document.getElementById('property_name').disabled = false;
             document.getElementById('property_name').placeholder = '物件を検索...';
@@ -427,10 +429,34 @@
             loadProperties(item.id);
         }
 
+        function closeBillingDestinationWithoutSelect(items) {
+            const inputData = document.getElementById('billing_destination_name').value;
+            if(items.length == 1 && items[0].querySelector('.font-medium').textContent == inputData) {
+                //残った一つの選択肢と入力内容が一致するなら選択と見なす
+                const item = items[0].closest('div');
+                const itemData = {
+                    name: item.querySelector('.font-medium').textContent,
+                    id: item.dataset.id,
+                    customer_id: item.dataset.customerId,
+                    customer_name: item.querySelector('.text-sm').textContent
+                };
+                selectBillingDestination(itemData);
+            }else{
+                if(inputData == '') {
+                    //クリア
+                    resetBillingDestination();
+                }else{
+                    //その他を選択
+                    selectOtherBillingDestination();
+                }
+            }
+        }
+
         function resetBillingDestination() {
             document.getElementById('billing_destination_id').value = '';
             document.getElementById('customer_id').value = '';
             document.getElementById('customer_name').value = '';
+            document.getElementById('billing_destination_results').classList.add('hidden');
             
             document.getElementById('property_name').disabled = true;
             document.getElementById('property_name').placeholder = '先に請求先を選択してください';
@@ -438,19 +464,17 @@
             document.getElementById('property_address').value = '';
         }
         function selectOtherBillingDestination() {
-            if(document.getElementById('billing_destination_id').value == '' && document.getElementById('billing_destination_name').value != '') {
-                document.getElementById('billing_destination_id').value = '{{ $others->id }}';
-                document.getElementById('customer_id').value = '{{ $others->Customer->id }}';
-                document.getElementById('billing_destination_results').classList.add('hidden');
-                document.getElementById('customer_name').value = '{{ $others->Customer->name }}';
-                
-                document.getElementById('property_name').disabled = false;
-                document.getElementById('property_name').placeholder = '物件を入力...';
-                document.getElementById('property_name').value = '';
-                document.getElementById('property_address').value = '';
+            document.getElementById('billing_destination_id').value = '{{ $others->id }}';
+            document.getElementById('customer_id').value = '{{ $others->Customer->id }}';
+            document.getElementById('customer_name').value = '{{ $others->Customer->name }}';
+            document.getElementById('billing_destination_results').classList.add('hidden');
+            
+            document.getElementById('property_name').disabled = false;
+            document.getElementById('property_name').placeholder = '物件を入力...';
+            document.getElementById('property_name').value = '';
+            document.getElementById('property_address').value = '';
 
-                loadUnitPrices({{ $others->Customer->id }});
-            }
+            loadUnitPrices({{ $others->Customer->id }});
         }
 
         function loadProperties(billingDestinationId) {
@@ -791,7 +815,7 @@
                 if (!e.target.closest('.relative')) {
                     document.querySelectorAll('.absolute').forEach(div => {
                         if(div.id == 'billing_destination_results'){
-                            selectOtherBillingDestination()
+                            closeBillingDestinationWithoutSelect(div.querySelectorAll('div > div.result-item'))
                         }
                         div.classList.add('hidden');
                     });

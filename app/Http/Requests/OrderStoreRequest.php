@@ -33,9 +33,9 @@ class OrderStoreRequest extends FormRequest
             'order_details' => 'required|array|min:1',
             'order_details.*.operation_id' => 'required|exists:operations,id',
             'order_details.*.artisan_id' => 'nullable|exists:artisans,id',
-            'order_details.*.quantity' => 'required|numeric|min:0.01',
-            'order_details.*.incoming_order_price' => 'required|numeric|min:0',
-            'order_details.*.purchase_order_price' => 'required|numeric|min:0',
+            'order_details.*.quantity' => 'nullable|numeric|min:0.01',
+            'order_details.*.incoming_order_price' => 'nullable|numeric|min:0',
+            'order_details.*.purchase_order_price' => 'nullable|numeric|min:0',
         ];
     }
 

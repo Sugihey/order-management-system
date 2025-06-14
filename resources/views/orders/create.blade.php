@@ -107,14 +107,14 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                    <div id="customer_name" class="md:col-span-2">
+                    <div class="md:col-span-2">
                         <x-form.label for="customer_name" label="顧客" />
                         <x-form.input 
                             id="customer_name" 
                             name="customer_name"
                             type="text"
-                            disabled="true"
-                            value="{{ old('customer_name') }}"
+                            disabled="false"
+                            value="xst"
                             class="disabled"
                         />
                     </div>
@@ -362,6 +362,7 @@
             document.getElementById('billing_destination_id').value = item.id;
             document.getElementById('customer_id').value = item.customer_id;
             document.getElementById('billing_destination_results').classList.add('hidden');
+            console.log(document.getElementById('customer_name').value);
             document.getElementById('customer_name').value = item.customer_name;
             
             document.getElementById('property_name').disabled = false;

@@ -57,4 +57,8 @@ class BillingDestination extends Model
             ]);
         }
     }
+    public static function getOthersBillingDestination()
+    {
+        return BillingDestination::query()->where('name','その他')->with('customer')->first();
+    }
 }

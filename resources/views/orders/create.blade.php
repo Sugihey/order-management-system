@@ -37,7 +37,7 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                    <div class="md:col-span-2">
+                    <div class="md:col-span-1">
                         <x-form.label for="order_no" label="発注番号" required="true" />
                         <x-form.input 
                             id="order_no" 
@@ -61,7 +61,7 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                    <div class="md:col-span-3">
+                    <div class="md:col-span-2">
                         <x-form.label for="order_type" label="依頼区分" required="true" />
                         <div class="flex gap-4">
                             @foreach($orderTypes as $key => $orderType)
@@ -72,18 +72,32 @@
                             @endforeach
                         </div>
                     </div>
+                    <div class="md:col-span-2">
+                        <x-form.label for="priority" label="優先度" required="true" />
+                        <div class="flex gap-4">
+                            @foreach($priorities as $priority)
+                            <div class="flex items-center">
+                                <input class="form-radio" type="radio" name="priority" id="priority-{{ $priority->value }}" value="{{ $priority->value }}" {{ old('priority') == $priority->value ? 'checked' : '' }}/>
+                                <label class="ml-2" for="priority-{{ $priority->value }}">{{ $priority->label() }}</label>
+                            </div>
+                            @endforeach
+                        </div>
+                        @error('order_type')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
 
                     <!-- Row:2 -->
                     <div class="md:col-span-4">
-                        <x-form.label for="billing_destination_search" label="請求先" required="true" />
+                        <x-form.label for="billing_destination_name" label="請求先" required="true" />
                         <div class="relative">
                             <x-form.input 
-                                id="billing_destination_search" 
-                                name="billing_destination_search" 
+                                id="billing_destination_name" 
+                                name="billing_destination_name" 
                                 type="text" 
-                                placeholder="請求先を検索..."
+                                placeholder="請求先を検索もしくは入力..."
                                 autocomplete="off"
-                                value="{{ old('billing_destination_search') }}"
+                                value="{{ old('billing_destination_name') }}"
                             />
                             <x-form.incremental-results id="billing_destination_results"/>
                         </div>
@@ -93,67 +107,17 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                    <div id="billing_destination_other_div" class="md:col-span-6">
-                        <x-form.label for="billing_destination_name" label="請求先名" required="true" />
+                    <div id="customer_name" class="md:col-span-2">
+                        <x-form.label for="customer_name" label="顧客" />
                         <x-form.input 
-                            id="billing_destination_name" 
-                            name="billing_destination_name" 
+                            id="customer_name" 
+                            name="customer_name"
                             type="text"
                             disabled="true"
-                            placeholder="請求先に「その他」を選択した場合は請求先名を入力"
-                            value="{{ old('billing_destination_name') }}"
+                            value="{{ old('customer_name') }}"
+                            class="disabled"
                         />
-                        @error('billing_destination_name')
-                            <x-form.error>{{ $message }}</x-form.error>
-                        @enderror
                     </div>
-
-                    <!-- Row:3 -->
-                    <div class="md:col-span-4">
-                        <x-form.label for="property_search" label="物件" required="true" />
-                        <div class="relative">
-                            <x-form.input 
-                                id="property_search" 
-                                name="property_search" 
-                                type="text" 
-                                placeholder="物件を検索..."
-                                autocomplete="off"
-                                disabled="true"
-                                value="{{ old('property_search') }}"
-                            />
-                            <x-form.incremental-results id='property_results'/>
-                        </div>
-                        <input type="hidden" id="property_name" name="property_name" value="{{ old('property_name') }}">
-                        @error('property_name')
-                            <x-form.error>{{ $message }}</x-form.error>
-                        @enderror
-                    </div>
-                    <div class="md:col-span-6">
-                        <x-form.label for="property_address" label="物件住所" required="true" />
-                        <x-form.input 
-                            id="property_address" 
-                            name="property_address" 
-                            type="text" 
-                            value="{{ old('property_address') }}"
-                        />
-                        @error('property_address')
-                            <x-form.error>{{ $message }}</x-form.error>
-                        @enderror
-                    </div>
-                    <div class="md:col-span-2">
-                        <x-form.label for="room_no" label="部屋番号" />
-                        <x-form.input 
-                            id="room_no" 
-                            name="room_no" 
-                            type="text" 
-                            value="{{ old('room_no') }}"
-                        />
-                        @error('room_no')
-                            <x-form.error>{{ $message }}</x-form.error>
-                        @enderror
-                    </div>
-
-                    <!-- Row:4 -->
                     <div class="md:col-span-2">
                         <x-form.label for="order_date" label="依頼日" required="true" />
                         <x-form.input 
@@ -180,18 +144,66 @@
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
-                    <div class="md:col-span-2">
-                        <x-form.label for="priority" label="優先度" required="true" />
-                        <select id="priority" name="priority" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            <option value="">選択してください</option>
-                            @foreach($priorities as $priority)
-                            <option value="{{ $priority->value }}" {{ old('priority') == $priority->value ? 'selected' : '' }}>{{$priority->label()}}</option>
-                            @endforeach
-                        </select>
-                        @error('order_type')
+
+                    <!-- Row:3 -->
+                    <div class="md:col-span-4">
+                        <x-form.label for="property_name" label="物件" required="true" />
+                        <div class="relative">
+                            <x-form.input 
+                                id="property_name" 
+                                name="property_name" 
+                                type="text" 
+                                placeholder="先に請求先を選択してください"
+                                autocomplete="off"
+                                disabled="{{ old('billing_destination_name')=='' }}"
+                                value="{{ old('property_name') }}"
+                            />
+                            <x-form.incremental-results id='property_results'/>
+                        </div>
+                        @error('property_name')
                             <x-form.error>{{ $message }}</x-form.error>
                         @enderror
                     </div>
+                    <div class="md:col-span-6">
+                        <x-form.label for="property_address" label="物件住所" required="true" />
+                        <x-form.input 
+                            id="property_address" 
+                            name="property_address" 
+                            type="text" 
+                            value="{{ old('property_address') }}"
+                        />
+                        @error('property_address')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+                    <div class="md:col-span-1">
+                        <x-form.label for="room_no" label="部屋番号" />
+                        <x-form.input 
+                            id="room_no" 
+                            name="room_no" 
+                            type="text" 
+                            value="{{ old('room_no') }}"
+                        />
+                        @error('room_no')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+
+                    <!-- Row:4 -->
+                    <div class="md:col-span-10">
+                        <x-form.label for="description" label="備考" />
+                        <x-form.input 
+                            id="description" 
+                            name="description" 
+                            type="text" 
+                            value="{{ old('description') }}"
+                        />
+                        @error('description')
+                            <x-form.error>{{ $message }}</x-form.error>
+                        @enderror
+                    </div>
+
+                    <!-- Row:5 -->
                     <div class="md:col-span-2 flex items-center space-x-4">
                         <label class="flex items-center">
                             <input type="checkbox" id="is_photo_required" name="is_photo_required" value="1" {{ old('is_photo_required') ? 'checked' : '' }} class="mr-2">
@@ -203,7 +215,7 @@
                         </label>
                     </div>
 
-                    <!-- Row:5 -->
+                    <!-- Row:6 -->
                     <div id="resident_name_div" class="hidden md:col-span-2">
                         <x-form.label for="resident_name" label="入居者名" required="true" />
                         <x-form.input 
@@ -301,16 +313,16 @@
         }
 
         function setupBillingDestinationSearch() {
-            const searchInput = document.getElementById('billing_destination_search');
+            const searchInput = document.getElementById('billing_destination_name');
             const resultsDiv = document.getElementById('billing_destination_results');
             
             searchInput.addEventListener('input', debounce(function(e) {
+                resetBillingDestination();
                 const query = e.target.value.trim();
                 if (query.length < 1) {
                     resultsDiv.classList.add('hidden');
                     return;
                 }
-                
                 fetch(`{{ route('orders.api.billing-destinations.search') }}?q=${encodeURIComponent(query)}`, {
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -340,46 +352,49 @@
                     div.onclick = () => selectBillingDestination(item);
                     resultsDiv.appendChild(div);
                 });
-                
-                const otherDiv = document.createElement('div');
-                otherDiv.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200 font-medium text-blue-600';
-                otherDiv.innerHTML = 'その他';
-                otherDiv.onclick = () => selectOtherBillingDestination();
-                resultsDiv.appendChild(otherDiv);
             }
             
             resultsDiv.classList.remove('hidden');
         }
 
         function selectBillingDestination(item) {
-            document.getElementById('billing_destination_search').value = item.name;
+            document.getElementById('billing_destination_name').value = item.name;
             document.getElementById('billing_destination_id').value = item.id;
             document.getElementById('customer_id').value = item.customer_id;
             document.getElementById('billing_destination_results').classList.add('hidden');
-            document.getElementById('billing_destination_name').classList.add('disabled');
-            document.getElementById('billing_destination_name').disabled = true;
+            document.getElementById('customer_name').value = item.customer_name;
             
-            document.getElementById('property_search').disabled = false;
-            document.getElementById('property_search').placeholder = '物件を検索...';
+            document.getElementById('property_name').disabled = false;
+            document.getElementById('property_name').placeholder = '物件を検索...';
             
             loadUnitPrices(item.customer_id);
             loadProperties(item.id);
         }
 
-        function selectOtherBillingDestination() {
-            document.getElementById('billing_destination_search').value = 'その他';
+        function resetBillingDestination() {
             document.getElementById('billing_destination_id').value = '';
             document.getElementById('customer_id').value = '';
-            document.getElementById('billing_destination_results').classList.add('hidden');
-            document.getElementById('billing_destination_name').classList.remove('disabled');
-            document.getElementById('billing_destination_name').value = '';
-            document.getElementById('billing_destination_name').disabled = false;
+            document.getElementById('customer_name').value = '';
             
-            document.getElementById('property_search').disabled = true;
-            document.getElementById('property_search').placeholder = '請求先を選択してください';
-            document.getElementById('property_search').value = '';
+            document.getElementById('property_name').disabled = true;
+            document.getElementById('property_name').placeholder = '先に請求先を選択してください';
             document.getElementById('property_name').value = '';
             document.getElementById('property_address').value = '';
+        }
+        function selectOtherBillingDestination() {
+            if(document.getElementById('billing_destination_id').value == '' && document.getElementById('billing_destination_name').value != '') {
+                document.getElementById('billing_destination_id').value = '{{ $others->id }}';
+                document.getElementById('customer_id').value = '{{ $others->Customer->id }}';
+                document.getElementById('billing_destination_results').classList.add('hidden');
+                document.getElementById('customer_name').value = '{{ $others->Customer->name }}';
+                
+                document.getElementById('property_name').disabled = false;
+                document.getElementById('property_name').placeholder = '物件を入力...';
+                document.getElementById('property_name').value = '';
+                document.getElementById('property_address').value = '';
+
+                loadUnitPrices({{ $others->Customer->id }});
+            }
         }
 
         function loadProperties(billingDestinationId) {
@@ -398,7 +413,7 @@
         }
 
         function setupPropertySearch(properties) {
-            const searchInput = document.getElementById('property_search');
+            const searchInput = document.getElementById('property_name');
             const resultsDiv = document.getElementById('property_results');
             
             searchInput.addEventListener('input', function() {
@@ -436,7 +451,6 @@
         }
 
         function selectProperty(item) {
-            document.getElementById('property_search').value = item.name;
             document.getElementById('property_name').value = item.name;
             document.getElementById('property_address').value = item.address;
             document.getElementById('property_results').classList.add('hidden');
@@ -773,6 +787,9 @@
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.relative')) {
                     document.querySelectorAll('.absolute').forEach(div => {
+                        if(div.id == 'billing_destination_results'){
+                            selectOtherBillingDestination()
+                        }
                         div.classList.add('hidden');
                     });
                 }

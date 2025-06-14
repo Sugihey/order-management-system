@@ -12,8 +12,10 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'title',
         'billing_destination_id',
         'order_type',
+        'priority',
         'billing_destination_name',
         'property_name',
         'property_address',

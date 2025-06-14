@@ -315,6 +315,7 @@
         function setupBillingDestinationSearch() {
             const searchInput = document.getElementById('billing_destination_name');
             const resultsDiv = document.getElementById('billing_destination_results');
+            let selectedIndex = -1;
             
             searchInput.addEventListener('input', debounce(function(e) {
                 resetBillingDestination();
@@ -332,10 +333,48 @@
                 .then(data => {
                     if (data.success) {
                         displayBillingDestinationResults(data.data);
+                        selectedIndex = -1; // 検索結果が更新されたら選択をリセット
                     }
                 })
                 .catch(error => console.error('Error:', error));
             }, 300));
+
+            // キーボードナビゲーションの追加
+            searchInput.addEventListener('keydown', function(e) {
+                const items = resultsDiv.querySelectorAll('div > div.result-item');
+                
+                switch(e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        if (selectedIndex < items.length - 1) {
+                            selectedIndex++;
+                            updateSelection(items, selectedIndex);
+                        }
+                        break;
+                        
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        if (selectedIndex > 0) {
+                            selectedIndex--;
+                            updateSelection(items, selectedIndex);
+                        }
+                        break;
+                        
+                    case 'Enter':
+                        e.preventDefault();
+                        if (selectedIndex >= 0 && items[selectedIndex]) {
+                            const item = items[selectedIndex].closest('div');
+                            const itemData = {
+                                name: item.querySelector('.font-medium').textContent,
+                                id: item.dataset.id,
+                                customer_id: item.dataset.customerId,
+                                customer_name: item.querySelector('.text-sm').textContent
+                            };
+                            selectBillingDestination(itemData);
+                        }
+                        break;
+                }
+            });
         }
 
         function displayBillingDestinationResults(results) {
@@ -347,8 +386,10 @@
             } else {
                 results.forEach(item => {
                     const div = document.createElement('div');
-                    div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<div class="font-medium">${item.name}</div><div class="text-sm text-gray-500">${item.customer_name}</div>`;
+                    div.className = 'result-item p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
+                    div.dataset.id = item.id;
+                    div.dataset.customerId = item.customer_id;
+                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="${item.customer_name}"/>`;
                     div.onclick = () => selectBillingDestination(item);
                     resultsDiv.appendChild(div);
                 });
@@ -357,12 +398,22 @@
             resultsDiv.classList.remove('hidden');
         }
 
+        function updateSelection(items, selectedIndex) {
+            items.forEach((item, index) => {
+                if (index === selectedIndex) {
+                    item.closest('div').classList.add('bg-gray-100');
+                    item.scrollIntoView({ block: 'nearest' });
+                } else {
+                    item.closest('div').classList.remove('bg-gray-100');
+                }
+            });
+        }
+
         function selectBillingDestination(item) {
             document.getElementById('billing_destination_name').value = item.name;
             document.getElementById('billing_destination_id').value = item.id;
             document.getElementById('customer_id').value = item.customer_id;
             document.getElementById('billing_destination_results').classList.add('hidden');
-            console.log(document.getElementById('customer_name').value);
             document.getElementById('customer_name').value = item.customer_name;
             
             document.getElementById('property_name').disabled = false;
@@ -442,7 +493,7 @@
                 results.forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<div class="font-medium">${item.name}</div><div class="text-sm text-gray-500">${item.address}</div>`;
+                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="${item.address}"/>`;
                     div.onclick = () => selectProperty(item);
                     resultsDiv.appendChild(div);
                 });
@@ -513,7 +564,7 @@
                 results.forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<div class="font-medium">${item.name}</div><div class="text-sm text-gray-500">単位: ${item.unit}</div>`;
+                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="単位: ${item.unit}"/>`;
                     div.onclick = () => selectOperation(item, row);
                     resultsDiv.appendChild(div);
                 });
@@ -566,7 +617,7 @@
                 results.forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<div class="font-medium">${item.name}</div>`;
+                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description=""/>`;
                     div.onclick = () => selectArtisan(item, row);
                     resultsDiv.appendChild(div);
                 });
@@ -579,59 +630,6 @@
             row.querySelector('.artisan-search').value = item.name;
             row.querySelector('.artisan-id').value = item.id;
             row.querySelector('.artisan-results').classList.add('hidden');
-        }
-
-        function setupOperationSearch(row) {
-            const searchInput = row.querySelector('.operation-search');
-            const resultsDiv = row.querySelector('.operation-results');
-            
-            searchInput.addEventListener('input', debounce(function(e) {
-                const query = e.target.value.trim();
-                if (query.length < 1) {
-                    resultsDiv.classList.add('hidden');
-                    return;
-                }
-                
-                fetch(`{{ route('orders.api.operations.search') }}?q=${encodeURIComponent(query)}`, {
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        displayOperationResults(resultsDiv, data.data, row);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }, 300));
-        }
-
-        function displayOperationResults(resultsDiv, results, row) {
-            resultsDiv.innerHTML = '';
-            
-            if (results.length === 0) {
-                resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する作業内容が見つかりません</div>';
-            } else {
-                results.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<div class="font-medium">${item.name}</div><div class="text-sm text-gray-500">単位: ${item.unit}</div>`;
-                    div.onclick = () => selectOperation(item, row);
-                    resultsDiv.appendChild(div);
-                });
-            }
-            
-            resultsDiv.classList.remove('hidden');
-        }
-
-        function selectOperation(item, row) {
-            row.querySelector('.operation-search').value = item.name;
-            row.querySelector('.operation-id').value = item.id;
-            row.querySelector('.unit-display').textContent = item.unit;
-            row.querySelector('.operation-results').classList.add('hidden');
-            
-            calculatePrices(row.querySelector('.quantity'));
         }
 
         function calculatePrices(quantityInput) {

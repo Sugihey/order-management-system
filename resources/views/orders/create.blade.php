@@ -398,7 +398,9 @@
                         break;
 
                     case 'Tab':
-                        closeResultFunction(items,row);
+                        if(!resultsDiv.classList.contains('hidden')){
+                            closeResultFunction(items,row);
+                        }
                         break;
                 }
             });

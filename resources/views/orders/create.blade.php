@@ -312,6 +312,22 @@
             };
         }
 
+        function createResultItem(title, description, dataset, clickCallback, item, row=undefined) {
+            const div = document.createElement('div');
+            div.className = 'result-item p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
+            const entries = Object.entries(dataset);
+            for(const [key, value] of entries) {
+                div.setAttribute(key,value);
+            }
+            if(description == ''){
+                div.innerHTML = `<div class="font-medium">${title}</div>`;
+            }else{
+                div.innerHTML = `<div class="font-medium">${title}</div><div class="text-sm text-gray-500">${description}</div>`;
+            }
+            div.onclick = () => row==undefined ? clickCallback(item) : clickCallback(item, row);
+            return div;
+        }
+
         function setupBillingDestinationSearch() {
             const searchInput = document.getElementById('billing_destination_name');
             const resultsDiv = document.getElementById('billing_destination_results');
@@ -391,13 +407,8 @@
                 resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する請求先が見つかりません</div>';
             } else {
                 results.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'result-item p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.dataset.id = item.id;
-                    div.dataset.customerId = item.customer_id;
-                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="${item.customer_name}"/>`;
-                    div.onclick = () => selectBillingDestination(item);
-                    resultsDiv.appendChild(div);
+                    const dataset = {'data-id':item.id,'data-customer-id':item.customer_id};
+                    resultsDiv.appendChild(createResultItem(item.name,item.customer_name,dataset,selectBillingDestination,item));
                 });
             }
             
@@ -519,11 +530,7 @@
                 resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する物件が見つかりません</div>';
             } else {
                 results.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="${item.address}"/>`;
-                    div.onclick = () => selectProperty(item);
-                    resultsDiv.appendChild(div);
+                    resultsDiv.appendChild(createResultItem(item.name,item.address,{},selectProperty,item));
                 });
             }
             
@@ -594,7 +601,7 @@
                     div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
                     div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="単位: ${item.unit}"/>`;
                     div.onclick = () => selectOperation(item, row);
-                    resultsDiv.appendChild(div);
+                    resultsDiv.appendChild(createResultItem(item.name,'単位: '+item.unit,{},selectOperation,item,row));
                 });
             }
             
@@ -643,11 +650,7 @@
                 resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する作業担当が見つかりません</div>';
             } else {
                 results.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description=""/>`;
-                    div.onclick = () => selectArtisan(item, row);
-                    resultsDiv.appendChild(div);
+                    resultsDiv.appendChild(createResultItem(item.name,'',{},selectArtisan,item,row));
                 });
             }
             

@@ -328,31 +328,43 @@
             return div;
         }
 
-        function setupBillingDestinationSearch() {
-            const searchInput = document.getElementById('billing_destination_name');
-            const resultsDiv = document.getElementById('billing_destination_results');
+        function setupSearch(fieldLabel,columnName,apiRoute,searchInput,resultsDiv,createItemFunction,selectItemFunction,closeResultFunction,resetFunction,defaultData=undefined,row=undefined) {
             let selectedIndex = -1;
             
             searchInput.addEventListener('input', debounce(function(e) {
-                resetBillingDestination();
-                const query = e.target.value.trim();
-                if (query.length < 1) {
-                    resultsDiv.classList.add('hidden');
-                    return;
+//                resetFunction(row);
+                if(defaultData == undefined){
+                    const query = e.target.value.trim();
+                    if (query.length < 1) {
+                        resultsDiv.classList.add('hidden');
+                        return;
+                    }
+                    fetch(`${apiRoute}?q=${encodeURIComponent(query)}`, {
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            displayResults(resultsDiv, data.data, fieldLabel, createItemFunction, row);
+                            selectedIndex = -1; // 検索結果が更新されたら選択をリセット
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                }else{
+                    const query = searchInput.value.trim().toLowerCase();
+                    if (query.length < 1) {
+                        resultsDiv.classList.add('hidden');
+                        return;
+                    }
+                    
+                    const filteredData = defaultData.filter(defaultItem => 
+                        defaultItem.name.toLowerCase().includes(query)
+                    );
+                    displayResults(resultsDiv, filteredData, fieldLabel, createItemFunction, row);
+                    selectedIndex = -1; // 検索結果が更新されたら選択をリセット
                 }
-                fetch(`{{ route('orders.api.billing-destinations.search') }}?q=${encodeURIComponent(query)}`, {
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        displayBillingDestinationResults(data.data);
-                        selectedIndex = -1; // 検索結果が更新されたら選択をリセット
-                    }
-                })
-                .catch(error => console.error('Error:', error));
             }, 300));
 
             // キーボードナビゲーションの追加
@@ -379,36 +391,26 @@
                     case 'Enter':
                         e.preventDefault();
                         if (selectedIndex >= 0 && items[selectedIndex]) {
-                            const item = items[selectedIndex].closest('div');
-                            const itemData = {
-                                name: item.querySelector('.font-medium').textContent,
-                                id: item.dataset.id,
-                                customer_id: item.dataset.customerId,
-                                customer_name: item.querySelector('.text-sm').textContent
-                            };
-                            selectBillingDestination(itemData);
+                            selectItemFunction(items[selectedIndex].closest('div'),row);
                         }else{
-                            closeBillingDestinationWithoutSelect(items);
+                            closeResultFunction(items,row);
                         }
                         break;
 
                     case 'Tab':
-                        closeBillingDestinationWithoutSelect(items);
+                        closeResultFunction(items,row);
                         break;
                 }
             });
         }
 
-        function displayBillingDestinationResults(results) {
-            const resultsDiv = document.getElementById('billing_destination_results');
+        function displayResults(resultsDiv, results, fieldLabel, createItem, row=undefined) {
             resultsDiv.innerHTML = '';
-            
             if (results.length === 0) {
-                resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する請求先が見つかりません</div>';
+                resultsDiv.innerHTML = `<div class="p-2 text-gray-500">該当する${fieldLabel}が見つかりません</div>`;
             } else {
                 results.forEach(item => {
-                    const dataset = {'data-id':item.id,'data-customer-id':item.customer_id};
-                    resultsDiv.appendChild(createResultItem(item.name,item.customer_name,dataset,selectBillingDestination,item));
+                    resultsDiv.appendChild(createItem(item,row));
                 });
             }
             
@@ -426,7 +428,27 @@
             });
         }
 
-        function selectBillingDestination(item) {
+        function createBillingDestinationResultItem(item) {
+            const dataset = {'data-id':item.id,'data-customer-id':item.customer_id};
+            return createResultItem(item.name,item.customer_name,dataset,selectBillingDestination,item);
+        }
+
+        function setupBillingDestinationSearch() {
+            const fieldLabel = '請求先';
+            const columnName = 'billing_destination';
+            const apiRoute = '{{ route('orders.api.billing-destinations.search') }}';
+            const searchInput = document.getElementById('billing_destination_name');
+            const resultsDiv = document.getElementById('billing_destination_results');
+            setupSearch(fieldLabel,columnName,apiRoute,searchInput,resultsDiv,createBillingDestinationResultItem,selectBillingDestination,closeBillingDestinationResult,resetBillingDestination);
+        }
+
+        function selectBillingDestination(data) {
+            const item = data.tagName ? {
+                    name: data.querySelector('.font-medium').textContent,
+                    id: data.dataset.id,
+                    customer_id: data.dataset.customerId,
+                    customer_name: data.querySelector('.text-sm').textContent
+                }:data;
             document.getElementById('billing_destination_name').value = item.name;
             document.getElementById('billing_destination_id').value = item.id;
             document.getElementById('customer_id').value = item.customer_id;
@@ -440,7 +462,7 @@
             loadProperties(item.id);
         }
 
-        function closeBillingDestinationWithoutSelect(items) {
+        function closeBillingDestinationResult(items,inputElm) {
             const inputData = document.getElementById('billing_destination_name').value;
             if(items.length == 1 && items[0].querySelector('.font-medium').textContent == inputData) {
                 //残った一つの選択肢と入力内容が一致するなら選択と見なす
@@ -458,7 +480,17 @@
                     resetBillingDestination();
                 }else{
                     //その他を選択
-                    selectOtherBillingDestination();
+                    document.getElementById('billing_destination_id').value = '{{ $others->id }}';
+                    document.getElementById('customer_id').value = '{{ $others->Customer->id }}';
+                    document.getElementById('customer_name').value = '{{ $others->Customer->name }}';
+                    document.getElementById('billing_destination_results').classList.add('hidden');
+                    
+                    document.getElementById('property_name').disabled = false;
+                    document.getElementById('property_name').placeholder = '物件を入力...';
+                    document.getElementById('property_name').value = '';
+                    document.getElementById('property_address').value = '';
+
+                    loadUnitPrices({{ $others->Customer->id }});
                 }
             }
         }
@@ -473,19 +505,6 @@
             document.getElementById('property_name').placeholder = '先に請求先を選択してください';
             document.getElementById('property_name').value = '';
             document.getElementById('property_address').value = '';
-        }
-        function selectOtherBillingDestination() {
-            document.getElementById('billing_destination_id').value = '{{ $others->id }}';
-            document.getElementById('customer_id').value = '{{ $others->Customer->id }}';
-            document.getElementById('customer_name').value = '{{ $others->Customer->name }}';
-            document.getElementById('billing_destination_results').classList.add('hidden');
-            
-            document.getElementById('property_name').disabled = false;
-            document.getElementById('property_name').placeholder = '物件を入力...';
-            document.getElementById('property_name').value = '';
-            document.getElementById('property_address').value = '';
-
-            loadUnitPrices({{ $others->Customer->id }});
         }
 
         function loadProperties(billingDestinationId) {
@@ -504,43 +523,47 @@
         }
 
         function setupPropertySearch(properties) {
+            const fieldLabel = '物件';
+            const columnName = 'property';
+            const apiRoute = '';
             const searchInput = document.getElementById('property_name');
             const resultsDiv = document.getElementById('property_results');
-            
-            searchInput.addEventListener('input', function() {
-                const query = this.value.trim().toLowerCase();
-                if (query.length < 1) {
-                    resultsDiv.classList.add('hidden');
-                    return;
-                }
-                
-                const filteredProperties = properties.filter(property => 
-                    property.name.toLowerCase().includes(query)
-                );
-                
-                displayPropertyResults(filteredProperties);
-            });
+            setupSearch(
+                fieldLabel,
+                columnName,
+                apiRoute,
+                searchInput,
+                resultsDiv,
+                createPropertyResultItem,
+                selectProperty,
+                closePropertyResult,
+                resetProperty,
+                properties
+            );
         }
 
-        function displayPropertyResults(results) {
-            const resultsDiv = document.getElementById('property_results');
-            resultsDiv.innerHTML = '';
-            
-            if (results.length === 0) {
-                resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する物件が見つかりません</div>';
-            } else {
-                results.forEach(item => {
-                    resultsDiv.appendChild(createResultItem(item.name,item.address,{},selectProperty,item));
-                });
-            }
-            
-            resultsDiv.classList.remove('hidden');
+        function createPropertyResultItem(item) {
+            return createResultItem(item.name,item.address,{},selectProperty,item);
         }
 
-        function selectProperty(item) {
+        function selectProperty(data) {
+            const item = data.tagName ? {
+                name: data.querySelector('.font-medium').textContent,
+                address: data.querySelector('.text-sm').textContent
+            }:data;
             document.getElementById('property_name').value = item.name;
             document.getElementById('property_address').value = item.address;
             document.getElementById('property_results').classList.add('hidden');
+        }
+        function closePropertyResult(items,inputElm) {
+            const inputData = document.getElementById('property_name').value;
+            if(items.length == 1 && items[0].querySelector('.font-medium').textContent == inputData) {
+                //残った一つの選択肢と入力内容が一致するなら選択と見なす
+                selectProperty(items[0].closest('div'));
+            }
+        }
+        function resetProperty() {
+            //Do nothing
         }
 
         function loadUnitPrices(customerId) {
@@ -565,50 +588,37 @@
         }
 
         function setupOperationSearch(row) {
+            const fieldLabel = '作業内容';
+            const columnName = 'operations';
+            const apiRoute = '{{ route('orders.api.operations.search') }}';
             const searchInput = row.querySelector('.operation-search');
             const resultsDiv = row.querySelector('.operation-results');
-            
-            searchInput.addEventListener('input', debounce(function(e) {
-                const query = e.target.value.trim();
-                if (query.length < 1) {
-                    resultsDiv.classList.add('hidden');
-                    return;
-                }
-                
-                fetch(`{{ route('orders.api.operations.search') }}?q=${encodeURIComponent(query)}`, {
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        displayOperationResults(resultsDiv, data.data, row);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }, 300));
+            setupSearch(
+                fieldLabel,
+                columnName,
+                apiRoute,
+                searchInput,
+                resultsDiv,
+                createOperationResultItem,
+                selectOperation,
+                closeOperationResult,
+                resetOperation,
+                undefined,
+                row
+            );
         }
 
-        function displayOperationResults(resultsDiv, results, row) {
-            resultsDiv.innerHTML = '';
-            
-            if (results.length === 0) {
-                resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する作業内容が見つかりません</div>';
-            } else {
-                results.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-                    div.innerHTML = `<x-form.incremental-result-item title="${item.name}" description="単位: ${item.unit}"/>`;
-                    div.onclick = () => selectOperation(item, row);
-                    resultsDiv.appendChild(createResultItem(item.name,'単位: '+item.unit,{},selectOperation,item,row));
-                });
-            }
-            
-            resultsDiv.classList.remove('hidden');
+        function createOperationResultItem(item,row) {
+            const dataset = {'data-id':item.id,'data-unit':item.unit};
+            return createResultItem(item.name,`単位: ${item.unit}`,dataset,selectOperation,item,row);
         }
 
-        function selectOperation(item, row) {
+        function selectOperation(data, row) {
+            const item = data.tagName ? {
+                id: data.dataset.id,
+                name: data.querySelector('.font-medium').textContent,
+                unit: data.dataset.unit,
+            }:data;
             row.querySelector('.operation-search').value = item.name;
             row.querySelector('.operation-id').value = item.id;
             row.querySelector('.unit-display').textContent = item.unit;
@@ -617,49 +627,70 @@
             calculatePrices(row.querySelector('.quantity'));
         }
 
+        function closeOperationResult(items,row){
+            const inputData = row.querySelector('.operation-search').value;
+            if(items.length == 1 && items[0].querySelector('.font-medium').textContent == inputData) {
+                //残った一つの選択肢と入力内容が一致するなら選択と見なす
+                selectOperation(items[0].closest('div'),row);
+            }else{
+                resetOperation(row);
+            }
+        }
+        function resetOperation(row){
+            row.querySelector('.operation-search').value = '';
+            row.querySelector('.operation-id').value = '';
+            row.querySelector('.unit-display').textContent = '';
+            row.querySelector('.operation-results').classList.add('hidden');
+            
+            calculatePrices(row.querySelector('.quantity'));
+        }
+
         function setupArtisanSearch(row) {
+            const fieldLabel = '作業担当者';
+            const columnName = 'operations';
+            const apiRoute = '{{ route('orders.api.artisans.search') }}';
             const searchInput = row.querySelector('.artisan-search');
             const resultsDiv = row.querySelector('.artisan-results');
-            
-            searchInput.addEventListener('input', debounce(function(e) {
-                const query = e.target.value.trim();
-                if (query.length < 1) {
-                    resultsDiv.classList.add('hidden');
-                    return;
-                }
-                
-                fetch(`{{ route('orders.api.artisans.search') }}?q=${encodeURIComponent(query)}`, {
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        displayArtisanResults(resultsDiv, data.data, row);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }, 300));
+            setupSearch(
+                fieldLabel,
+                columnName,
+                apiRoute,
+                searchInput,
+                resultsDiv,
+                createArtisanResultItem,
+                selectArtisan,
+                closeArtisanResult,
+                resetProperty,
+                undefined,
+                row
+            );
         }
 
-        function displayArtisanResults(resultsDiv, results, row) {
-            resultsDiv.innerHTML = '';
-            
-            if (results.length === 0) {
-                resultsDiv.innerHTML = '<div class="p-2 text-gray-500">該当する作業担当が見つかりません</div>';
-            } else {
-                results.forEach(item => {
-                    resultsDiv.appendChild(createResultItem(item.name,'',{},selectArtisan,item,row));
-                });
-            }
-            
-            resultsDiv.classList.remove('hidden');
+        function createArtisanResultItem(item,row) {
+            const dataset = {'data-id':item.id};
+            return createResultItem(item.name,'',dataset,selectArtisan,item,row);
         }
-
-        function selectArtisan(item, row) {
+        function selectArtisan(data, row) {
+            const item = data.tagName ? {
+                id: data.dataset.id,
+                name: data.querySelector('.font-medium').textContent
+            }:data;
             row.querySelector('.artisan-search').value = item.name;
             row.querySelector('.artisan-id').value = item.id;
+            row.querySelector('.artisan-results').classList.add('hidden');
+        }
+        function closeArtisanResult(items,row){
+            const inputData = row.querySelector('.artisan-search').value;
+            if(items.length == 1 && items[0].querySelector('.font-medium').textContent == inputData) {
+                //残った一つの選択肢と入力内容が一致するなら選択と見なす
+                selectArtisan(items[0].closest('div'),row);
+            }else{
+                resetArtisan(row);
+            }
+        }
+        function resetArtisan(row){
+            row.querySelector('.artisan-search').value = '';
+            row.querySelector('.artisan-id').value = '';
             row.querySelector('.artisan-results').classList.add('hidden');
         }
 
@@ -817,10 +848,22 @@
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.relative')) {
                     document.querySelectorAll('.absolute').forEach(div => {
-                        if(div.id == 'billing_destination_results'){
-                            closeBillingDestinationWithoutSelect(div.querySelectorAll('div > div.result-item'))
+                        if(!div.classList.contains('hidden')){
+                            if(div.id == 'billing_destination_results'){
+                                closeBillingDestinationResult(div.querySelectorAll('div > div.result-item'));
+                            }
+                            if(div.id == 'property_results'){
+                                closePropertyResult(div.querySelectorAll('div > div.result-item'));
+                            }
+                            if(div.classList.contains('operation-results')){
+                                const row = div.closest('.order-detail-row');
+                                closeOperationResult(div.querySelectorAll('div > div.result-item'),row);
+                            }else if(div.classList.contains('artisan-results')){
+                                const row = div.closest('.order-detail-row');
+                                closeArtisanResult(div.querySelectorAll('div > div.result-item'),row);
+                            }
+                            div.classList.add('hidden');
                         }
-                        div.classList.add('hidden');
                     });
                 }
             });
